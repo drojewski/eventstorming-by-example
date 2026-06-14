@@ -1,0 +1,34 @@
+import { defineCollection, z } from 'astro:content';
+import { glob } from 'astro/loaders';
+
+const slice = z.object({
+  trigger: z.object({ type: z.literal('event'), text: z.string(), note: z.string().optional() }).optional(),
+  externalSystems: z.array(z.string()).optional(),
+  readModels: z.array(z.string()).optional(),
+  actor: z.string().optional(),
+  command: z.string().optional(),
+  aggregate: z.string().optional(),
+  invariant: z.string().optional(),
+  events: z.array(z.string()).optional(),
+  policy: z.object({ text: z.string() }).optional(),
+});
+
+const episodes = defineCollection({
+  loader: glob({ pattern: '**/*.json', base: './src/data/episodes' }),
+  schema: z.object({
+    title: z.string(),
+    subtitle: z.string().optional(),
+    dialogue: z.array(z.object({
+      role: z.enum(['ekspert', 'analityk']),
+      name: z.string(),
+      avatar: z.string(),
+      text: z.string(),
+    })),
+    model: z.object({
+      slices: z.array(slice),
+      hotspots: z.array(z.string()).optional(),
+    }),
+  }),
+});
+
+export const collections = { episodes };

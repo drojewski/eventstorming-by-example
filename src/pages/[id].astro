@@ -1,0 +1,28 @@
+---
+import { getCollection } from 'astro:content';
+import EpisodeViewer from '../components/EpisodeViewer.jsx';
+import '../styles/global.css';
+
+export async function getStaticPaths() {
+  const episodes = await getCollection('episodes');
+  return episodes.map((entry) => ({
+    params: { id: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+---
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{entry.data.title} — Event Storming by Example</title>
+  </head>
+  <body class="bg-gray-50 min-h-screen p-4 md:p-8">
+    <a href="/" class="text-sm text-gray-500 hover:underline">← wszystkie odcinki</a>
+    <h1 class="text-2xl font-bold mt-2 mb-1">{entry.data.title}</h1>
+    {entry.data.subtitle && <p class="text-gray-500 mb-6">{entry.data.subtitle}</p>}
+    <EpisodeViewer episode={entry.data} client:load />
+  </body>
+</html>

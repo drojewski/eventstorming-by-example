@@ -1,0 +1,36 @@
+{
+  "title": "Klasyfikacja klienta",
+  "subtitle": "Klasyczny wywiad: ekspert wie „jak”, analityk szuka „co ważnego”",
+  "dialogue": [
+    { "role": "ekspert", "name": "Ekspert biznesowy", "avatar": "👨‍💼", "text": "No więc ten nasz proces działa tak: bierzemy dane z CRM-a, dociągamy historię zadłużenia, sprawdzamy gościa w BIK-u, zaglądamy do XERXES, bo tam mamy tajne informacje… są jeszcze integracje z trzema innymi systemami, ale nie pamiętam nazw…" },
+    { "role": "analityk", "name": "Analityk biznesowy", "avatar": "🕵️", "text": "Okej… a co istotnego dzieje się w tym procesie? Co jest tu NAPRAWDĘ WAŻNE?" },
+    { "role": "ekspert", "name": "Ekspert biznesowy", "avatar": "👨‍💼", "text": "Klasyfikujemy klienta na podstawie danych z tych systemów. Oceniam je algorytmem i tyle." },
+    { "role": "analityk", "name": "Analityk biznesowy", "avatar": "🕵️", "text": "A co musi się stać, żeby móc sklasyfikować klienta? Kiedy to się może nie udać?" },
+    { "role": "ekspert", "name": "Ekspert biznesowy", "avatar": "👨‍💼", "text": "Jak Jolka w ERPie doda nowego klienta z którym chcemy zrobić deal to wtedy potrzebne jest wykonanie takiej klasyfikacji. Nie klasyfikujemy, jeśli klient jest w zewnętrznych bazach oznaczony jako „BADBOY”. Za te systemy na marginesie płacimy kupę kasy. Każdego BADBOYA wysyłamy na drzewo." },
+    { "role": "analityk", "name": "Analityk biznesowy", "avatar": "🕵️", "text": "A co ważnego dzieje się po klasyfikacji?" },
+    { "role": "ekspert", "name": "Ekspert biznesowy", "avatar": "👨‍💼", "text": "Powiadamiamy szefa, żeby potwierdził, skorygował lub wycofał dokonaną klasyfikację. Ale tylko dla klientów, którzy nie są VIP'ami. VIP'a klasyfikujemy i nie weryfikujemy już. Jolka gdy dodaje klienta to zaznacza w jakichś tam przypadkach czy to VIP czy nie VIP. Nie wiem nawet na podstawie czego to robi." }
+  ],
+  "model": {
+    "slices": [
+      {
+        "trigger": { "type": "event", "text": "Utworzono nowego klienta"},
+        "policy": { "text": "Zawsze gdy mamy do czynienia z nowym klientem → dokonaj jego klasyfikacji. Algorytm i źródła danych są opisane w dokumentacji: https://docs.example" }
+      },
+      {
+        "command": "Sklasyfikuj klienta",
+        "aggregate": " ",
+        "invariant": "Nie można sklasyfikować klienta, gdy klient = „BADBOY”",
+        "events": ["Zaklasyfikowano klienta", "Zablokowano klienta (BADBOY)"],
+        "policy": { "text": "Zawsze gdy dokonano klasyfikacji klienta, który NIE jest VIP-em → skieruj do weryfikacji" }
+      },
+      {
+        "command": "Zweryfikuj dokonaną klasyfikację",
+        "events": ["Potwierdzono klasyfikację", "Skorygowano klasyfikację", "Wycofano klasyfikację"]
+      }
+    ],
+    "hotspots": [
+      "Jak nazywają się 3 systemy integracyjne? Ekspert nie pamięta.",
+      "Czym dokładnie jest XERXES i jakie „tajne” dane stamtąd bierzemy?"
+    ]
+  }
+}

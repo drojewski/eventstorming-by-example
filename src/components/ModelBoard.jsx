@@ -37,7 +37,8 @@ function SliceFlow({ slice }) {
   const r = (i) => rotations[i % rotations.length];
   const hasContext = slice.externalSystems?.length || slice.readModels?.length || slice.actor;
   const moreAfterTrigger =
-    Boolean(hasContext) || Boolean(slice.command) || Boolean(slice.aggregate) || (slice.events?.length ?? 0) > 0;
+    Boolean(hasContext) || Boolean(slice.command) || Boolean(slice.aggregate) ||
+    (slice.events?.length ?? 0) > 0 || Boolean(slice.policy) || (slice.branches?.length ?? 0) > 0;
 
   return (
     <div className="flex items-center gap-2 shrink-0">
@@ -101,8 +102,48 @@ function SliceFlow({ slice }) {
 
       {slice.policy && (
         <>
-          <Arrow />
+          {(slice.command || slice.aggregate || slice.events?.length || hasContext || slice.trigger) && <Arrow />}
           <Sticky type="policy" rotate={1}>{slice.policy.text}</Sticky>
+        </>
+      )}
+
+      {slice.branches?.length > 0 && (
+        <>
+          <Arrow />
+          <div className="flex flex-col gap-5">
+            {slice.branches.map((b, bi) => (
+              <div key={bi} className="flex items-center gap-2 border-l-2 border-gray-200 pl-3">
+                {b.command && <Sticky type="command" rotate={1}>{b.command}</Sticky>}
+                {b.aggregate && (
+                  <>
+                    <Arrow />
+                    <Sticky type="aggregate" rotate={-1}>
+                      {b.aggregate}
+                      {b.invariant && (
+                        <span className="block text-xs font-normal text-gray-700 mt-1 italic">⚖ {b.invariant}</span>
+                      )}
+                    </Sticky>
+                  </>
+                )}
+                {b.events?.length > 0 && (
+                  <>
+                    <Arrow />
+                    <div className="flex flex-col gap-2 items-center">
+                      {b.events.map((e, i) => (
+                        <Sticky key={i} type="event" rotate={i % 2 === 0 ? -1 : 1}>{e}</Sticky>
+                      ))}
+                    </div>
+                  </>
+                )}
+                {b.policy && (
+                  <>
+                    <Arrow />
+                    <Sticky type="policy" rotate={1}>{b.policy.text}</Sticky>
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
         </>
       )}
     </div>
@@ -126,7 +167,7 @@ export default function ModelBoard({ model }) {
   return (
     <div>
       <div className="overflow-x-auto pb-4">
-        <div className="flex items-center gap-2 min-w-max px-2">
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-6 px-2">
           {model.slices.map((slice, i) => (
             <React.Fragment key={i}>
               <SliceFlow slice={slice} />

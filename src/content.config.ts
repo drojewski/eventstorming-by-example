@@ -11,6 +11,14 @@ const slice = z.object({
   invariant: z.string().optional(),
   events: z.array(z.string()).optional(),
   policy: z.object({ text: z.string() }).optional(),
+  commands: z.array(z.string()).optional(),
+  branches: z.array(z.object({
+      command: z.string().optional(),
+      aggregate: z.string().optional(),
+      invariant: z.string().optional(),
+      events: z.array(z.string()).optional(),
+      policy: z.object({ text: z.string() }).optional(),
+    })).optional()
 });
 
 const episodes = defineCollection({

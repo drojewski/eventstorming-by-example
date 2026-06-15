@@ -1,15 +1,26 @@
 {
   "title": "Czym jest polityka? Fioletowa kartka versus żółta kartka.",
-  "subtitle": "Wywiad: Warsztat wewnątrz zespołu - uczymy się notacji",
+  "subtitle": "Wywiad: Wszędzie polityka",
   "dialogue": [
     { "role": "analityk", "name": "Analityk Janek", "avatar": "🕵️", "text": "Dobra, przeczytłem tego całego Brandoliniego i nic z tego nie rozumiem. O co chodzi z tą fioletową karteczką. Łatwiej było spisywać analizę w notatniku, na co komu te kartki." },
-    { "role": "analityk2", "name": "Analityk Paweł", "avatar": "👨‍💼", "text": "Nic nie dygaj ryju. Będzie dobrze. Przyklejasz fioletową kartkę zaraz po zdarzeniu. Natomiast po fioletowej kartce naklejasz niebieską i elo." },
+    { "role": "analityk2", "name": "Analityk Paweł", "avatar": "👨‍💼", "text": "Nic nie dygaj. Będzie dobrze. Przyklejasz fioletową kartkę zaraz po zdarzeniu. Natomiast po fioletowej kartce naklejasz niebieską i elo." },
     { "role": "analityk", "name": "Analityk Janek", "avatar": "🕵️", "text": "To żeś mi wyjaśnił. Nara." },
-    { "role": "analityk2", "name": "Analityk Paweł", "avatar": "👨‍💼", "text": "Czekaj, świruję przecież. Fioletowa kartka to po prostu reguła. Byłeś wcześniej programistą nie? No to zaimplementowałbyś taką fioletową kartkę jako event listener albo process manager.. No przyjmujesz zdarzenie i decydujesz co z tym dalej. Walisz ifa i sru ślesz komendę." },
-    { "role": "analityk", "name": "Analityk Janek", "avatar": "🕵️", "text": "Ale reguły przecież żółtą karteczką oznaczamy." },
-    { "role": "analityk2", "name": "Analityk Paweł", "avatar": "👨‍💼", "text": "Co racja to racja. No bo mamy tak naprawdę dwa rodzaje reguł. Na tych żółtych karteczkach umieszczasz reguły (niezmienniki), które muszą być spełnione, aby komenda się powiodła. A na tej fioletowej umieszczasz słowno muzycznie 'reakcję', która zachodzi na skutek pojawienia się zdarzenia / wystąpienia jakiegoś faktu." },
-    { "role": "analityk", "name": "Analityk Janek", "avatar": "🕵️", "text": "Weź mi to jeszcze sparafrazuj jakoś sprytnie" },
-    { "role": "analityk2", "name": "Analityk Paweł", "avatar": "👨‍💼", "text": "No fioletowa kartka mówi Ci coś w stylu: 'skoro już zadziało się to i to, to teraz zrób tamto', a reguła z żółtej karteczki mówi Ci czy mogę zrealizować jakąś akcję w ogóle. To bardzo ważna reguła, która pilnuje nam spójności biznesu, w sensie, że nie rozleci się na kawałki, biznes nie będzie na nas krzyczeć, nie dostaniemy kary, nie będą pisać o nas w gazetach / nie pójdziemy na przykład pierdzieć w pasiaki. Cokolwiek. Ta fioletowa to klej między zdarzeniem, które wystąpiło, a nową komendą." },
+    { "role": "analityk2", "name": "Analityk Paweł", "avatar": "👨‍💼", "text": "Czekaj, świruję przecież. Fioletowa kartka to reguła biznesowa, która pozwala nam podjać decyzję procesową. No przyjmujesz zdarzenie i decydujesz co z tym dalej. Walisz ifa jak jest potrzeba i sru ślesz komendę." },
+    { "role": "analityk", "name": "Analityk Janek", "avatar": "🕵️", "text": "Jakiego znowu ifa. Reguły przecież żółtą karteczką mieliśmy oznaczać." },
+
+    { "role": "analityk2", "name": "Analityk Paweł", "avatar": "👨‍💼", "text": "Co racja to racja. No bo mamy tak naprawdę dwa rodzaje reguł. Reguły dotyczące procesu oraz reguły pilnujące spójności biznesu."},
+    { "role": "analityk", "name": "Analityk Janek", "avatar": "🕵️", "text": "Uhuum.. mów dalej, ale już mi się to nie podoba." },
+    { "role": "analityk2", "name": "Analityk Paweł", "avatar": "👨‍💼", "text": "Zacznijmy od fioletowej kartki. Ta reguła (ten if) rozgałęzia nam proces na różne, dozwolone i akceptowalne przez biznes, ściezki. Innymi słowy steruje przepływem między krokami procesu. Byłeś wcześniej programistą nie? No to zaimplementowałbyś taką fioletową kartkę jako event listener albo process manager..,"},
+    { "role": "analityk", "name": "Analityk Janek", "avatar": "🕵️", "text": "Okej... a ta źółta?" },
+    { "role": "analityk2", "name": "Analityk Paweł", "avatar": "👨‍💼", "text": "Na tych żółtych karteczkach umieszczasz reguły (niezmienniki), które muszą być spełnione, aby komenda się powiodła, aby nie wprowadzić naszego systemu w niedozwolony stan. Spójności tej pilnuje tzw. agregat (DDD). To klasa, encja, która ma pewne zachowania (metody po prostu), a w tych metodach te super istotne ify pilnujące owej spójności"},
+    { "role": "analityk", "name": "Analityk Janek", "avatar": "🕵️", "text": "Daj no jakiś przykład lepiej jeszcze." },
+    { "role": "analityk2", "name": "Analityk Paweł", "avatar": "👨‍💼", "text": "Powiedzmy, że składasz rezerwację i złożenie takiej rezerwacji wiąże się z tym, że naliczane są punkty lojalnościowe. Ale, ale!! Ale tylko wówczas, gdy masz status 'KINOMAN'. Jak mógłbyś to zrobić.. Mógłbyś w module rezerwacji przechwycić zdarzenie o złożeniu rezerwacji, walnąć ifa na statusie i wysłać bądź nie wysłać żądania naliczenia punktów lojalnościowych. Co o tym myślisz?" },
+    { "role": "analityk", "name": "Analityk Janek", "avatar": "🕵️", "text": "Trochę to śmierdzi." },
+    { "role": "analityk2", "name": "Analityk Paweł", "avatar": "👨‍💼", "text": "Wiadomix, że śmierdzi. Bo dlaczego niby nasz wypieszczony mikroserwis miałby wiedzieć coś o VIPach oraz o regułach rządzących przyznawaniem punktów. Biznes powiedział jasno - nie można naliczyć punktów lojalnościowych jeśli nie jesteś kinomanem. To jest super ważna reguła biznesowa, której nie możemy złamać. Ta reguła musi znajdować się w kontekście punktów a nie rezerwacji." },
+    { "role": "analityk", "name": "Analityk Janek", "avatar": "🕵️", "text": "Brzmi sensownie nawet." },
+    { "role": "analityk2", "name": "Analityk Paweł", "avatar": "👨‍💼", "text": "Wiem, sam to w końcu wymyśliłem. No bo wyobraźmy sobie, że teraz nie jest to status KINOMAN tylko KINOMANIAK - jeśli zostawilibyśmy tę regułę w kontekście rezerwacji, to musielibyśmy dodać zadanie do backlog w zespole rezerwacji, mimo że o zmianie zdecydował biznes zajmujący się punktami lojalnościowymi - dziwne kapkę..." },
+    { "role": "analityk", "name": "Analityk Janek", "avatar": "🕵️", "text": "Dobrze, no już mówiłem, że brzmi sensownie. Idźmy dalej." },
+    { "role": "analityk2", "name": "Analityk Paweł", "avatar": "👨‍💼", "text": "Spokojnie, zabierz te ręce. Powiedzmy teraz, że reguła brzmi: złożenie oferty, która opiewa na więcej niż 200k wymaga akceptacji szefa. Czyli mamy dwie dozwolone ścieżki procesu. Oferta na 50k i oferta na 250k jest dozwolonym i w pełni poprawnym bytem biznesowym. Ta reguła nie dotyczy stanu tego obiektu. Dotyczy kroków procesu. Zatem ją bym umieścił w polityce." },
     { "role": "analityk", "name": "Analityk Janek", "avatar": "🕵️", "text": "Dzięki. Jesteś mądrzejszy nawet od naszego eksperta biznesowego. Idę modelować świat." }
   ],
   "model": {

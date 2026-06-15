@@ -22,6 +22,7 @@ const slice = z.object({
   policy: z.object({ text: z.string() }).optional(),
   then: z.array(step).optional(),
   branches: z.array(step.extend({ then: z.array(step).optional() })).optional(),
+
 });
 
 const episodes = defineCollection({
@@ -38,6 +39,10 @@ const episodes = defineCollection({
     model: z.object({
       slices: z.array(slice),
       hotspots: z.array(z.string()).optional(),
+      screenshots: z.array(z.object({
+                src: z.string(),
+                caption: z.string().optional(),
+              })).optional(),
     }),
   }),
 });

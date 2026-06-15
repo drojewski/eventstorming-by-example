@@ -4,7 +4,7 @@
   "dialogue": [
     { "role": "ekspert", "name": "Ekspert biznesowy", "avatar": "👨‍💼", "text": "No więc ten nasz proces oceny dostawcy działa tak: bierzemy dane z CRM-a, sprawdzamy gościa w BIK-u, zaglądamy do systemu XERXES, bo tam mamy tajne informacje. No i są jeszcze integracje z trzema innymi systemami, ale nie pamiętam nazw…" },
     { "role": "analityk", "name": "Analityk biznesowy", "avatar": "🕵️", "text": "Okej brachu, powiedz mi najpierw po co go oceniacie i co istotnego dzieje się w tym procesie? Co tu jest NAPRAWDĘ ważne bez czego ten proces by się nie mógł udać?" },
-    { "role": "ekspert", "name": "Ekspert biznesowy", "avatar": "👨‍💼", "text": "Chodzi tu o to, że kwalifikujemy tym sposobem dostawcę do współpracy. Oceniam dostawcę, pomaga algorytm napisany przez Janka i tyle." },
+    { "role": "ekspert", "name": "Ekspert biznesowy", "avatar": "👨‍💼", "text": "Chodzi tu o to, że jak otrzymamy ofertę od dostawcy to kwalifikujemy tym sposobem dostawcę do współpracy. Oceniam dostawcę, pomaga algorytm napisany przez Janka i tyle." },
     { "role": "analityk", "name": "Analityk biznesowy", "avatar": "🕵️", "text": "Uuuu.. a czy każdego dostawcę poddajesz takiej ocenie?" },
     { "role": "ekspert", "name": "Ekspert biznesowy", "avatar": "👨‍💼", "text": "Nie, dostawców, którzy współpracowali z nami przynajmniej przy 5 dealach nie poddajemy już takiemu procesowi, kwalifikujemy ich w ciemno." },
     { "role": "analityk", "name": "Analityk biznesowy", "avatar": "🕵️", "text": "Mhm... A co się stanie jeśli na przykład przez pomyłkę poddam takiego dostawcę jednak procesowi kwalifikacji?" },
@@ -63,6 +63,5 @@
         ]
       }
     ],
-    "hotspots": []
-  }
+    "hotspots": []}
 }

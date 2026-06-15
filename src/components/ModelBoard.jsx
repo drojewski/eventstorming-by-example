@@ -4,7 +4,7 @@ import { ArrowRight, AlertTriangle } from 'lucide-react';
 const STICKY = {
   event:          { bg: 'bg-orange-300', label: 'Zdarzenie' },
   command:        { bg: 'bg-blue-300',   label: 'Komenda' },
-  aggregate:      { bg: 'bg-yellow-200', label: 'Agregat' },
+  aggregate:      { bg: 'bg-yellow-200', label: 'Niezmiennik' },
   policy:         { bg: 'bg-purple-300', label: 'Polityka' },
   externalSystem: { bg: 'bg-pink-200',   label: 'System zewn.' },
   readModel:      { bg: 'bg-green-200',  label: 'Read model' },
@@ -187,7 +187,6 @@ function Legend() {
 }
 
 export default function ModelBoard({ model }) {
-  // Grupujemy kolejne slice'y po polu `lane`. Slice bez `lane` trafia do grupy bez nagłówka.
   const groups = [];
   model.slices.forEach((slice, i) => {
     const last = groups[groups.length - 1];
@@ -224,6 +223,23 @@ export default function ModelBoard({ model }) {
           ))}
         </div>
       </div>
+
+      {model.screenshots?.length > 0 && (
+        <div className="mt-6 border-t border-gray-200 pt-4 space-y-6">
+          {model.screenshots.map((shot, i) => (
+            <figure key={i} className="m-0">
+              <img
+                src={shot.src}
+                alt={shot.caption || `Screenshot ${i + 1}`}
+                className="max-w-full rounded-lg border border-gray-200 shadow-sm"
+              />
+              {shot.caption && (
+                <figcaption className="text-sm text-gray-500 mt-2 text-center">{shot.caption}</figcaption>
+              )}
+            </figure>
+          ))}
+        </div>
+      )}
 
       {model.hotspots?.length > 0 && (
         <div className="mt-6 border-t border-gray-200 pt-4">

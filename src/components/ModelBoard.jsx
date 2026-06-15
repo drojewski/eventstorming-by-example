@@ -12,6 +12,27 @@ const STICKY = {
   hotspot:        { bg: 'bg-red-300',    label: 'Hotspot' },
 };
 
+function EventGroup({ events, inline }) {
+  if (inline) {
+    return (
+      <div className="flex items-center gap-2">
+        {events.map((e, i) => (
+          <React.Fragment key={i}>
+            {i > 0 && <Arrow />}
+            <Sticky type="event" rotate={i % 2 === 0 ? -1 : 1}>{e}</Sticky>
+          </React.Fragment>
+        ))}
+      </div>
+    );
+  }
+  return (
+    <div className="flex flex-col gap-2 items-center">
+      {events.map((e, i) => (
+        <Sticky key={i} type="event" rotate={i % 2 === 0 ? -1 : 1}>{e}</Sticky>
+      ))}
+    </div>
+  );
+}
 function Sticky({ type, children, small = false, rotate = 0 }) {
   const size = small ? 'w-28 min-h-16 p-2 text-xs' : 'w-44 min-h-20 p-3 text-sm';
   return (
@@ -55,21 +76,30 @@ function Segment({ node, firstArrow }) {
         </>
       )}
       {node.events?.length > 0 && (
-        <>
-          <Arrow />
-          <div className="flex flex-col gap-2 items-center">
-            {node.events.map((e, i) => (
-              <Sticky key={i} type="event" rotate={i % 2 === 0 ? -1 : 1}>{e}</Sticky>
-            ))}
-          </div>
-        </>
-      )}
+              <>
+                <Arrow />
+                <EventGroup events={node.events} inline={node.eventsInline} />
+              </>
+            )}
       {node.policy && (
         <>
           <Arrow />
           <Sticky type="policy" rotate={1}>{node.policy.text}</Sticky>
         </>
       )}
+    {node.branches?.length > 0 && (
+            <>
+              <Arrow />
+              <div className="flex flex-col gap-5">
+                {node.branches.map((b, bi) => (
+                  <div key={bi} className="flex items-center gap-2 border-l-2 border-gray-200 pl-3">
+                    <Segment node={b} firstArrow={false} />
+                    {b.then?.map((s, si) => <Segment key={si} node={s} firstArrow={true} />)}
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
     </>
   );
 }

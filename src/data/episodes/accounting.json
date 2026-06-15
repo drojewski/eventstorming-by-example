@@ -1,0 +1,53 @@
+{
+  "title": "Accounting",
+  "subtitle": "Wywiad: ekspert potrafi odpowiedzieć na pytania, a analityk umie właściwe pytania zadać",
+  "dialogue": [
+    { "role": "analityk", "name": "Analityk biznesowy", "avatar": "🕵️", "text": "Powiedz mi proszę drogi ekspercie, jakie dwa zdarzenia byś wymienił jako te najistotniejsze w tym procesie z Twojego punktu widzenia. Pamiętasz.. chodzi mi o zdarzenia biznesowe. Jeśli Ci to pomoże to zapomnijmy na chwilę, że proces jest scyfryzowany. Niech to będą zdarzenia pi razy oko z początku i końca procesu." },
+    { "role": "ekspert", "name": "Ekspert biznesowy", "avatar": "👨‍💼", "text": "Czyli te dyrdymały w czasie przeszłym, tak? Dobra, niech będzie. To co pierwsze przychodzi mi do głowy to 'Zmniejszono kwotę kapitału do spłaty' i 'Powiększono limit'" },
+    { "role": "analityk", "name": "Analityk biznesowy", "avatar": "🕵️", "text": "Super. Wrzućmy je w takim razie na naszego boarda wzdłuż linii czasu. Mamy to. Powiedz mi proszę co się musi stać żebym mógł zmniejszyć kwotę kapitału do spłaty?" },
+    { "role": "ekspert", "name": "Ekspert biznesowy", "avatar": "👨‍💼", "text": "Najpierw to musi wpłynąć kasa od klienta i musimy ją zaksięgować, bez tego ani rusz dalej." },
+    { "role": "analityk", "name": "Analityk biznesowy", "avatar": "🕵️", "text": "Co jest bezpośrednim skutkiem zaksięgowania wpłaty? Od razu przystępujesz do zmniejszenia tego kapitału, czy coś jeszcze musi się stać?" },
+    { "role": "ekspert", "name": "Ekspert biznesowy", "avatar": "👨‍💼", "text": "Byku, no coś Ty. Najpierw to musi się odpalić skomplikowany algorytm." },
+    { "role": "analityk", "name": "Analityk biznesowy", "avatar": "🕵️", "text": "A za co on odpowiada, czemu to jest ważne?" },
+    { "role": "ekspert", "name": "Ekspert biznesowy", "avatar": "👨‍💼", "text": "Algorytm mówi mi czy wpłata taka może być rozliczona automatycznie czy manualnie." },
+    { "role": "analityk", "name": "Analityk biznesowy", "avatar": "🕵️", "text": "Żeby nie było za prosto, jasne. Zajmijmy się tą ścieżką automatyczną. Jak to działa?" },
+    { "role": "ekspert", "name": "Ekspert biznesowy", "avatar": "👨‍💼", "text": "No zmniejszam wartość kapitału do spłaty i powiększam przyznany klientowi limit, żeby mógł z niego dalej korzystać." },
+    { "role": "analityk", "name": "Analityk biznesowy", "avatar": "🕵️", "text": "Ludzki pan jesteś. A ten kapitał do spłaty to po prostu, ot tak, zmniejszam, czy może to się w jakimś przypadku nie udać?" },
+    { "role": "ekspert", "name": "Ekspert biznesowy", "avatar": "👨‍💼", "text": "Wiadome, że ot tak to nie mogę. Muszę sprawdzić czy kwota wpłaty nie jest większa od kwoty kapitału do spłaty. Bo jak inaczej.." },
+    { "role": "analityk", "name": "Analityk biznesowy", "avatar": "🕵️", "text": "Ma sens. Wspominałeś o powiększeniu limitu. Co by się stało gdybym to zdarzenie usunął?" },
+    { "role": "ekspert", "name": "Ekspert biznesowy", "avatar": "👨‍💼", "text": "To bym zasugerował, abyś uderzył głową o ścianę. To jest dla nas super istotne. Spłata kapitału musi się wiązać bezpośrednio z powiększeniem limitu" },
+    { "role": "analityk", "name": "Analityk biznesowy", "avatar": "🕵️", "text": "A co by się stało gdybym limit powiększył 5 minut po spłacie kapitału?" },
+    { "role": "ekspert", "name": "Ekspert biznesowy", "avatar": "👨‍💼", "text": "Tam jest druga ściana. To musi się stać jedno po drugim, nie możemy sobie pozwolić, aby zadziało to się w różnych momentach" },
+    { "role": "analityk", "name": "Analityk biznesowy", "avatar": "🕵️", "text": "Jesteś najmądrzejszy na kuli ziemskiej, na razie mi to wystarczy, dzięki!" }
+  ],
+  "model": {
+    "slices": [
+      {
+        "lane": "Rozliczenie",
+        "trigger": { "type": "event", "text": "Zaksięgowano wpłatę" },
+        "policy": { "text": "Zawsze gdy zaksięgowano wpłatę → uruchom algorytm rozliczenia (bezpośredni skutek zaksięgowania, jeszcze przed jakąkolwiek zmianą kapitału)" },
+        "then":[
+      {
+        "command": "Określ sposób rozliczenia wpłaty",
+        "events": ["Wybrano automatyczny sposób rozliczania", "Wybrano manualny sposób rozliczenia"],
+        "branches": [
+          {
+            "command": "Zmniejsz kwotę kapitału do spłaty",
+            "aggregate": " ",
+            "invariant": "Kwota wpłaty nie może być większa niż kapitał do spłaty.",
+            "events": ["Zmniejszono kwotę kapitału do spłaty", "Powiększono limit"],
+            "eventsInline": true
+          },
+          {
+            "command": "Rozlicz wpłatę manualnie",
+            "events": ["Skierowano do rozliczenia manualnego"]
+          }
+        ]}]}
+        ],
+    "hotspots": [
+      "Co się dzieje, gdy kwota wpłaty jest większa od kapitału do spłaty?",
+      "Ścieżka rozliczenia manualnego — jak dokładnie przebiega? Do omówienia.",
+      "Co konkretnie robi „skomplikowany algorytm”?."
+    ]
+  }
+}

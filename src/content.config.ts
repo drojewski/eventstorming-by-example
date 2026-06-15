@@ -7,6 +7,9 @@ const step = z.object({
   invariant: z.string().optional(),
   events: z.array(z.string()).optional(),
   policy: z.object({ text: z.string() }).optional(),
+  eventsInline: z.boolean().optional(),
+  branches: z.array(z.lazy(() => step.extend({ then: z.array(step).optional() }))).optional(),
+
 });
 
 const slice = z.object({

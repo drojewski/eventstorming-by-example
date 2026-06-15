@@ -32,13 +32,56 @@ function Arrow() {
   );
 }
 
+// Pojedynczy poziomy odcinek: komenda -> agregat -> zdarzenia -> polityka.
+// firstArrow steruje strzałką PRZED komendą (na początku linii zwykle jej nie chcemy).
+function Segment({ node, firstArrow }) {
+  return (
+    <>
+      {node.command && (
+        <>
+          {firstArrow && <Arrow />}
+          <Sticky type="command" rotate={1}>{node.command}</Sticky>
+        </>
+      )}
+      {node.aggregate && (
+        <>
+          <Arrow />
+          <Sticky type="aggregate" rotate={-1}>
+            {node.aggregate}
+            {node.invariant && (
+              <span className="block text-xs font-normal text-gray-700 mt-1 italic">⚖ {node.invariant}</span>
+            )}
+          </Sticky>
+        </>
+      )}
+      {node.events?.length > 0 && (
+        <>
+          <Arrow />
+          <div className="flex flex-col gap-2 items-center">
+            {node.events.map((e, i) => (
+              <Sticky key={i} type="event" rotate={i % 2 === 0 ? -1 : 1}>{e}</Sticky>
+            ))}
+          </div>
+        </>
+      )}
+      {node.policy && (
+        <>
+          <Arrow />
+          <Sticky type="policy" rotate={1}>{node.policy.text}</Sticky>
+        </>
+      )}
+    </>
+  );
+}
+
 function SliceFlow({ slice }) {
   const rotations = [-2, 1, -1, 2, 0];
   const r = (i) => rotations[i % rotations.length];
   const hasContext = slice.externalSystems?.length || slice.readModels?.length || slice.actor;
   const moreAfterTrigger =
     Boolean(hasContext) || Boolean(slice.command) || Boolean(slice.aggregate) ||
-    (slice.events?.length ?? 0) > 0 || Boolean(slice.policy) || (slice.branches?.length ?? 0) > 0;
+    (slice.events?.length ?? 0) > 0 || Boolean(slice.policy) ||
+    (slice.then?.length ?? 0) > 0 || (slice.branches?.length ?? 0) > 0;
 
   return (
     <div className="flex items-center gap-2 shrink-0">
@@ -107,40 +150,20 @@ function SliceFlow({ slice }) {
         </>
       )}
 
+      {slice.then?.map((step, si) => (
+        <Segment key={si} node={step} firstArrow={true} />
+      ))}
+
       {slice.branches?.length > 0 && (
         <>
           <Arrow />
           <div className="flex flex-col gap-5">
             {slice.branches.map((b, bi) => (
               <div key={bi} className="flex items-center gap-2 border-l-2 border-gray-200 pl-3">
-                {b.command && <Sticky type="command" rotate={1}>{b.command}</Sticky>}
-                {b.aggregate && (
-                  <>
-                    <Arrow />
-                    <Sticky type="aggregate" rotate={-1}>
-                      {b.aggregate}
-                      {b.invariant && (
-                        <span className="block text-xs font-normal text-gray-700 mt-1 italic">⚖ {b.invariant}</span>
-                      )}
-                    </Sticky>
-                  </>
-                )}
-                {b.events?.length > 0 && (
-                  <>
-                    <Arrow />
-                    <div className="flex flex-col gap-2 items-center">
-                      {b.events.map((e, i) => (
-                        <Sticky key={i} type="event" rotate={i % 2 === 0 ? -1 : 1}>{e}</Sticky>
-                      ))}
-                    </div>
-                  </>
-                )}
-                {b.policy && (
-                  <>
-                    <Arrow />
-                    <Sticky type="policy" rotate={1}>{b.policy.text}</Sticky>
-                  </>
-                )}
+                <Segment node={b} firstArrow={false} />
+                {b.then?.map((step, si) => (
+                  <Segment key={si} node={step} firstArrow={true} />
+                ))}
               </div>
             ))}
           </div>
@@ -164,15 +187,40 @@ function Legend() {
 }
 
 export default function ModelBoard({ model }) {
+  // Grupujemy kolejne slice'y po polu `lane`. Slice bez `lane` trafia do grupy bez nagłówka.
+  const groups = [];
+  model.slices.forEach((slice, i) => {
+    const last = groups[groups.length - 1];
+    if (last && last.lane === slice.lane) {
+      last.slices.push({ slice, index: i });
+    } else {
+      groups.push({ lane: slice.lane, slices: [{ slice, index: i }] });
+    }
+  });
+
   return (
     <div>
       <div className="overflow-x-auto pb-4">
-        <div className="flex flex-wrap items-center gap-x-2 gap-y-6 px-2">
-          {model.slices.map((slice, i) => (
-            <React.Fragment key={i}>
-              <SliceFlow slice={slice} />
-              {i < model.slices.length - 1 && <Arrow />}
-            </React.Fragment>
+        <div className="flex flex-wrap items-stretch gap-x-4 gap-y-6 px-2">
+          {groups.map((group, gi) => (
+            <div
+              key={gi}
+              className={group.lane ? 'border border-gray-200 rounded-lg p-3 pt-2 bg-gray-50' : ''}
+            >
+              {group.lane && (
+                <div className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">
+                  {group.lane}
+                </div>
+              )}
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-6">
+                {group.slices.map(({ slice, index }, si) => (
+                  <React.Fragment key={index}>
+                    <SliceFlow slice={slice} />
+                    {si < group.slices.length - 1 && <Arrow />}
+                  </React.Fragment>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       </div>

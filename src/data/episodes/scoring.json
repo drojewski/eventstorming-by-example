@@ -50,7 +50,7 @@
           "text": "Zakwalifikowano dostawcę"
         },
         "policy": {
-          "text": "Zawsze gdy zakwalifikowano dostawcę do współpracy → poddaj weryfikacji przez szefa."
+          "text": "Zawsze gdy zakwalifikowano dostawcę do współpracy -> poddaj weryfikacji przez szefa."
         },
         "then": [
           {

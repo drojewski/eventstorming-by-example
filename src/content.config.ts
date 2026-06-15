@@ -34,7 +34,7 @@ const episodes = defineCollection({
     title: z.string(),
     subtitle: z.string().optional(),
     dialogue: z.array(z.object({
-      role: z.enum(['ekspert', 'analityk']),
+      role: z.enum(['ekspert', 'analityk', 'analityk2']),
       name: z.string(),
       avatar: z.string(),
       text: z.string(),

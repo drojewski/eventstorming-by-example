@@ -1,0 +1,55 @@
+{
+  "title": "Ifology",
+  "subtitle": "Wywiad: jeśli to, to tamto, jeśli tamto, to..",
+  "dialogue": [
+{ "role": "analityk", "name": "Analityk biznesowy Janek", "avatar": "🕵️", "text": "Pa tera. Narysowałeś ten fragment ostatnio: komenda 'Pobierz dane z systemu kontrahentów', potem fioletowa karteczka 'jeśli w odpowiedzi status = ACTIVE, to oceń dostawcę', i na końcu 'Oceniono dostawcę'. Można bardziej sexy to zrobić." },
+{ "role": "analityk2", "name": "Analityk biznesowy Paweł", "avatar": "🧐", "text": "Tak to działa panie mądry. Pobieramy, patrzymy na status w jsonie, jak ACTIVE to jedziemy z oceną. Nie pytaj tyle bo kociej mordy dostaniesz." },
+{ "role": "analityk", "name": "Analityk biznesowy Janek", "avatar": "🕵️", "text": "Drogi kolego, trochę techniczne to Twoje modelowanie. Chodzi mi o to: 'pole status równa się ACTIVE'. A polityka nie reaguje na pola w jsonie. Gadaliśmy o tym. Polityka reaguje na fakt, który już się wydarzył (niespodzianka!) i coś znaczy dla biznesu. Powiedz mi jak krowa na rowie: co tak naprawdę oznacza ten status ACTIVE?" },
+{ "role": "analityk2", "name": "Ekspert biznesowy Paweł", "avatar": "🧐", "text": "No że kontrahent jest aktywny, że nie jest zawieszony ani wykreślony z rejestru. Że można z nim robić geszefty." },
+{ "role": "analityk", "name": "Analityk biznesowy Janek", "avatar": "🕵️", "text": "Ano właśnie. Nie 'status = ACTIVE', tylko 'Potwierdzono aktywność kontrahenta'. Pomarańczowa karteczka, czas przeszły. Ten if z kodu przed chwilą zamienił się magicznie w zdarzenie. Czaisz?" },
+{ "role": "analityk2", "name": "Ekspert biznesowy Paweł", "avatar": "🧐", "text": "Dobra, ale zara. Bo coś mi się nie klei. To samo sprawdzenie statusu robię też przy zakładaniu umowy - tam jak kontrahent nie jest aktywny, to po prostu nie pozwalam założyć umowy. To też mam robić jako zdarzenie i politykę?" },
+{ "role": "analityk", "name": "Analityk biznesowy Janek", "avatar": "🕵️", "text": "Nope. To jest nieco inna sytuacja. Tam ten warunek nie wyzwala niczego nowego. On blokuje operację. 'Nie można założyć umowy z nieaktywnym kontrahentem'. To nie polityka, tylko niezmiennik - żółta karteczka." },
+{ "role": "analityk2", "name": "Ekspert biznesowy Paweł", "avatar": "🧐", "text": "Yyyyy?" },
+{ "role": "analityk", "name": "Analityk biznesowy Janek", "avatar": "🕵️", "text": "Zadaj sobie pytanie: czy po tym warunku dzieje się coś nowego, czy może ten warunek decyduje po prostu czy operacja się powiedzie." },
+{ "role": "analityk2", "name": "Ekspert biznesowy Paweł", "avatar": "🧐", "text": "Dzięki, jesteś najmądrzejszy, a zwątpiłem na chwilę." }
+  ],
+"model": {
+"slices": [
+{
+"lane": "Weryfikacja kontrahenta",
+"trigger": { "type": "event", "text": "Zgłoszono kontrahenta do współpracy" },
+"policy": { "text": "Zawsze gdy zgłoszono kontrahenta -> sprawdź jego status w rejestrze" },
+"then": [
+{
+"command": "Sprawdź status kontrahenta",
+"externalSystemNote": "dane z zewnętrznego rejestru kontrahentów",
+"events": ["Potwierdzono aktywność kontrahenta", "Stwierdzono nieaktywność kontrahenta"]
+}
+]
+},
+{
+"lane": "Ocena",
+"trigger": { "type": "event", "text": "Potwierdzono aktywność kontrahenta" },
+"policy": { "text": "Zawsze gdy potwierdzono aktywność kontrahenta -> oceń kontrahenta" },
+"then": [
+{
+"command": "Oceń kontrahenta",
+"events": ["Oceniono kontrahenta"]
+}
+]
+},
+{
+"lane": "Odrzucenie",
+"trigger": { "type": "event", "text": "Stwierdzono nieaktywność kontrahenta" },
+"policy": { "text": "Zawsze gdy stwierdzono nieaktywność kontrahenta -> odrzuć zgłoszenie" },
+"then": [
+{
+"command": "Odrzuć zgłoszenie kontrahenta",
+"events": ["Odrzucono zgłoszenie kontrahenta"]
+}
+]
+}
+],
+"hotspots": [
+]}
+}

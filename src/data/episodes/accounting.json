@@ -25,7 +25,7 @@
       {
         "lane": "Rozliczenie",
         "trigger": { "type": "event", "text": "Zaksięgowano wpłatę" },
-        "policy": { "text": "Zawsze gdy zaksięgowano wpłatę → uruchom algorytm rozliczenia (bezpośredni skutek zaksięgowania, jeszcze przed jakąkolwiek zmianą kapitału)" },
+        "policy": { "text": "Zawsze gdy zaksięgowano wpłatę -> uruchom algorytm rozliczenia (bezpośredni skutek zaksięgowania, jeszcze przed jakąkolwiek zmianą kapitału)" },
         "then":[
       {
         "command": "Określ sposób rozliczenia wpłaty",
@@ -47,7 +47,7 @@
     "hotspots": [
       "Co się dzieje, gdy kwota wpłaty jest większa od kapitału do spłaty?",
       "Ścieżka rozliczenia manualnego — jak dokładnie przebiega? Do omówienia.",
-      "Co konkretnie robi „skomplikowany algorytm”?."
+      "Co konkretnie robi 'skomplikowany algorytm'?."
     ]
   }
 }

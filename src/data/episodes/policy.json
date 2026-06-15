@@ -3,13 +3,13 @@
   "subtitle": "Wywiad: Warsztat wewnątrz zespołu - uczymy się notacji",
   "dialogue": [
     { "role": "analityk", "name": "Analityk Janek", "avatar": "🕵️", "text": "Dobra, przeczytłem tego całego Brandoliniego i nic z tego nie rozumiem. O co chodzi z tą fioletową karteczką. Łatwiej było spisywać analizę w notatniku, na co komu te kartki." },
-    { "role": "ekspert", "name": "Analityk Paweł", "avatar": "👨‍💼", "text": "Nic nie dygaj ryju. Będzie dobrze. Przyklejasz fioletową kartkę zaraz po zdarzeniu. Natomiast po fioletowej kartce naklejasz niebieską i elo." },
+    { "role": "analityk2", "name": "Analityk Paweł", "avatar": "👨‍💼", "text": "Nic nie dygaj ryju. Będzie dobrze. Przyklejasz fioletową kartkę zaraz po zdarzeniu. Natomiast po fioletowej kartce naklejasz niebieską i elo." },
     { "role": "analityk", "name": "Analityk Janek", "avatar": "🕵️", "text": "To żeś mi wyjaśnił. Nara." },
-    { "role": "ekspert", "name": "Analityk Paweł", "avatar": "👨‍💼", "text": "Czekaj, świruję przecież. Fioletowa kartka to po prostu reguła. Byłeś wcześniej programistą nie? No to zaimplementowałbyś taką fioletową kartkę jako event listener albo process manager.. No przyjmujesz zdarzenie i decydujesz co z tym dalej. Walisz ifa i sru ślesz komendę." },
+    { "role": "analityk2", "name": "Analityk Paweł", "avatar": "👨‍💼", "text": "Czekaj, świruję przecież. Fioletowa kartka to po prostu reguła. Byłeś wcześniej programistą nie? No to zaimplementowałbyś taką fioletową kartkę jako event listener albo process manager.. No przyjmujesz zdarzenie i decydujesz co z tym dalej. Walisz ifa i sru ślesz komendę." },
     { "role": "analityk", "name": "Analityk Janek", "avatar": "🕵️", "text": "Ale reguły przecież żółtą karteczką oznaczamy." },
-    { "role": "ekspert", "name": "Analityk Paweł", "avatar": "👨‍💼", "text": "Co racja to racja. No bo mamy tak naprawdę dwa rodzaje reguł. Na tych żółtych karteczkach umieszczasz reguły (niezmienniki), które muszą być spełnione, aby komenda się powiodła. A na tej fioletowej umieszczasz słowno muzycznie 'reakcję', która zachodzi na skutek pojawienia się zdarzenia / wystąpienia jakiegoś faktu." },
+    { "role": "analityk2", "name": "Analityk Paweł", "avatar": "👨‍💼", "text": "Co racja to racja. No bo mamy tak naprawdę dwa rodzaje reguł. Na tych żółtych karteczkach umieszczasz reguły (niezmienniki), które muszą być spełnione, aby komenda się powiodła. A na tej fioletowej umieszczasz słowno muzycznie 'reakcję', która zachodzi na skutek pojawienia się zdarzenia / wystąpienia jakiegoś faktu." },
     { "role": "analityk", "name": "Analityk Janek", "avatar": "🕵️", "text": "Weź mi to jeszcze sparafrazuj jakoś sprytnie" },
-    { "role": "ekspert", "name": "Analityk Paweł", "avatar": "👨‍💼", "text": "No fioletowa kartka mówi Ci coś w stylu: 'skoro już zadziało się to i to, to teraz zrób tamto', a reguła z żółtej karteczki mówi Ci czy mogę zrealizować jakąś akcję w ogóle. To bardzo ważna reguła, która pilnuje nam spójności biznesu, w sensie, że nie rozleci się na kawałki, biznes nie będzie na nas krzyczeć, nie dostaniemy kary, nie będą pisać o nas w gazetach / nie pójdziemy na przykład pierdzieć w pasiaki. Cokolwiek. Ta fioletowa to klej między zdarzeniem, które wystąpiło, a nową komendą." },
+    { "role": "analityk2", "name": "Analityk Paweł", "avatar": "👨‍💼", "text": "No fioletowa kartka mówi Ci coś w stylu: 'skoro już zadziało się to i to, to teraz zrób tamto', a reguła z żółtej karteczki mówi Ci czy mogę zrealizować jakąś akcję w ogóle. To bardzo ważna reguła, która pilnuje nam spójności biznesu, w sensie, że nie rozleci się na kawałki, biznes nie będzie na nas krzyczeć, nie dostaniemy kary, nie będą pisać o nas w gazetach / nie pójdziemy na przykład pierdzieć w pasiaki. Cokolwiek. Ta fioletowa to klej między zdarzeniem, które wystąpiło, a nową komendą." },
     { "role": "analityk", "name": "Analityk Janek", "avatar": "🕵️", "text": "Dzięki. Jesteś mądrzejszy nawet od naszego eksperta biznesowego. Idę modelować świat." }
   ],
   "model": {
@@ -25,7 +25,7 @@
       {
         "lane": "Płatność",
         "trigger": { "type": "event", "text": "Złożono zamówienie" },
-        "policy": { "text": "Zawsze gdy złożono zamówienie → uruchom proces płatności" },
+        "policy": { "text": "Zawsze gdy złożono zamówienie -> uruchom proces płatności" },
         "then": [
           {
             "actor": "Klient",

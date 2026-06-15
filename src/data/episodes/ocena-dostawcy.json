@@ -13,7 +13,7 @@
     { "role": "ekspert", "name": "Ekspert biznesowy", "avatar": "👨‍💼", "text": "Jeśli okaże się, że XERXES, za który płacimy kupę kasy, zwróci nam status BADBOY dla NIPu dostawcy, to nie kwalifikujemy go do współpracy, tylko blokujemy go na amen. To bardzo mądry system." },
     { "role": "analityk", "name": "Analityk biznesowy", "avatar": "🕵️", "text": "Mhm... A co jest bezpośrednim następstwem takiej kwalifikacji do współpracy?" },
     { "role": "ekspert", "name": "Ekspert biznesowy", "avatar": "👨‍💼", "text": "Tak jak wspominałem. System powiadamia szefa, żeby potwierdził lub wycofał dokonaną kwalifikację i to koniec procesu."},
-    { "role": "analityk", "name": "Analityk biznesowy", "avatar": "🕵️", "text": "Ahaaa, Ty to jesteś taki mądry, dziękuję za pomoc!" }
+    { "role": "analityk", "name": "Analityk biznesowy", "avatar": "🕵️", "text": "Ahaaa, Ty to jesteś taki mądry, dziękuję za pomoc! Jest jednak jeszcze wiele pytań, które będę chciał Ci wkrótce zadać. :-)" }
   ],
   "model": {
     "slices": [

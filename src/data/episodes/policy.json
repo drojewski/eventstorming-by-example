@@ -2,50 +2,178 @@
   "title": "Czym jest polityka? Fioletowa kartka versus żółta kartka.",
   "subtitle": "Wywiad: Wszędzie polityka",
   "dialogue": [
-    { "role": "analityk", "name": "Analityk Janek", "avatar": "🕵️", "text": "Dobra, przeczytłem tego całego Brandoliniego i nic z tego nie rozumiem. O co chodzi z tą fioletową karteczką. Łatwiej było spisywać analizę w notatniku, na co komu te kartki." },
-    { "role": "analityk2", "name": "Analityk Paweł", "avatar": "👨‍💼", "text": "Nic nie dygaj. Będzie dobrze. Przyklejasz fioletową kartkę zaraz po zdarzeniu. Natomiast po fioletowej kartce naklejasz niebieską i elo." },
-    { "role": "analityk", "name": "Analityk Janek", "avatar": "🕵️", "text": "To żeś mi wyjaśnił. Nara." },
-    { "role": "analityk2", "name": "Analityk Paweł", "avatar": "👨‍💼", "text": "Czekaj, świruję przecież. Fioletowa kartka to reguła biznesowa, która pozwala nam podjać decyzję procesową. No przyjmujesz zdarzenie i decydujesz co z tym dalej. Walisz ifa jak jest potrzeba i sru ślesz komendę." },
-    { "role": "analityk", "name": "Analityk Janek", "avatar": "🕵️", "text": "Jakiego znowu ifa. Reguły przecież żółtą karteczką mieliśmy oznaczać." },
-
-    { "role": "analityk2", "name": "Analityk Paweł", "avatar": "👨‍💼", "text": "Co racja to racja. No bo mamy tak naprawdę dwa rodzaje reguł. Reguły dotyczące procesu oraz reguły pilnujące spójności biznesu."},
-    { "role": "analityk", "name": "Analityk Janek", "avatar": "🕵️", "text": "Uhuum.. mów dalej, ale już mi się to nie podoba." },
-    { "role": "analityk2", "name": "Analityk Paweł", "avatar": "👨‍💼", "text": "Zacznijmy od fioletowej kartki. Ta reguła (ten if) rozgałęzia nam proces na różne, dozwolone i akceptowalne przez biznes, ściezki. Innymi słowy steruje przepływem między krokami procesu. Byłeś wcześniej programistą nie? No to zaimplementowałbyś taką fioletową kartkę jako event listener albo process manager..,"},
-    { "role": "analityk", "name": "Analityk Janek", "avatar": "🕵️", "text": "Okej... a ta źółta?" },
-    { "role": "analityk2", "name": "Analityk Paweł", "avatar": "👨‍💼", "text": "Na tych żółtych karteczkach umieszczasz reguły (niezmienniki), które muszą być spełnione, aby komenda się powiodła, aby nie wprowadzić naszego systemu w niedozwolony stan. Spójności tej pilnuje tzw. agregat (DDD). To klasa, encja, która ma pewne zachowania (metody po prostu), a w tych metodach te super istotne ify pilnujące owej spójności"},
-    { "role": "analityk", "name": "Analityk Janek", "avatar": "🕵️", "text": "Daj no jakiś przykład lepiej jeszcze." },
-    { "role": "analityk2", "name": "Analityk Paweł", "avatar": "👨‍💼", "text": "Powiedzmy, że składasz rezerwację i złożenie takiej rezerwacji wiąże się z tym, że naliczane są punkty lojalnościowe. Ale, ale!! Ale tylko wówczas, gdy masz status 'KINOMAN'. Jak mógłbyś to zrobić.. Mógłbyś w module rezerwacji przechwycić zdarzenie o złożeniu rezerwacji, walnąć ifa na statusie i wysłać bądź nie wysłać żądania naliczenia punktów lojalnościowych. Co o tym myślisz?" },
-    { "role": "analityk", "name": "Analityk Janek", "avatar": "🕵️", "text": "Trochę to śmierdzi." },
-    { "role": "analityk2", "name": "Analityk Paweł", "avatar": "👨‍💼", "text": "Wiadomix, że śmierdzi. Bo dlaczego niby nasz wypieszczony mikroserwis miałby wiedzieć coś o VIPach oraz o regułach rządzących przyznawaniem punktów. Biznes powiedział jasno - nie można naliczyć punktów lojalnościowych jeśli nie jesteś kinomanem. To jest super ważna reguła biznesowa, której nie możemy złamać. Ta reguła musi znajdować się w kontekście punktów a nie rezerwacji." },
-    { "role": "analityk", "name": "Analityk Janek", "avatar": "🕵️", "text": "Brzmi sensownie nawet." },
-    { "role": "analityk2", "name": "Analityk Paweł", "avatar": "👨‍💼", "text": "Wiem, sam to w końcu wymyśliłem. No bo wyobraźmy sobie, że teraz nie jest to status KINOMAN tylko KINOMANIAK - jeśli zostawilibyśmy tę regułę w kontekście rezerwacji, to musielibyśmy dodać zadanie do backlog w zespole rezerwacji, mimo że o zmianie zdecydował biznes zajmujący się punktami lojalnościowymi - dziwne kapkę..." },
-    { "role": "analityk", "name": "Analityk Janek", "avatar": "🕵️", "text": "Dobrze, no już mówiłem, że brzmi sensownie. Idźmy dalej." },
-    { "role": "analityk2", "name": "Analityk Paweł", "avatar": "👨‍💼", "text": "Spokojnie, zabierz te ręce. Powiedzmy teraz, że reguła brzmi: złożenie oferty, która opiewa na więcej niż 200k wymaga akceptacji szefa. Czyli mamy dwie dozwolone ścieżki procesu. Oferta na 50k i oferta na 250k jest dozwolonym i w pełni poprawnym bytem biznesowym. Ta reguła nie dotyczy stanu tego obiektu. Dotyczy kroków procesu. Zatem ją bym umieścił w polityce." },
-    { "role": "analityk", "name": "Analityk Janek", "avatar": "🕵️", "text": "Dzięki. Jesteś mądrzejszy nawet od naszego eksperta biznesowego. Idę modelować świat." }
+    {
+      "role": "analityk",
+      "name": "Analityk Janek",
+      "avatar": "🕵️",
+      "text": "Dobra, przeczytłem tego całego Brandoliniego i nic z tego nie rozumiem. O co chodzi z tą fioletową karteczką. Łatwiej było spisywać analizę w notatniku, na co komu te kartki."
+    },
+    {
+      "role": "analityk2",
+      "name": "Analityk Paweł",
+      "avatar": "👨‍💼",
+      "text": "Nic nie dygaj. Będzie dobrze. Przyklejasz fioletową kartkę zaraz po zdarzeniu. Natomiast po fioletowej kartce naklejasz niebieską i elo."
+    },
+    {
+      "role": "analityk",
+      "name": "Analityk Janek",
+      "avatar": "🕵️",
+      "text": "To żeś mi wyjaśnił. Nara."
+    },
+    {
+      "role": "analityk2",
+      "name": "Analityk Paweł",
+      "avatar": "👨‍💼",
+      "text": "Czekaj, świruję przecież. Fioletowa kartka to reguła biznesowa, która pozwala nam podjać decyzję procesową. No przyjmujesz zdarzenie i decydujesz co z tym dalej. Walisz ifa jak jest potrzeba i sru ślesz komendę."
+    },
+    {
+      "role": "analityk",
+      "name": "Analityk Janek",
+      "avatar": "🕵️",
+      "text": "Jakiego znowu ifa. Reguły przecież żółtą karteczką mieliśmy oznaczać."
+    },
+    {
+      "role": "analityk2",
+      "name": "Analityk Paweł",
+      "avatar": "👨‍💼",
+      "text": "Co racja to racja. No bo mamy tak naprawdę dwa rodzaje reguł. Reguły dotyczące procesu oraz reguły pilnujące spójności biznesu."
+    },
+    {
+      "role": "analityk",
+      "name": "Analityk Janek",
+      "avatar": "🕵️",
+      "text": "Uhuum.. mów dalej, ale już mi się to nie podoba."
+    },
+    {
+      "role": "analityk2",
+      "name": "Analityk Paweł",
+      "avatar": "👨‍💼",
+      "text": "Zacznijmy od fioletowej kartki. Ta reguła (ten if) rozgałęzia nam proces na różne, dozwolone i akceptowalne przez biznes, ściezki. Innymi słowy steruje przepływem między krokami procesu. Byłeś wcześniej programistą nie? No to zaimplementowałbyś taką fioletową kartkę jako event listener albo process manager..,"
+    },
+    {
+      "role": "analityk",
+      "name": "Analityk Janek",
+      "avatar": "🕵️",
+      "text": "Okej... a ta źółta?"
+    },
+    {
+      "role": "analityk2",
+      "name": "Analityk Paweł",
+      "avatar": "👨‍💼",
+      "text": "Na tych żółtych karteczkach umieszczasz reguły (niezmienniki), które muszą być spełnione, aby komenda się powiodła, aby nie wprowadzić naszego systemu w niedozwolony stan. Spójności tej pilnuje tzw. agregat (DDD). To klasa, encja, która ma pewne zachowania (metody po prostu), a w tych metodach te super istotne ify pilnujące owej spójności"
+    },
+    {
+      "role": "analityk",
+      "name": "Analityk Janek",
+      "avatar": "🕵️",
+      "text": "Daj no jakiś przykład lepiej jeszcze."
+    },
+    {
+      "role": "analityk2",
+      "name": "Analityk Paweł",
+      "avatar": "👨‍💼",
+      "text": "Powiedzmy, że składasz rezerwację i złożenie takiej rezerwacji wiąże się z tym, że naliczane są punkty lojalnościowe. Ale, ale!! Ale tylko wówczas, gdy masz status 'KINOMAN'. Jak mógłbyś to zrobić.. Mógłbyś w module rezerwacji przechwycić zdarzenie o złożeniu rezerwacji, walnąć ifa na statusie i wysłać bądź nie wysłać żądania naliczenia punktów lojalnościowych. Co o tym myślisz?"
+    },
+    {
+      "role": "analityk",
+      "name": "Analityk Janek",
+      "avatar": "🕵️",
+      "text": "Trochę to śmierdzi."
+    },
+    {
+      "role": "analityk2",
+      "name": "Analityk Paweł",
+      "avatar": "👨‍💼",
+      "text": "Wiadomix, że śmierdzi. Bo dlaczego niby nasz wypieszczony mikroserwis rezerwacji miałby wiedzieć coś o VIPach oraz o regułach rządzących przyznawaniem punktów. Biznes powiedział jasno - nie można naliczyć punktów lojalnościowych jeśli nie jesteś kinomanem. To jest super ważna reguła biznesowa, której nie możemy złamać. Ta reguła musi znajdować się w kontekście punktów a nie rezerwacji."
+    },
+    {
+      "role": "analityk",
+      "name": "Analityk Janek",
+      "avatar": "🕵️",
+      "text": "Brzmi sensownie nawet."
+    },
+    {
+      "role": "analityk2",
+      "name": "Analityk Paweł",
+      "avatar": "👨‍💼",
+      "text": "Wiem, sam to w końcu wymyśliłem. No bo wyobraźmy sobie, że teraz nie jest to status KINOMAN tylko KINOMANIAK - jeśli zostawilibyśmy tę regułę w kontekście rezerwacji, to musielibyśmy dodać zadanie do backlog'u w zespole rezerwacji, mimo że o zmianie zdecydował biznes zajmujący się punktami lojalnościowymi - dziwne kapkę..."
+    },
+    {
+      "role": "analityk",
+      "name": "Analityk Janek",
+      "avatar": "🕵️",
+      "text": "Dobrze, no już mówiłem, że brzmi sensownie. Idźmy dalej."
+    },
+    {
+      "role": "analityk2",
+      "name": "Analityk Paweł",
+      "avatar": "👨‍💼",
+      "text": "Spokojnie, zabierz te ręce. Powiedzmy teraz, że reguła brzmi: złożenie oferty, która opiewa na więcej niż 200k wymaga akceptacji szefa. Czyli mamy dwie dozwolone ścieżki procesu. Zarówno oferta na 50k i oferta na 250k są dozwolonymi i w pełni poprawnymi bytami biznesowymi. Ta reguła nie dotyczy stanu tego obiektu. Dotyczy kroków procesu. Zatem ją bym umieścił w polityce."
+    },
+    {
+      "role": "analityk",
+      "name": "Analityk Janek",
+      "avatar": "🕵️",
+      "text": "Dzięki. Jesteś mądrzejszy nawet od naszego eksperta biznesowego. Idę modelować świat."
+    }
   ],
   "model": {
     "slices": [
       {
-        "lane": "Zamówienie",
+        "lane": "Rezerwacje",
         "actor": "Klient",
-        "command": "Złóż zamówienie",
-        "aggregate": " ",
-        "invariant": "Koszyk nie może być pusty",
-        "events": ["Złożono zamówienie"]
+        "command": "Złóż rezerwację",
+        "invariant": "miejsce nie może być już zajęte",
+        "events": ["Złożono rezerwację"]
       },
       {
-        "lane": "Płatność",
-        "trigger": { "type": "event", "text": "Złożono zamówienie" },
-        "policy": { "text": "Zawsze gdy złożono zamówienie -> uruchom proces płatności" },
-        "then": [
+        "lane": "Rezerwacje",
+        "policy": { "text": "Zawsze gdy złożono rezerwację, spróbuj naliczyć punkty lojalnościowe (kontekst Rezerwacji nie wie komu się należą - przerzucamy decyzję do kontekstu punktów)" }
+      },
+      {
+        "lane": "Punkty lojalnościowe",
+        "command": "Nalicz punkty lojalnościowe",
+        "aggregate": " ",
+        "invariant": "wymagany poziom wtajemniczenia KINOMAN",
+        "events": ["Naliczono punkty", "Odrzucono próbę naliczenia punktów"]
+      },
+      {
+        "lane": "Oferta (case reguły procesowej)",
+        "actor": "Handlowiec",
+        "command": "Złóż ofertę",
+        "aggregate": " ",
+        "invariant": "Oferta musi mieć przynajmniej jedną pozycję i wartość > 0",
+        "events": [
+          "Złożono ofertę"
+        ]
+      },
+      {
+        "lane": "Oferta (case reguły procesowej)",
+        "trigger": {
+          "type": "event",
+          "text": "Złożono ofertę"
+        },
+        "policy": {
+          "text": "Zawsze gdy złożono ofertę sprawdź czy wartość > 200k. Wówczas skieruj do akceptacji szefa, w przeciwnym razie zatwierdź automatycznie (oba warianty to poprawne, dozwolone ścieżki procesu)"
+        },
+        "branches": [
           {
-            "actor": "Klient",
-            "command": "Opłać zamówienie",
-            "aggregate": " ",
-            "invariant": "Kwota płatności musi być równa wartości zamówienia",
-            "events": ["Opłacono zamówienie"]
+            "command": "Skieruj ofertę do akceptacji szefa",
+            "events": [
+              "Skierowano ofertę do akceptacji"
+            ]
+          },
+          {
+            "command": "Zatwierdź ofertę automatycznie",
+            "events": [
+              "Zatwierdzono ofertę"
+            ]
           }
         ]
-      }]
+      }
+    ],
+    "hotspots": [
+
+    ]
   }
 }

@@ -120,25 +120,32 @@
   "model": {
     "slices": [
       {
-        "lane": "Rezerwacje",
+        "lane": "Case nr 1: Rezerwacje",
         "actor": "Klient",
         "command": "Złóż rezerwację",
         "invariant": "miejsce nie może być już zajęte",
-        "events": ["Złożono rezerwację"]
+        "events": [
+          "Złożono rezerwację"
+        ]
       },
       {
-        "lane": "Rezerwacje",
-        "policy": { "text": "Zawsze gdy złożono rezerwację, zleć naliczenie punktów lojalnościowych (kontekst Rezerwacji nie wie komu się należą - przerzucamy decyzję do kontekstu punktów)" }
+        "lane": "Case nr 1: Rezerwacje",
+        "policy": {
+          "text": "Zawsze gdy złożono rezerwację, zleć naliczenie punktów lojalnościowych (kontekst Rezerwacji nie wie komu się należą - przerzucamy decyzję do kontekstu punktów)"
+        }
       },
       {
-        "lane": "Punkty lojalnościowe",
+        "lane": "Case nr 1: Punkty lojalnościowe",
         "command": "Nalicz punkty lojalnościowe",
         "aggregate": " ",
         "invariant": "wymagany poziom wtajemniczenia KINOMAN",
-        "events": ["Naliczono punkty", "Odrzucono próbę naliczenia punktów"]
+        "events": [
+          "Naliczono punkty",
+          "Odrzucono próbę naliczenia punktów"
+        ]
       },
       {
-        "lane": "Oferta (case reguły procesowej)",
+        "lane": "Case nr 2: Oferta",
         "actor": "Handlowiec",
         "command": "Złóż ofertę",
         "aggregate": " ",
@@ -148,7 +155,7 @@
         ]
       },
       {
-        "lane": "Oferta (case reguły procesowej)",
+        "lane": "Case nr 2: Oferta",
         "trigger": {
           "type": "event",
           "text": "Złożono ofertę"
@@ -172,8 +179,6 @@
         ]
       }
     ],
-    "hotspots": [
-
-    ]
+    "hotspots": []
   }
 }

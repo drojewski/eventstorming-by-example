@@ -128,7 +128,7 @@
       },
       {
         "lane": "Rezerwacje",
-        "policy": { "text": "Zawsze gdy złożono rezerwację, spróbuj naliczyć punkty lojalnościowe (kontekst Rezerwacji nie wie komu się należą - przerzucamy decyzję do kontekstu punktów)" }
+        "policy": { "text": "Zawsze gdy złożono rezerwację, zleć naliczenie punktów lojalnościowych (kontekst Rezerwacji nie wie komu się należą - przerzucamy decyzję do kontekstu punktów)" }
       },
       {
         "lane": "Punkty lojalnościowe",

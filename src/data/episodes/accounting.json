@@ -1,6 +1,6 @@
 {
   "title": "Accounting",
-  "subtitle": "Wywiad: ekspert potrafi odpowiedzieć na pytania, a analityk umie właściwe pytania zadać",
+  "subtitle": "Wywiad: Ekspert potrafi odpowiedzieć na pytania, a analityk umie właściwe pytania zadać",
   "dialogue": [
     { "role": "analityk", "name": "Analityk biznesowy", "avatar": "🕵️", "text": "Powiedz mi proszę drogi ekspercie, jakie dwa zdarzenia byś wymienił jako te najistotniejsze w tym procesie z Twojego punktu widzenia. Pamiętasz.. chodzi mi o zdarzenia biznesowe. Jeśli Ci to pomoże to zapomnijmy na chwilę, że proces jest scyfryzowany. Niech to będą zdarzenia pi razy oko z początku i końca procesu." },
     { "role": "ekspert", "name": "Ekspert biznesowy", "avatar": "👨‍💼", "text": "Czyli te dyrdymały w czasie przeszłym, tak? Dobra, niech będzie. To co pierwsze przychodzi mi do głowy to 'Zmniejszono kwotę kapitału do spłaty' i 'Powiększono limit'" },

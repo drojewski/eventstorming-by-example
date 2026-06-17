@@ -16,13 +16,13 @@
   "model": {
     "slices": [
       {
-        "lane": "Kwalifikacja dostawcy",
+        "lane": "Ocena dostawcy",
         "trigger": { "type": "event", "text": "Otrzymano ofertę od dostawcy" },
         "readModels": ["Historia współpracy: liczba dealów"],
-        "policy": { "text": "Zawsze gdy otrzymano ofertę, sprawdź liczbę dealów. Przynajmniej 5 -> zaakceptuj dostawcę w ciemno (bez oceny, bez BADBOY, bez szefa). Mniej niż 5 -> skieruj do oceny."},
+        "policy": { "text": "Zawsze gdy otrzymano ofertę, sprawdź liczbę dealów. Przynajmniej 5 -> zaakceptuj dostawcę (bez oceny, bez sprawdzania statusu, bez akceptacji szefa). Mniej niż 5 -> skieruj do oceny."},
         "branches": [
           {
-            "command": "Zaakceptuj dostawcę w ciemno",
+            "command": "Zaakceptuj dostawcę",
             "events": ["Zaakceptowano dostawcę"]
           },
           {
@@ -34,13 +34,24 @@
         ]
       },
       {
-        "lane": "Potwierdzenie",
+        "lane": "Weryfikacja kwalifikacji dostawcy",
         "trigger": { "type": "event", "text": "Zakwalifikowano dostawcę" },
-        "policy": { "text": "Zawsze gdy zakwalifikowano dostawcę po ocenie to powiadom szefa by potwierdził lub wycofał ocenę." },
+        "policy": { "text": "Zawsze gdy zakwalifikowano dostawcę po ocenie to powiadom szefa, by potwierdził lub wycofał kwalifikację" },
         "then": [
           {
             "command": "Zweryfikuj kwalifikację",
             "events": ["Potwierdzono kwalifikację", "Wycofano kwalifikację"]
+          }
+        ]
+      },
+      {
+        "lane": "Akceptacja",
+        "trigger": { "type": "event", "text": "Potwierdzono kwalifikację" },
+        "policy": { "text": "Zawsze gdy potwierdzono kwalifikację -> zaakceptuj dostawcę" },
+        "then": [
+          {
+            "command": "Zaakceptuj dostawcę",
+            "events": ["Zaakceptowano dostawcę"]
           }
         ]
       }

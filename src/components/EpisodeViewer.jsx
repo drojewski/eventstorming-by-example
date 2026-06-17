@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { MessageSquare, GitMerge, Play } from 'lucide-react';
 import DialogueView from './DialogueView.jsx';
 import ModelBoard from './ModelBoard.jsx';
+import CanvasView from './CanvasView.jsx';
 
 export default function EpisodeViewer({ episode }) {
   const [view, setView] = useState('dialogue');
@@ -40,7 +41,9 @@ export default function EpisodeViewer({ episode }) {
       <div className="bg-white rounded-xl shadow-sm p-5 md:p-8">
         {view === 'dialogue'
           ? <DialogueView dialogue={episode.dialogue} animate={animate} visibleCount={visibleCount} />
-          : <ModelBoard model={episode.model} />}
+          : (episode.canvas?.nodes?.length > 0)
+            ? <CanvasView canvas={episode.canvas} />
+            : <ModelBoard model={episode.model} />}
       </div>
     </div>
   );

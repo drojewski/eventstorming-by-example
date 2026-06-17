@@ -28,6 +28,24 @@ const slice = z.object({
 
 });
 
+const canvasNode = z.object({
+  id: z.string(),
+  type: z.string(),
+  text: z.string(),
+  x: z.number(),
+  y: z.number(),
+});
+
+const canvasFrame = z.object({
+  id: z.string(),
+  label: z.string(),
+  x: z.number(),
+  y: z.number(),
+  w: z.number(),
+  h: z.number(),
+  color: z.string().optional(),
+});
+
 const episodes = defineCollection({
   loader: glob({ pattern: '**/*.json', base: './src/data/episodes' }),
   schema: z.object({
@@ -38,15 +56,19 @@ const episodes = defineCollection({
       name: z.string(),
       avatar: z.string(),
       text: z.string(),
-    })),
+    })).optional().default([]),
     model: z.object({
       slices: z.array(slice),
       hotspots: z.array(z.string()).optional(),
       screenshots: z.array(z.object({
-                src: z.string(),
-                caption: z.string().optional(),
-              })).optional(),
-    }),
+        src: z.string(),
+        caption: z.string().optional(),
+      })).optional(),
+    }).optional(),
+    canvas: z.object({
+      nodes: z.array(canvasNode).optional().default([]),
+      frames: z.array(canvasFrame).optional().default([]),
+    }).optional(),
   }),
 });
 

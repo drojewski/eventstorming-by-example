@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import CanvasEditor from './CanvasEditor.jsx';
 
 // ── Aktorzy ──────────────────────────────────────────────────────────────────
 const ACTORS = [
@@ -353,6 +354,7 @@ export default function AdminApp() {
   const [selId, setSelId] = useState(null);
   const [data, setData] = useState(null);
   const [tab, setTab] = useState('dialogue');
+  const [modelView, setModelView] = useState('canvas');
   const [saving, setSaving] = useState(false);
   const [loading, setLoading] = useState(false);
   const [toast, setToast] = useState({ msg: '', type: 'success' });
@@ -440,7 +442,7 @@ export default function AdminApp() {
   const TABS = [
     { key: 'info',     label: 'Informacje', icon: 'ℹ️'  },
     { key: 'dialogue', label: 'Dialogi',    icon: '💬'  },
-    { key: 'model',    label: 'Model JSON', icon: '🗂️' },
+    { key: 'model',    label: 'Model',      icon: '🗂️' },
   ];
 
   return (
@@ -658,12 +660,47 @@ export default function AdminApp() {
               )}
 
               {tab === 'model' && (
-                <div style={{ maxWidth: 860, margin: '0 auto' }}>
-                  <ModelEditor
-                    model={data.model || { slices: [], hotspots: [] }}
-                    episodeId={selId}
-                    onChange={m => setData({ ...data, model: m })}
-                  />
+                <div style={{ display: 'flex', flexDirection: 'column', height: 'calc(100vh - 160px)' }}>
+                  {/* Przełącznik widoku */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
+                    <div style={{ display: 'flex', background: '#f1f5f9', borderRadius: 8, padding: 3 }}>
+                      {[
+                        { key: 'canvas', label: '🖼️ Kanban' },
+                        { key: 'json',   label: '{ } JSON' },
+                      ].map(({ key, label }) => (
+                        <button
+                          key={key}
+                          onClick={() => setModelView(key)}
+                          style={{
+                            padding: '5px 14px', borderRadius: 6, border: 'none',
+                            background: modelView === key ? '#fff' : 'transparent',
+                            color: modelView === key ? '#1e293b' : '#94a3b8',
+                            fontWeight: modelView === key ? 600 : 400,
+                            fontSize: 12, cursor: 'pointer',
+                            boxShadow: modelView === key ? '0 1px 4px rgba(0,0,0,.1)' : 'none',
+                            transition: 'all .15s',
+                          }}
+                        >{label}</button>
+                      ))}
+                    </div>
+                    <span style={{ fontSize: 11, color: '#94a3b8' }}>
+                      {modelView === 'canvas' ? 'Drag & drop — przeciągaj karteczki i ramki' : 'Edytor JSON struktury modelu'}
+                    </span>
+                  </div>
+
+                  {modelView === 'canvas' ? (
+                    <CanvasEditor
+                      canvas={data.canvas || { nodes: [], frames: [] }}
+                      episodeId={selId}
+                      onChange={c => setData({ ...data, canvas: c })}
+                    />
+                  ) : (
+                    <ModelEditor
+                      model={data.model || { slices: [], hotspots: [] }}
+                      episodeId={selId}
+                      onChange={m => setData({ ...data, model: m })}
+                    />
+                  )}
                 </div>
               )}
             </div>

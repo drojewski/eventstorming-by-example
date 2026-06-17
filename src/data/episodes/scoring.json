@@ -2,61 +2,138 @@
   "title": "Ocena dostawcy",
   "subtitle": "Wywiad: Pytania naprowadzające",
   "dialogue": [
-    { "role": "ekspert", "name": "Ekspert biznesowy", "avatar": "👨‍💼", "text": "No więc ten nasz proces oceny dostawcy działa tak: bierzemy dane z CRM-a, sprawdzamy gościa w BIK-u, zaglądamy do systemu XERXES, bo tam mamy tajne informacje. No i są jeszcze integracje z trzema innymi systemami, ale nie pamiętam nazw…" },
-    { "role": "analityk", "name": "Analityk biznesowy", "avatar": "🕵️", "text": "Okej brachu, powiedz mi najpierw po co go oceniacie i co istotnego dzieje się w tym procesie? Bez czego ten proces by się nie mógł udać?" },
-    { "role": "ekspert", "name": "Ekspert biznesowy", "avatar": "👨‍💼", "text": "Chodzi tu o to, że jak otrzymamy ofertę od dostawcy to zlecamy kwalifikację dostawcy do współpracy. Oceniam dostawcę bo jestem mądry, klikam checkboxa OCENA OK/NOK i tyle." },
-    { "role": "analityk", "name": "Analityk biznesowy", "avatar": "🕵️", "text": "A co się musi wydarzyć, żebyś stwierdził, że nie możesz podjąć współpracy z dostawcą?" },
-    { "role": "ekspert", "name": "Ekspert biznesowy", "avatar": "👨‍💼", "text": "No ja to sprawdzam gościa w takich naszych kwitach, tam leży teczka, spójrz sobie. A potem puszczam tym checkboxem ocenę systemową i jeśli system zobaczy, że dostawca jest oznaczony statusem BADBOY, to od razu takiego gagatka blokujemy."},
-    { "role": "analityk", "name": "Analityk biznesowy", "avatar": "🕵️", "text": "Mhm... A co jest bezpośrednim następstwem takiej kwalifikacji do współpracy?" },
-    { "role": "ekspert", "name": "Ekspert biznesowy", "avatar": "👨‍💼", "text": "System powiadamia szefa, żeby zaakceptował dostawcę lub wycofał dokonaną ocenę i to koniec procesu."},
-    { "role": "analityk", "name": "Analityk biznesowy", "avatar": "🕵️", "text": "Uuuu.. a czy każdego dostawcę poddajesz takiej ocenie?" },
-    { "role": "ekspert", "name": "Ekspert biznesowy", "avatar": "👨‍💼", "text": "Nie, nie, nie. Dostawców, którzy współpracowali z nami przynajmniej przy 5 dealach nie poddajemy już takiemu procesowi, kwalifikujemy ich w ciemno. Nawet jak Jolka oznaczyła takiego dostawcę jako BADBOY to i tak kwalifikujemy go, a co więcej szef już nie musi tego akceptować. Taki dostawca staje się zaakceptowany. Możemy z nim działać." },
-    { "role": "analityk", "name": "Analityk biznesowy", "avatar": "🕵️", "text": "Ahaaa, Ty to jesteś taki mądry, dziękuję za pomoc! Jest jednak jeszcze wiele pytań, które będę chciał Ci wkrótce zadać. :-)" }
+    {
+      "role": "ekspert",
+      "name": "Ekspert biznesowy",
+      "avatar": "👨‍💼",
+      "text": "No więc ten nasz proces oceny dostawcy działa tak: bierzemy dane z CRM-a, sprawdzamy gościa w BIK-u, zaglądamy do systemu XERXES, bo tam mamy tajne informacje. No i są jeszcze integracje z trzema innymi systemami, ale nie pamiętam nazw…"
+    },
+    {
+      "role": "analityk",
+      "name": "Analityk biznesowy",
+      "avatar": "🕵️",
+      "text": "Okej brachu, powiedz mi najpierw po co go oceniacie i co istotnego dzieje się w tym procesie? Bez czego ten proces by się nie mógł udać?"
+    },
+    {
+      "role": "ekspert",
+      "name": "Ekspert biznesowy",
+      "avatar": "👨‍💼",
+      "text": "Chodzi tu o to, że jak otrzymamy ofertę od dostawcy to zlecamy kwalifikację dostawcy do współpracy. Oceniam dostawcę bo jestem mądry, klikam checkboxa OCENA OK/NOK i tyle."
+    },
+    {
+      "role": "analityk",
+      "name": "Analityk biznesowy",
+      "avatar": "🕵️",
+      "text": "A co się musi wydarzyć, żebyś stwierdził, że nie możesz podjąć współpracy z dostawcą?"
+    },
+    {
+      "role": "ekspert",
+      "name": "Ekspert biznesowy",
+      "avatar": "👨‍💼",
+      "text": "No ja to sprawdzam gościa w takich naszych kwitach, tam leży teczka, spójrz sobie. A potem puszczam tym checkboxem ocenę systemową i jeśli system zobaczy, że dostawca jest oznaczony statusem BADBOY, to od razu takiego gagatka blokujemy."
+    },
+    {
+      "role": "analityk",
+      "name": "Analityk biznesowy",
+      "avatar": "🕵️",
+      "text": "Mhm... A co jest bezpośrednim następstwem takiej kwalifikacji do współpracy?"
+    },
+    {
+      "role": "ekspert",
+      "name": "Ekspert biznesowy",
+      "avatar": "👨‍💼",
+      "text": "System powiadamia szefa, żeby zaakceptował dostawcę lub wycofał dokonaną ocenę i to koniec procesu."
+    },
+    {
+      "role": "analityk",
+      "name": "Analityk biznesowy",
+      "avatar": "🕵️",
+      "text": "Uuuu.. a czy każdego dostawcę poddajesz takiej ocenie?"
+    },
+    {
+      "role": "ekspert",
+      "name": "Ekspert biznesowy",
+      "avatar": "👨‍💼",
+      "text": "Nie, nie, nie. Dostawców, którzy współpracowali z nami przynajmniej przy 5 dealach nie poddajemy już takiemu procesowi, kwalifikujemy ich w ciemno. Nawet jak Jolka oznaczyła takiego dostawcę jako BADBOY to i tak kwalifikujemy go, a co więcej szef już nie musi tego akceptować. Taki dostawca staje się zaakceptowany. Możemy z nim działać."
+    },
+    {
+      "role": "analityk",
+      "name": "Analityk biznesowy",
+      "avatar": "🕵️",
+      "text": "Ahaaa, Ty to jesteś taki mądry, dziękuję za pomoc! Jest jednak jeszcze wiele pytań, które będę chciał Ci wkrótce zadać. :-))"
+    }
   ],
   "model": {
     "slices": [
       {
         "lane": "Ocena dostawcy",
-        "trigger": { "type": "event", "text": "Otrzymano ofertę od dostawcy" },
-        "readModels": ["Historia współpracy: liczba dealów"],
-        "policy": { "text": "Zawsze gdy otrzymano ofertę, sprawdź liczbę dealów. Przynajmniej 5 -> zaakceptuj dostawcę (bez oceny, bez sprawdzania statusu, bez akceptacji szefa). Mniej niż 5 -> skieruj do oceny."},
+        "trigger": {
+          "type": "event",
+          "text": "Otrzymano ofertę od dostawcy"
+        },
+        "readModels": [
+          "Historia współpracy: liczba dealów"
+        ],
+        "policy": {
+          "text": "Zawsze gdy otrzymano ofertę, sprawdź liczbę dealów. Przynajmniej 5 -> zaakceptuj dostawcę (bez oceny, bez sprawdzania statusu, bez akceptacji szefa). Mniej niż 5 -> skieruj do oceny."
+        },
         "branches": [
           {
             "command": "Zaakceptuj dostawcę",
-            "events": ["Zaakceptowano dostawcę"]
+            "events": [
+              "Zaakceptowano dostawcę"
+            ]
           },
           {
             "command": "Oceń dostawcę",
             "aggregate": " ",
             "invariant": "Dostawca ze statusem BADBOY -> blokada zamiast kwalifikacji",
-            "events": ["Zakwalifikowano dostawcę", "Odrzucono dostawcę", "Zablokowano dostawcę"]
+            "events": [
+              "Zakwalifikowano dostawcę",
+              "Odrzucono dostawcę",
+              "Zablokowano dostawcę"
+            ]
           }
         ]
       },
       {
         "lane": "Weryfikacja kwalifikacji dostawcy",
-        "trigger": { "type": "event", "text": "Zakwalifikowano dostawcę" },
-        "policy": { "text": "Zawsze gdy zakwalifikowano dostawcę po ocenie to powiadom szefa, by potwierdził kwalifikację lub ją wycofał" },
+        "trigger": {
+          "type": "event",
+          "text": "Zakwalifikowano dostawcę"
+        },
+        "policy": {
+          "text": "Zawsze gdy zakwalifikowano dostawcę po ocenie to powiadom szefa, by potwierdził kwalifikację lub ją wycofał"
+        },
         "then": [
           {
             "command": "Zweryfikuj kwalifikację",
-            "events": ["Potwierdzono kwalifikację", "Wycofano kwalifikację"]
+            "events": [
+              "Potwierdzono kwalifikację",
+              "Wycofano kwalifikację"
+            ]
           }
         ]
       },
       {
         "lane": "Akceptacja",
-        "trigger": { "type": "event", "text": "Potwierdzono kwalifikację" },
-        "policy": { "text": "Zawsze gdy potwierdzono kwalifikację -> zaakceptuj dostawcę" },
+        "trigger": {
+          "type": "event",
+          "text": "Potwierdzono kwalifikację"
+        },
+        "policy": {
+          "text": "Zawsz, gdy potwierdzono kwalifikację -> zaakceptuj dostawcę"
+        },
         "then": [
           {
             "command": "Zaakceptuj dostawcę",
-            "events": ["Zaakceptowano dostawcę"]
+            "events": [
+              "Zaakceptowano dostawcę"
+            ]
           }
         ]
       }
     ],
-    "hotspots": [
-    ]
+    "hotspots": []
   }
 }

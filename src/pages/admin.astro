@@ -1,0 +1,22 @@
+---
+export const prerender = false;
+import AdminApp from '../components/AdminApp.jsx';
+---
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin – Event Storming</title>
+  </head>
+  <body class="bg-gray-50 min-h-screen">
+    <script is:inline>
+      // Gate: redirect away immediately if the hash is wrong.
+      // AdminApp also performs its own check for defense-in-depth.
+      if (window.location.hash !== '#admin2024') {
+        window.location.replace('/');
+      }
+    </script>
+    <AdminApp client:only="react" />
+  </body>
+</html>

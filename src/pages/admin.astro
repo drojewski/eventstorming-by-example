@@ -1,6 +1,7 @@
 ---
 export const prerender = false;
 import AdminApp from '../components/AdminApp.jsx';
+import '../styles/global.css';
 ---
 <!DOCTYPE html>
 <html lang="pl">
@@ -9,7 +10,7 @@ import AdminApp from '../components/AdminApp.jsx';
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin – Event Storming</title>
   </head>
-  <body class="bg-gray-50 min-h-screen">
+  <body style="margin:0;padding:0;font-family:system-ui,sans-serif;">
     <script is:inline>
       // Gate: redirect away immediately if the hash is wrong.
       // AdminApp also performs its own check for defense-in-depth.

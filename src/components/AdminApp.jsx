@@ -1,579 +1,682 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
-// ---------------------------------------------------------------------------
-// Actor definitions
-// ---------------------------------------------------------------------------
+// ── Aktorzy ──────────────────────────────────────────────────────────────────
 const ACTORS = [
-  { role: 'ekspert',   name: 'Ekspert biznesowy',  avatar: '👨‍💼', color: 'bg-blue-100 border-blue-300',   side: 'left'  },
-  { role: 'analityk',  name: 'Analityk biznesowy', avatar: '🕵️',  color: 'bg-orange-100 border-orange-300', side: 'right' },
-  { role: 'analityk2', name: 'Analityk 2',         avatar: '🧑‍💻', color: 'bg-teal-100 border-teal-300',   side: 'right' },
+  { role: 'ekspert',   name: 'Ekspert biznesowy',  emoji: '👨‍💼', color: '#4f46e5', align: 'left'  },
+  { role: 'analityk',  name: 'Analityk biznesowy', emoji: '🕵️',  color: '#b45309', align: 'right' },
+  { role: 'analityk2', name: 'Analityk 2',         emoji: '🧑‍💻', color: '#0f766e', align: 'right' },
 ];
 
-function getActorInfo(role) {
-  return ACTORS.find(a => a.role === role) || ACTORS[0];
+function actor(role) {
+  return ACTORS.find(a => a.role === role) ?? ACTORS[0];
 }
 
-// ---------------------------------------------------------------------------
-// DialogueBubble
-// ---------------------------------------------------------------------------
-function DialogueBubble({ entry, index, onChange, onDelete, onMoveUp, onMoveDown, isFirst, isLast }) {
-  const actor = getActorInfo(entry.role);
-  const isRight = actor.side === 'right';
+// ── Textarea która rośnie automatycznie ──────────────────────────────────────
+function AutoTextarea({ value, onChange, placeholder, style }) {
+  const ref = useRef(null);
+  useEffect(() => {
+    if (!ref.current) return;
+    ref.current.style.height = 'auto';
+    ref.current.style.height = ref.current.scrollHeight + 'px';
+  }, [value]);
+  return (
+    <textarea
+      ref={ref}
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      rows={1}
+      spellCheck={false}
+      style={{
+        width: '100%',
+        background: 'transparent',
+        border: 'none',
+        outline: 'none',
+        resize: 'none',
+        overflow: 'hidden',
+        fontSize: 14,
+        lineHeight: 1.6,
+        fontFamily: 'inherit',
+        ...style,
+      }}
+    />
+  );
+}
+
+// ── Jedna chmurka dialogu ─────────────────────────────────────────────────────
+function Bubble({ entry, onChange, onDelete, onUp, onDown, isFirst, isLast }) {
+  const [hover, setHover] = useState(false);
+  const a = actor(entry.role);
+  const left = a.align === 'left';
 
   return (
-    <div className={`flex gap-3 mb-4 items-start ${isRight ? 'flex-row-reverse' : 'flex-row'}`}>
-      {/* Avatar + actor selector */}
-      <div className="flex flex-col items-center gap-1 shrink-0 w-[72px]">
-        <div className="text-3xl leading-none select-none">{actor.avatar}</div>
+    <div
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      style={{
+        display: 'flex',
+        flexDirection: left ? 'row' : 'row-reverse',
+        alignItems: 'flex-end',
+        gap: 14,
+        marginBottom: 32,
+      }}
+    >
+      {/* Avatar */}
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, flexShrink: 0 }}>
+        <div style={{
+          width: 44, height: 44, borderRadius: '50%',
+          background: a.color + '18',
+          border: `2px solid ${a.color}44`,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          fontSize: 22, lineHeight: 1,
+        }}>{a.emoji}</div>
         <select
           value={entry.role}
           onChange={e => {
-            const a = getActorInfo(e.target.value);
-            onChange({ ...entry, role: e.target.value, name: a.name, avatar: a.avatar });
+            const b = actor(e.target.value);
+            onChange({ ...entry, role: b.role, name: b.name, avatar: b.emoji });
           }}
-          className="text-[10px] border border-gray-300 rounded px-1 py-0.5 bg-white w-full text-center cursor-pointer"
+          style={{
+            fontSize: 10, border: `1px solid ${a.color}55`, borderRadius: 4,
+            padding: '1px 2px', background: '#fff', color: '#666',
+            cursor: 'pointer', width: 58, textAlign: 'center',
+          }}
         >
-          {ACTORS.map(a => (
-            <option key={a.role} value={a.role}>{a.name}</option>
-          ))}
+          {ACTORS.map(b => <option key={b.role} value={b.role}>{b.name.split(' ')[0]}</option>)}
         </select>
       </div>
 
-      {/* Speech bubble */}
-      <div className={`flex-1 border-2 rounded-2xl p-3 ${actor.color}`}>
-        <textarea
-          value={entry.text}
-          onChange={e => onChange({ ...entry, text: e.target.value })}
-          className="w-full bg-transparent resize-none outline-none text-sm leading-relaxed min-h-[64px]"
-          placeholder="Wpisz kwestię dialogu…"
-          rows={3}
-        />
+      {/* Chmurka */}
+      <div style={{ maxWidth: '75%', position: 'relative' }}>
+        {/* ogon */}
+        <div style={{
+          position: 'absolute', bottom: 14,
+          ...(left ? { left: -8, borderRight: `9px solid ${a.color}` } : { right: -8, borderLeft: `9px solid ${a.color}` }),
+          width: 0, height: 0,
+          borderTop: '7px solid transparent',
+          borderBottom: '7px solid transparent',
+        }} />
+        <div style={{
+          background: a.color,
+          borderRadius: left ? '4px 20px 20px 20px' : '20px 4px 20px 20px',
+          padding: '16px 22px',
+          boxShadow: '0 2px 10px rgba(0,0,0,.18)',
+        }}>
+          <AutoTextarea
+            value={entry.text}
+            onChange={e => onChange({ ...entry, text: e.target.value })}
+            placeholder="Wpisz kwestię…"
+            style={{ color: '#fff', caretColor: '#fff', fontSize: 15, minWidth: 260 }}
+          />
+        </div>
       </div>
 
-      {/* Action buttons */}
-      <div className="flex flex-col gap-1 shrink-0 pt-1">
-        <button
-          onClick={onDelete}
-          className="text-red-400 hover:text-red-600 text-base leading-none px-1 py-0.5 rounded hover:bg-red-50 transition-colors"
-          title="Usuń kwestię"
-        >
-          ✕
-        </button>
-        <button
-          onClick={onMoveUp}
-          disabled={isFirst}
-          className="text-gray-400 hover:text-gray-700 disabled:opacity-20 px-1 py-0.5 rounded hover:bg-gray-100 transition-colors text-sm"
-          title="Przesuń w górę"
-        >
-          ↑
-        </button>
-        <button
-          onClick={onMoveDown}
-          disabled={isLast}
-          className="text-gray-400 hover:text-gray-700 disabled:opacity-20 px-1 py-0.5 rounded hover:bg-gray-100 transition-colors text-sm"
-          title="Przesuń w dół"
-        >
-          ↓
-        </button>
+      {/* Akcje (widoczne na hover) */}
+      <div style={{
+        display: 'flex', flexDirection: 'column', gap: 4,
+        opacity: hover ? 1 : 0, transition: 'opacity .15s',
+        paddingBottom: 4,
+      }}>
+        {[
+          { label: '↑', action: onUp,    disabled: isFirst, color: '#6366f1' },
+          { label: '↓', action: onDown,  disabled: isLast,  color: '#6366f1' },
+          { label: '✕', action: onDelete, disabled: false,  color: '#ef4444' },
+        ].map(({ label, action, disabled, color }) => (
+          <button
+            key={label}
+            onClick={action}
+            disabled={disabled}
+            style={{
+              width: 26, height: 26, borderRadius: '50%',
+              border: 'none', background: disabled ? '#f3f4f6' : '#f3f4f6',
+              color: disabled ? '#d1d5db' : color,
+              cursor: disabled ? 'default' : 'pointer',
+              fontSize: 12, display: 'flex', alignItems: 'center', justifyContent: 'center',
+              transition: 'background .1s',
+            }}
+          >{label}</button>
+        ))}
       </div>
     </div>
   );
 }
 
-// ---------------------------------------------------------------------------
-// DialogueEditor
-// ---------------------------------------------------------------------------
+// ── Edytor dialogów ───────────────────────────────────────────────────────────
 function DialogueEditor({ dialogue, onChange }) {
-  function addEntry() {
-    const lastRole = dialogue.length > 0 ? dialogue[dialogue.length - 1].role : 'analityk';
-    // Alternate between ekspert and analityk
-    const nextRole = lastRole === 'ekspert' ? 'analityk' : 'ekspert';
-    const actor = getActorInfo(nextRole);
-    onChange([...dialogue, { role: nextRole, name: actor.name, avatar: actor.avatar, text: '' }]);
-  }
+  const bottomRef = useRef(null);
 
-  function updateEntry(index, updated) {
-    const next = [...dialogue];
-    next[index] = updated;
+  function add(role) {
+    const a = actor(role);
+    const next = [...dialogue, { role, name: a.name, avatar: a.emoji, text: '' }];
     onChange(next);
+    setTimeout(() => bottomRef.current?.scrollIntoView({ behavior: 'smooth' }), 50);
   }
 
-  function deleteEntry(index) {
-    onChange(dialogue.filter((_, i) => i !== index));
+  function smartAdd() {
+    const last = dialogue[dialogue.length - 1]?.role ?? 'analityk';
+    add(last === 'ekspert' ? 'analityk' : 'ekspert');
   }
 
-  function moveUp(index) {
-    if (index === 0) return;
-    const next = [...dialogue];
-    [next[index - 1], next[index]] = [next[index], next[index - 1]];
-    onChange(next);
+  function update(i, v) { const n = [...dialogue]; n[i] = v; onChange(n); }
+  function remove(i) { onChange(dialogue.filter((_, j) => j !== i)); }
+  function moveUp(i) {
+    if (i === 0) return;
+    const n = [...dialogue]; [n[i-1], n[i]] = [n[i], n[i-1]]; onChange(n);
   }
-
-  function moveDown(index) {
-    if (index === dialogue.length - 1) return;
-    const next = [...dialogue];
-    [next[index], next[index + 1]] = [next[index + 1], next[index]];
-    onChange(next);
+  function moveDown(i) {
+    if (i === dialogue.length - 1) return;
+    const n = [...dialogue]; [n[i], n[i+1]] = [n[i+1], n[i]]; onChange(n);
   }
 
   return (
     <div>
       {dialogue.length === 0 && (
-        <p className="text-gray-400 text-sm text-center py-8">
-          Brak kwestii dialogu. Kliknij poniżej, aby dodać pierwszą.
-        </p>
+        <div style={{ textAlign: 'center', padding: '60px 0', color: '#9ca3af' }}>
+          <div style={{ fontSize: 48, marginBottom: 12 }}>💬</div>
+          <div style={{ fontSize: 14 }}>Brak kwestii — dodaj pierwszą poniżej</div>
+        </div>
       )}
+
       {dialogue.map((entry, i) => (
-        <DialogueBubble
+        <Bubble
           key={i}
           entry={entry}
-          index={i}
-          onChange={updated => updateEntry(i, updated)}
-          onDelete={() => deleteEntry(i)}
-          onMoveUp={() => moveUp(i)}
-          onMoveDown={() => moveDown(i)}
+          onChange={v => update(i, v)}
+          onDelete={() => remove(i)}
+          onUp={() => moveUp(i)}
+          onDown={() => moveDown(i)}
           isFirst={i === 0}
           isLast={i === dialogue.length - 1}
         />
       ))}
-      <button
-        onClick={addEntry}
-        className="w-full py-3 border-2 border-dashed border-gray-300 rounded-xl text-gray-500 hover:border-blue-400 hover:text-blue-600 transition-colors text-sm mt-2"
-      >
-        + Dodaj kwestię
-      </button>
+
+      <div ref={bottomRef} />
+
+      {/* Przyciski dodawania */}
+      <div style={{ borderTop: '1px solid #e5e7eb', paddingTop: 20, marginTop: 8 }}>
+        <div style={{ fontSize: 11, color: '#9ca3af', textAlign: 'center', marginBottom: 12 }}>
+          Dodaj kwestię
+        </div>
+        <div style={{ display: 'flex', gap: 8, justifyContent: 'center', flexWrap: 'wrap' }}>
+          {ACTORS.map(a => (
+            <button
+              key={a.role}
+              onClick={() => add(a.role)}
+              style={{
+                display: 'flex', alignItems: 'center', gap: 8,
+                padding: '9px 18px', borderRadius: 10,
+                border: 'none', background: a.color,
+                color: '#fff', fontSize: 13, fontWeight: 500,
+                cursor: 'pointer', boxShadow: '0 1px 4px rgba(0,0,0,.2)',
+                transition: 'opacity .1s, transform .1s',
+              }}
+              onMouseEnter={e => e.currentTarget.style.opacity = '.88'}
+              onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+            >
+              <span>{a.emoji}</span> {a.name.split(' ')[0]}
+            </button>
+          ))}
+          <button
+            onClick={smartAdd}
+            style={{
+              display: 'flex', alignItems: 'center', gap: 8,
+              padding: '9px 18px', borderRadius: 10,
+              border: '1.5px solid #e5e7eb', background: '#fff',
+              color: '#6b7280', fontSize: 13, fontWeight: 500,
+              cursor: 'pointer', transition: 'background .1s',
+            }}
+            onMouseEnter={e => e.currentTarget.style.background = '#f9fafb'}
+            onMouseLeave={e => e.currentTarget.style.background = '#fff'}
+          >
+            ⚡ Auto
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
 
-// ---------------------------------------------------------------------------
-// ModelEditor
-// ---------------------------------------------------------------------------
+// ── Edytor modelu (JSON) ──────────────────────────────────────────────────────
 function ModelEditor({ model, episodeId, onChange }) {
-  const [jsonText, setJsonText] = useState('');
+  const [text, setText] = useState('');
   const [error, setError] = useState('');
-  // Track which episode the textarea was last initialised for so we can
-  // re-seed the text when the user switches episodes without losing in-progress edits.
-  const lastEpisodeId = useRef(null);
+  const lastId = useRef(null);
 
   useEffect(() => {
-    if (episodeId !== lastEpisodeId.current) {
-      lastEpisodeId.current = episodeId;
-      setJsonText(JSON.stringify(model, null, 2));
+    if (episodeId !== lastId.current) {
+      lastId.current = episodeId;
+      setText(JSON.stringify(model, null, 2));
       setError('');
     }
   }, [episodeId, model]);
 
-  function handleChange(text) {
-    setJsonText(text);
-    try {
-      const parsed = JSON.parse(text);
-      setError('');
-      onChange(parsed);
-    } catch (e) {
-      setError(e.message);
-    }
+  function handleChange(val) {
+    setText(val);
+    try { onChange(JSON.parse(val)); setError(''); }
+    catch (e) { setError(e.message); }
   }
 
-  function formatJson() {
+  function format() {
     try {
-      const parsed = JSON.parse(jsonText);
-      const formatted = JSON.stringify(parsed, null, 2);
-      setJsonText(formatted);
-      setError('');
-      onChange(parsed);
-    } catch (e) {
-      setError(e.message);
-    }
+      const parsed = JSON.parse(text);
+      setText(JSON.stringify(parsed, null, 2));
+      onChange(parsed); setError('');
+    } catch (e) { setError(e.message); }
   }
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-2">
-        <span className="text-sm font-medium text-gray-700">Model JSON</span>
+    <div style={{ borderRadius: 12, overflow: 'hidden', border: '1px solid #334155', boxShadow: '0 4px 20px rgba(0,0,0,.2)' }}>
+      {/* Pasek jak edytor kodu */}
+      <div style={{
+        background: '#1e293b', display: 'flex',
+        alignItems: 'center', justifyContent: 'space-between',
+        padding: '10px 16px',
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <div style={{ display: 'flex', gap: 6 }}>
+            {['#ff5f57','#febc2e','#28c840'].map(c => (
+              <div key={c} style={{ width: 12, height: 12, borderRadius: '50%', background: c }} />
+            ))}
+          </div>
+          <span style={{ color: '#64748b', fontSize: 12, fontFamily: 'monospace' }}>model.json</span>
+        </div>
         <button
-          onClick={formatJson}
-          className="text-xs bg-gray-100 hover:bg-gray-200 px-3 py-1.5 rounded transition-colors"
-        >
-          Formatuj JSON
-        </button>
+          onClick={format}
+          style={{
+            background: '#334155', color: '#94a3b8', border: 'none',
+            borderRadius: 6, padding: '4px 12px', fontSize: 12,
+            cursor: 'pointer', transition: 'background .1s',
+          }}
+          onMouseEnter={e => e.currentTarget.style.background = '#475569'}
+          onMouseLeave={e => e.currentTarget.style.background = '#334155'}
+        >Formatuj</button>
       </div>
+
       {error && (
-        <div className="text-red-500 text-xs mb-2 font-mono bg-red-50 border border-red-200 rounded px-3 py-2 break-all">
-          {error}
+        <div style={{ background: '#450a0a', color: '#fca5a5', fontSize: 12, fontFamily: 'monospace', padding: '8px 16px' }}>
+          ⚠ {error}
         </div>
       )}
+
       <textarea
-        value={jsonText}
+        value={text}
         onChange={e => handleChange(e.target.value)}
-        className={`w-full font-mono text-xs border rounded-lg p-3 min-h-[500px] focus:outline-none focus:ring-2 focus:ring-blue-300 ${
-          error ? 'border-red-400' : 'border-gray-300'
-        }`}
         spellCheck={false}
-        autoComplete="off"
-        autoCorrect="off"
-        autoCapitalize="off"
+        style={{
+          display: 'block', width: '100%', minHeight: 500,
+          background: '#0f172a', color: '#4ade80',
+          fontFamily: '"JetBrains Mono","Fira Code","Cascadia Code",monospace',
+          fontSize: 13, lineHeight: 1.7,
+          padding: 20, border: 'none', outline: 'none',
+          resize: 'vertical', boxSizing: 'border-box',
+        }}
       />
     </div>
   );
 }
 
-// ---------------------------------------------------------------------------
-// Toast
-// ---------------------------------------------------------------------------
-function Toast({ message }) {
-  if (!message) return null;
+// ── Karta ze statystyką ───────────────────────────────────────────────────────
+function StatCard({ value, label, color }) {
   return (
-    <div className="fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50 transition-all text-sm">
-      {message}
+    <div style={{
+      background: '#fff', borderRadius: 12, border: '1px solid #e5e7eb',
+      padding: '16px 20px', textAlign: 'center',
+      boxShadow: '0 1px 4px rgba(0,0,0,.05)',
+    }}>
+      <div style={{ fontSize: 28, fontWeight: 700, color }}>{value}</div>
+      <div style={{ fontSize: 11, color: '#9ca3af', marginTop: 2 }}>{label}</div>
     </div>
   );
 }
 
-// ---------------------------------------------------------------------------
-// AdminApp (main component)
-// ---------------------------------------------------------------------------
+// ── Toast ─────────────────────────────────────────────────────────────────────
+function Toast({ msg, type }) {
+  if (!msg) return null;
+  return (
+    <div style={{
+      position: 'fixed', bottom: 24, right: 24, zIndex: 9999,
+      background: type === 'error' ? '#ef4444' : '#10b981',
+      color: '#fff', padding: '12px 20px', borderRadius: 10,
+      fontSize: 14, fontWeight: 500,
+      boxShadow: '0 4px 16px rgba(0,0,0,.2)',
+      animation: 'fadein .2s ease',
+    }}>
+      {msg}
+    </div>
+  );
+}
+
+// ── Główny komponent ──────────────────────────────────────────────────────────
 export default function AdminApp() {
-  const [authorized, setAuthorized] = useState(false);
+  const [auth, setAuth] = useState(false);
   const [episodes, setEpisodes] = useState([]);
-  const [selectedId, setSelectedId] = useState(null);
-  const [episodeData, setEpisodeData] = useState(null);
-  const [tab, setTab] = useState('info'); // 'info' | 'dialogue' | 'model'
+  const [selId, setSelId] = useState(null);
+  const [data, setData] = useState(null);
+  const [tab, setTab] = useState('dialogue');
   const [saving, setSaving] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [toast, setToast] = useState('');
+  const [toast, setToast] = useState({ msg: '', type: 'success' });
 
-  // Hash check on mount
   useEffect(() => {
-    if (window.location.hash === '#admin2024') {
-      setAuthorized(true);
-      fetchEpisodes();
-    }
+    if (window.location.hash === '#admin2024') { setAuth(true); loadList(); }
   }, []);
 
-  function showToast(msg) {
-    setToast(msg);
-    setTimeout(() => setToast(''), 3000);
+  function showToast(msg, type = 'success') {
+    setToast({ msg, type });
+    setTimeout(() => setToast({ msg: '', type: 'success' }), 3000);
   }
 
-  // ------------------------------------------------------------------
-  // API helpers
-  // ------------------------------------------------------------------
-  async function fetchEpisodes() {
-    try {
-      const res = await fetch('/api/episodes');
-      const data = await res.json();
-      setEpisodes(Array.isArray(data) ? data : []);
-    } catch (e) {
-      console.error('Failed to fetch episodes', e);
-    }
+  async function loadList() {
+    const res = await fetch('/api/episodes');
+    setEpisodes(await res.json());
   }
 
   async function loadEpisode(id) {
-    setLoading(true);
-    setSelectedId(id);
-    setEpisodeData(null);
-    setTab('info');
+    if (id === selId) return;
+    setLoading(true); setSelId(id); setData(null);
     try {
       const res = await fetch(`/api/episodes/${id}`);
-      if (!res.ok) throw new Error('Not found');
-      const data = await res.json();
-      setEpisodeData(data);
-    } catch (e) {
-      showToast('Błąd ładowania epizodu');
-    } finally {
-      setLoading(false);
-    }
+      setData(await res.json());
+      setTab('dialogue');
+    } catch { showToast('Błąd ładowania', 'error'); }
+    finally { setLoading(false); }
   }
 
-  async function saveEpisode() {
-    if (!selectedId || !episodeData) return;
+  async function save() {
+    if (!selId || !data || saving) return;
     setSaving(true);
     try {
-      const res = await fetch(`/api/episodes/${selectedId}`, {
+      await fetch(`/api/episodes/${selId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(episodeData),
+        body: JSON.stringify(data),
       });
-      if (!res.ok) throw new Error('Save failed');
       showToast('Zapisano ✓');
-      await fetchEpisodes(); // refresh sidebar titles
-    } catch (e) {
-      showToast('Błąd zapisu!');
-    } finally {
-      setSaving(false);
-    }
+      loadList();
+    } catch { showToast('Błąd zapisu!', 'error'); }
+    finally { setSaving(false); }
   }
 
-  async function createEpisode() {
-    const id = prompt('ID epizodu (małe litery, cyfry, myślniki – np. "nowy-temat"):');
-    if (!id) return;
-    const trimmed = id.trim();
-    if (!trimmed) return;
-
+  async function create() {
+    const id = prompt('ID epizodu (małe litery i myślniki, np. "moj-temat"):');
+    if (!id?.trim()) return;
     const res = await fetch('/api/episodes', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: trimmed }),
+      body: JSON.stringify({ id: id.trim() }),
     });
-    const data = await res.json();
-    if (data.error) {
-      alert(data.error);
-      return;
-    }
-    await fetchEpisodes();
-    await loadEpisode(trimmed);
+    const j = await res.json();
+    if (j.error) { alert(j.error); return; }
+    await loadList();
+    loadEpisode(id.trim());
   }
 
-  async function deleteEpisode(id) {
-    if (!confirm(`Usunąć epizod "${id}"? Tej operacji nie można cofnąć.`)) return;
+  async function del(id) {
+    if (!confirm(`Usunąć "${id}"?`)) return;
     await fetch(`/api/episodes/${id}`, { method: 'DELETE' });
-    await fetchEpisodes();
-    if (selectedId === id) {
-      setSelectedId(null);
-      setEpisodeData(null);
-    }
+    loadList();
+    if (selId === id) { setSelId(null); setData(null); }
   }
 
-  // ------------------------------------------------------------------
-  // Keyboard shortcut: Ctrl/Cmd+S to save
-  // ------------------------------------------------------------------
   useEffect(() => {
-    function onKeyDown(e) {
-      if ((e.ctrlKey || e.metaKey) && e.key === 's') {
-        e.preventDefault();
-        if (selectedId && episodeData && !saving) {
-          saveEpisode();
-        }
-      }
-    }
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
-  }, [selectedId, episodeData, saving]);
+    const fn = e => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 's') { e.preventDefault(); save(); }
+    };
+    window.addEventListener('keydown', fn);
+    return () => window.removeEventListener('keydown', fn);
+  }, [selId, data, saving]);
 
-  // ------------------------------------------------------------------
-  // Render: not authorized
-  // ------------------------------------------------------------------
-  if (!authorized) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center text-gray-500">
-          <div className="text-5xl mb-4">🔒</div>
-          <p className="text-lg">Brak dostępu.</p>
-          <p className="text-sm mt-1">Sprawdź URL – wymagany jest poprawny hash.</p>
-        </div>
+  // ── Brak dostępu ──
+  if (!auth) return (
+    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#0f172a' }}>
+      <div style={{ textAlign: 'center', color: '#94a3b8' }}>
+        <div style={{ fontSize: 60, marginBottom: 16 }}>🔒</div>
+        <div style={{ fontSize: 18, color: '#e2e8f0', marginBottom: 8 }}>Brak dostępu</div>
+        <div style={{ fontSize: 13 }}>URL musi zawierać <code style={{ color: '#818cf8' }}>#admin2024</code></div>
       </div>
-    );
-  }
+    </div>
+  );
 
-  // ------------------------------------------------------------------
-  // Render: authorized
-  // ------------------------------------------------------------------
+  const TABS = [
+    { key: 'info',     label: 'Informacje', icon: 'ℹ️'  },
+    { key: 'dialogue', label: 'Dialogi',    icon: '💬'  },
+    { key: 'model',    label: 'Model JSON', icon: '🗂️' },
+  ];
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Toast message={toast} />
+    <div style={{ display: 'flex', height: '100vh', overflow: 'hidden', background: '#f8fafc' }}>
+      <Toast msg={toast.msg} type={toast.type} />
 
-      <div className="flex h-screen overflow-hidden">
-        {/* ---- Sidebar ---- */}
-        <aside className="w-64 shrink-0 bg-white border-r border-gray-200 flex flex-col">
-          <div className="p-4 border-b border-gray-200">
-            <h1 className="font-bold text-gray-800 text-sm">Panel admina</h1>
-            <p className="text-xs text-gray-400 mt-0.5">Event Storming by Example</p>
-          </div>
+      {/* ── Sidebar ── */}
+      <aside style={{
+        width: 220, flexShrink: 0, display: 'flex', flexDirection: 'column',
+        background: '#1e293b', borderRight: '1px solid #334155',
+      }}>
+        <div style={{ padding: '20px 16px 16px', borderBottom: '1px solid #334155' }}>
+          <div style={{ color: '#f1f5f9', fontWeight: 700, fontSize: 14 }}>Event Storming</div>
+          <div style={{ color: '#64748b', fontSize: 11, marginTop: 2 }}>Panel admina</div>
+        </div>
 
-          <div className="flex-1 overflow-y-auto p-3">
-            <button
-              onClick={createEpisode}
-              className="w-full mb-3 py-2 px-3 bg-blue-500 text-white text-sm rounded-lg hover:bg-blue-600 transition-colors font-medium"
-            >
-              + Nowy epizod
-            </button>
+        <div style={{ flex: 1, overflowY: 'auto', padding: '12px 10px' }}>
+          <button
+            onClick={create}
+            style={{
+              width: '100%', marginBottom: 12, padding: '8px 12px',
+              background: 'transparent', border: '1px dashed #475569',
+              borderRadius: 8, color: '#94a3b8', fontSize: 13,
+              cursor: 'pointer', textAlign: 'left', transition: 'all .1s',
+            }}
+            onMouseEnter={e => { e.currentTarget.style.borderColor = '#818cf8'; e.currentTarget.style.color = '#c7d2fe'; }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = '#475569'; e.currentTarget.style.color = '#94a3b8'; }}
+          >+ Nowy epizod</button>
 
-            {episodes.length === 0 && (
-              <p className="text-xs text-gray-400 text-center py-4">Brak epizodów</p>
-            )}
-
-            {episodes.map(ep => (
+          {episodes.map(ep => {
+            const active = selId === ep.id;
+            return (
               <div
                 key={ep.id}
-                className={`group flex items-center justify-between p-2.5 rounded-lg cursor-pointer mb-1 transition-colors ${
-                  selectedId === ep.id
-                    ? 'bg-blue-50 border border-blue-200'
-                    : 'hover:bg-gray-50 border border-transparent'
-                }`}
                 onClick={() => loadEpisode(ep.id)}
+                style={{
+                  display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                  padding: '8px 10px', borderRadius: 8, marginBottom: 2,
+                  background: active ? '#4f46e5' : 'transparent',
+                  cursor: 'pointer', transition: 'background .1s',
+                }}
+                onMouseEnter={e => { if (!active) e.currentTarget.style.background = '#334155'; }}
+                onMouseLeave={e => { if (!active) e.currentTarget.style.background = 'transparent'; }}
               >
-                <div className="flex-1 min-w-0 pr-1">
-                  <div className="text-sm font-medium text-gray-700 truncate">
+                <div style={{ minWidth: 0, flex: 1 }}>
+                  <div style={{ fontSize: 12, fontWeight: 500, color: active ? '#fff' : '#cbd5e1', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                     {ep.title || ep.id}
                   </div>
-                  <div className="text-xs text-gray-400 truncate">{ep.id}</div>
+                  <div style={{ fontSize: 10, color: active ? '#c7d2fe' : '#64748b', marginTop: 1 }}>
+                    {ep.id}
+                  </div>
                 </div>
                 <button
-                  onClick={e => { e.stopPropagation(); deleteEpisode(ep.id); }}
-                  className="opacity-0 group-hover:opacity-100 text-red-400 hover:text-red-600 ml-1 px-1.5 py-0.5 rounded hover:bg-red-50 transition-all text-sm"
-                  title="Usuń epizod"
-                >
-                  ✕
-                </button>
+                  onClick={e => { e.stopPropagation(); del(ep.id); }}
+                  style={{
+                    width: 20, height: 20, borderRadius: '50%', border: 'none',
+                    background: 'transparent', color: active ? '#a5b4fc' : '#475569',
+                    fontSize: 10, cursor: 'pointer', flexShrink: 0, marginLeft: 4,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    opacity: 0, transition: 'opacity .1s',
+                  }}
+                  className="del-btn"
+                >✕</button>
               </div>
-            ))}
-          </div>
+            );
+          })}
+        </div>
 
-          <div className="p-3 border-t border-gray-200">
-            <a href="/" className="text-xs text-gray-400 hover:text-gray-600 transition-colors">
-              ← Powrót do aplikacji
-            </a>
-          </div>
-        </aside>
+        <div style={{ padding: '12px 16px', borderTop: '1px solid #334155' }}>
+          <a href="/" style={{ fontSize: 12, color: '#475569', textDecoration: 'none' }}>← Aplikacja</a>
+        </div>
+      </aside>
 
-        {/* ---- Main content ---- */}
-        <main className="flex-1 flex flex-col overflow-hidden">
-          {!selectedId && (
-            <div className="flex-1 flex items-center justify-center text-gray-400">
-              <div className="text-center">
-                <div className="text-5xl mb-4">📝</div>
-                <p>Wybierz epizod z listy lub utwórz nowy</p>
-              </div>
+      {/* ── Główna treść ── */}
+      <main style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+
+        {/* Empty state */}
+        {!selId && !loading && (
+          <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94a3b8' }}>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: 52, marginBottom: 12 }}>📖</div>
+              <div style={{ fontSize: 15, color: '#6b7280' }}>Wybierz epizod z listy</div>
             </div>
-          )}
+          </div>
+        )}
 
-          {selectedId && loading && (
-            <div className="flex-1 flex items-center justify-center text-gray-400">
-              <p>Ładowanie…</p>
-            </div>
-          )}
+        {/* Ładowanie */}
+        {loading && (
+          <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, color: '#9ca3af' }}>
+            <div style={{
+              width: 18, height: 18, borderRadius: '50%',
+              border: '2px solid #e5e7eb', borderTopColor: '#4f46e5',
+              animation: 'spin 0.7s linear infinite',
+            }} />
+            Ładowanie…
+          </div>
+        )}
 
-          {selectedId && !loading && episodeData && (
-            <>
-              {/* Top bar */}
-              <div className="bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between shrink-0">
-                <nav className="flex gap-1">
-                  {[
-                    { key: 'info',     label: 'Informacje' },
-                    { key: 'dialogue', label: 'Dialogi' },
-                    { key: 'model',    label: 'Model' },
-                  ].map(({ key, label }) => (
+        {/* Edytor */}
+        {selId && !loading && data && (
+          <>
+            {/* Topbar */}
+            <div style={{
+              background: '#fff', borderBottom: '1px solid #e5e7eb',
+              display: 'flex', alignItems: 'stretch', justifyContent: 'space-between',
+              padding: '0 24px', height: 52, flexShrink: 0,
+            }}>
+              <div style={{ display: 'flex', gap: 0 }}>
+                {TABS.map(({ key, label, icon }) => {
+                  const active = tab === key;
+                  return (
                     <button
                       key={key}
                       onClick={() => setTab(key)}
-                      className={`text-sm px-3 py-1.5 rounded-lg transition-colors ${
-                        tab === key
-                          ? 'bg-blue-100 text-blue-700 font-medium'
-                          : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100'
-                      }`}
+                      style={{
+                        display: 'flex', alignItems: 'center', gap: 6,
+                        padding: '0 16px', background: 'none', border: 'none',
+                        borderBottom: active ? '2px solid #4f46e5' : '2px solid transparent',
+                        color: active ? '#4f46e5' : '#9ca3af',
+                        fontWeight: active ? 600 : 400,
+                        fontSize: 13, cursor: 'pointer', transition: 'color .15s',
+                      }}
                     >
-                      {label}
+                      <span style={{ fontSize: 15 }}>{icon}</span> {label}
                     </button>
-                  ))}
-                </nav>
+                  );
+                })}
+              </div>
 
-                <div className="flex items-center gap-3">
-                  <span className="text-xs text-gray-400 hidden sm:block">Ctrl+S aby zapisać</span>
-                  <button
-                    onClick={saveEpisode}
-                    disabled={saving}
-                    className="px-4 py-2 bg-green-500 text-white text-sm rounded-lg hover:bg-green-600 disabled:opacity-50 transition-colors font-medium"
-                  >
-                    {saving ? 'Zapisuję…' : 'Zapisz'}
-                  </button>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                <span style={{ fontSize: 11, color: '#d1d5db' }}>⌘S</span>
+                <button
+                  onClick={save}
+                  disabled={saving}
+                  style={{
+                    padding: '7px 20px', background: saving ? '#6366f1' : '#4f46e5',
+                    color: '#fff', border: 'none', borderRadius: 8,
+                    fontSize: 13, fontWeight: 600, cursor: saving ? 'default' : 'pointer',
+                    display: 'flex', alignItems: 'center', gap: 8,
+                    boxShadow: '0 1px 4px rgba(79,70,229,.3)',
+                    transition: 'opacity .1s',
+                    opacity: saving ? .7 : 1,
+                  }}
+                >
+                  {saving && (
+                    <div style={{
+                      width: 13, height: 13, borderRadius: '50%',
+                      border: '2px solid rgba(255,255,255,.3)', borderTopColor: '#fff',
+                      animation: 'spin 0.7s linear infinite',
+                    }} />
+                  )}
+                  {saving ? 'Zapisuję…' : 'Zapisz'}
+                </button>
+              </div>
+            </div>
+
+            {/* Treść zakładki */}
+            <div style={{ flex: 1, overflowY: 'auto', padding: '32px 40px' }}>
+
+              {tab === 'info' && (
+                <div style={{ maxWidth: 520 }}>
+                  <div style={{ marginBottom: 20 }}>
+                    <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: '#374151', marginBottom: 6 }}>Tytuł</label>
+                    <input
+                      type="text"
+                      value={data.title || ''}
+                      onChange={e => setData({ ...data, title: e.target.value })}
+                      placeholder="Tytuł epizodu"
+                      style={{
+                        width: '100%', padding: '10px 14px', fontSize: 14,
+                        border: '1.5px solid #e5e7eb', borderRadius: 10,
+                        outline: 'none', boxSizing: 'border-box',
+                        fontFamily: 'inherit', transition: 'border-color .15s',
+                      }}
+                      onFocus={e => e.target.style.borderColor = '#4f46e5'}
+                      onBlur={e => e.target.style.borderColor = '#e5e7eb'}
+                    />
+                  </div>
+                  <div style={{ marginBottom: 28 }}>
+                    <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: '#374151', marginBottom: 6 }}>Podtytuł</label>
+                    <textarea
+                      value={data.subtitle || ''}
+                      onChange={e => setData({ ...data, subtitle: e.target.value })}
+                      placeholder="Krótki opis epizodu"
+                      rows={3}
+                      style={{
+                        width: '100%', padding: '10px 14px', fontSize: 14,
+                        border: '1.5px solid #e5e7eb', borderRadius: 10,
+                        outline: 'none', boxSizing: 'border-box', resize: 'vertical',
+                        fontFamily: 'inherit', transition: 'border-color .15s',
+                      }}
+                      onFocus={e => e.target.style.borderColor = '#4f46e5'}
+                      onBlur={e => e.target.style.borderColor = '#e5e7eb'}
+                    />
+                  </div>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 12, marginBottom: 24 }}>
+                    <StatCard value={data.dialogue?.length ?? 0}       label="kwestii dialogu" color="#4f46e5" />
+                    <StatCard value={data.model?.slices?.length ?? 0}  label="slices"          color="#7c3aed" />
+                    <StatCard value={data.model?.hotspots?.length ?? 0} label="hotspots"       color="#b45309" />
+                  </div>
+                  <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 10, padding: '12px 16px' }}>
+                    <div style={{ fontSize: 11, color: '#9ca3af', marginBottom: 4 }}>Plik</div>
+                    <code style={{ fontSize: 12, color: '#475569', fontFamily: 'monospace' }}>src/data/episodes/{selId}.json</code>
+                  </div>
                 </div>
-              </div>
+              )}
 
-              {/* Tab content */}
-              <div className="flex-1 overflow-y-auto p-6">
+              {tab === 'dialogue' && (
+                <div style={{ maxWidth: 680, margin: '0 auto' }}>
+                  <DialogueEditor
+                    dialogue={data.dialogue || []}
+                    onChange={d => setData({ ...data, dialogue: d })}
+                  />
+                </div>
+              )}
 
-                {/* INFO TAB */}
-                {tab === 'info' && (
-                  <div className="max-w-2xl space-y-5">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Tytuł
-                      </label>
-                      <input
-                        type="text"
-                        value={episodeData.title || ''}
-                        onChange={e => setEpisodeData({ ...episodeData, title: e.target.value })}
-                        className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300"
-                        placeholder="Tytuł epizodu"
-                      />
-                    </div>
+              {tab === 'model' && (
+                <div style={{ maxWidth: 860, margin: '0 auto' }}>
+                  <ModelEditor
+                    model={data.model || { slices: [], hotspots: [] }}
+                    episodeId={selId}
+                    onChange={m => setData({ ...data, model: m })}
+                  />
+                </div>
+              )}
+            </div>
+          </>
+        )}
+      </main>
 
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Podtytuł
-                      </label>
-                      <textarea
-                        value={episodeData.subtitle || ''}
-                        onChange={e => setEpisodeData({ ...episodeData, subtitle: e.target.value })}
-                        className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300"
-                        rows={3}
-                        placeholder="Podtytuł / krótki opis epizodu"
-                      />
-                    </div>
-
-                    <div className="bg-gray-50 rounded-xl p-4 border border-gray-200">
-                      <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
-                        Statystyki
-                      </div>
-                      <div className="grid grid-cols-3 gap-4 text-center">
-                        <div className="bg-white rounded-lg p-3 border border-gray-200">
-                          <div className="text-2xl font-bold text-blue-600">
-                            {episodeData.dialogue?.length ?? 0}
-                          </div>
-                          <div className="text-xs text-gray-500 mt-0.5">kwestii dialogu</div>
-                        </div>
-                        <div className="bg-white rounded-lg p-3 border border-gray-200">
-                          <div className="text-2xl font-bold text-purple-600">
-                            {episodeData.model?.slices?.length ?? 0}
-                          </div>
-                          <div className="text-xs text-gray-500 mt-0.5">slices</div>
-                        </div>
-                        <div className="bg-white rounded-lg p-3 border border-gray-200">
-                          <div className="text-2xl font-bold text-orange-600">
-                            {episodeData.model?.hotspots?.length ?? 0}
-                          </div>
-                          <div className="text-xs text-gray-500 mt-0.5">hotspots</div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="bg-gray-50 rounded-xl p-4 border border-gray-200">
-                      <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
-                        ID pliku
-                      </div>
-                      <code className="text-sm font-mono text-gray-700">
-                        src/data/episodes/{selectedId}.json
-                      </code>
-                    </div>
-                  </div>
-                )}
-
-                {/* DIALOGUE TAB */}
-                {tab === 'dialogue' && (
-                  <div className="max-w-3xl">
-                    <DialogueEditor
-                      dialogue={episodeData.dialogue || []}
-                      onChange={d => setEpisodeData({ ...episodeData, dialogue: d })}
-                    />
-                  </div>
-                )}
-
-                {/* MODEL TAB */}
-                {tab === 'model' && (
-                  <div className="max-w-4xl">
-                    <ModelEditor
-                      model={episodeData.model || { slices: [], hotspots: [] }}
-                      episodeId={selectedId}
-                      onChange={m => setEpisodeData({ ...episodeData, model: m })}
-                    />
-                  </div>
-                )}
-              </div>
-            </>
-          )}
-        </main>
-      </div>
+      <style>{`
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes fadein { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+        aside div:hover .del-btn { opacity: 1 !important; }
+        * { box-sizing: border-box; }
+      `}</style>
     </div>
   );
 }

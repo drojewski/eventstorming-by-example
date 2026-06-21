@@ -27,6 +27,7 @@ export default function CanvasView({ canvas }) {
 
   const nodes  = canvas?.nodes  ?? [];
   const frames = canvas?.frames ?? [];
+  const arrows = canvas?.arrows ?? [];
 
   // Oblicz bounding box wszystkich elementów
   const elements = [
@@ -54,6 +55,25 @@ export default function CanvasView({ canvas }) {
     window.addEventListener('resize', recalc);
     return () => window.removeEventListener('resize', recalc);
   }, [minX, minY, contentW]);
+
+  function edgePt(center, toward, offset) {
+    const dx = toward.x - center.x, dy = toward.y - center.y;
+    const dist = Math.hypot(dx, dy) || 1;
+    return { x: center.x + (dx / dist) * offset, y: center.y + (dy / dist) * offset };
+  }
+
+  function buildArrowPath(arrow) {
+    const sn = nodes.find(n => n.id === arrow.fromId);
+    const tn = nodes.find(n => n.id === arrow.toId);
+    if (!sn || !tn) return null;
+    const sc = { x: sn.x + NODE_W / 2, y: sn.y + NODE_H / 2 };
+    const tc = { x: tn.x + NODE_W / 2, y: tn.y + NODE_H / 2 };
+    const wps = arrow.waypoints || [];
+    const src = edgePt(sc, wps.length > 0 ? wps[0] : tc, NODE_W / 2 + 4);
+    const tgt = edgePt(tc, wps.length > 0 ? wps[wps.length - 1] : sc, NODE_W / 2 + 12);
+    const pts = [src, ...wps, tgt];
+    return pts.map((p, i) => `${i === 0 ? 'M' : 'L'} ${(p.x + offsetX).toFixed(1)},${(p.y + offsetY).toFixed(1)}`).join(' ');
+  }
 
   if (nodes.length === 0 && frames.length === 0) {
     return (
@@ -114,10 +134,29 @@ export default function CanvasView({ canvas }) {
           </div>
         ))}
 
+        {/* Strzałki */}
+        {arrows.length > 0 && (
+          <svg style={{ position: 'absolute', top: 0, left: 0, width: contentW, height: contentH, overflow: 'visible', zIndex: 4, pointerEvents: 'none' }}>
+            <defs>
+              <marker id="vah" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                <polygon points="0 0, 8 3, 0 6" fill="#475569" />
+              </marker>
+            </defs>
+            {arrows.map(arrow => {
+              const d = buildArrowPath(arrow);
+              return d ? (
+                <path key={arrow.id} d={d} stroke="#475569" strokeWidth={1.8} fill="none" markerEnd="url(#vah)" />
+              ) : null;
+            })}
+          </svg>
+        )}
+
         {/* Karteczki */}
         {nodes.map(node => {
           const ct = cardType(node.type);
           const rot = (parseInt(node.id, 36) % 5 - 2) * 1.4;
+          const nw = node.type === 'actor' ? (node.w ?? NODE_W) : NODE_W;
+          const nh = node.type === 'actor' ? (node.h ?? NODE_H) : NODE_H;
           return (
             <div
               key={node.id}
@@ -125,8 +164,8 @@ export default function CanvasView({ canvas }) {
                 position: 'absolute',
                 left: node.x + offsetX,
                 top:  node.y + offsetY,
-                width: NODE_W,
-                minHeight: NODE_H,
+                width: nw,
+                minHeight: nh,
                 background: ct.color,
                 borderRadius: 3,
                 padding: '10px 12px',
@@ -137,13 +176,15 @@ export default function CanvasView({ canvas }) {
                 userSelect: 'none',
               }}
             >
-              <div style={{
-                fontSize: 9, fontWeight: 800, color: ct.dark,
-                opacity: .55, marginBottom: 7,
-                textTransform: 'uppercase', letterSpacing: .6,
-              }}>
-                {ct.label}
-              </div>
+              {node.type !== 'aggregate' && (
+                <div style={{
+                  fontSize: 9, fontWeight: 800, color: ct.dark,
+                  opacity: .55, marginBottom: 7,
+                  textTransform: 'uppercase', letterSpacing: .6,
+                }}>
+                  {ct.label}
+                </div>
+              )}
               <div style={{
                 fontSize: 13, fontWeight: 600, color: ct.dark,
                 lineHeight: 1.45, wordBreak: 'break-word',

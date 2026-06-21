@@ -180,5 +180,174 @@
       }
     ],
     "hotspots": []
+  },
+  "canvas": {
+    "nodes": [
+      {
+        "id": "c1",
+        "type": "actor",
+        "text": "Klient",
+        "x": 46.822265625,
+        "y": 90.2470703125,
+        "w": 66.30078125,
+        "h": 82.3408203125
+      },
+      {
+        "id": "c2",
+        "type": "command",
+        "text": "Złóż rezerwację",
+        "x": 121.0361328125,
+        "y": 87.9619140625
+      },
+      {
+        "id": "c3",
+        "type": "aggregate",
+        "text": "miejsce nie może być już zajęte",
+        "x": 286.5947265625,
+        "y": 88.0205078125
+      },
+      {
+        "id": "c4",
+        "type": "event",
+        "text": "Złożono rezerwację",
+        "x": 484.609375,
+        "y": 84.5537109375
+      },
+      {
+        "id": "c5",
+        "type": "policy",
+        "text": "Zawsze gdy złożono rezerwację, zleć naliczenie punktów lojalnościowych (kontekst Rezerwacji nie wie komu się należą - przerzucamy decyzję do kontekstu punktów)",
+        "x": 63.2578125,
+        "y": 254.8076171875
+      },
+      {
+        "id": "c7",
+        "type": "command",
+        "text": "Nalicz punkty lojalnościowe",
+        "x": 64,
+        "y": 584
+      },
+      {
+        "id": "c8",
+        "type": "aggregate",
+        "text": "wymagany poziom wtajemniczenia KINOMAN",
+        "x": 232,
+        "y": 584
+      },
+      {
+        "id": "c9",
+        "type": "event",
+        "text": "Naliczono punkty",
+        "x": 400,
+        "y": 584
+      },
+      {
+        "id": "c10",
+        "type": "event",
+        "text": "Odrzucono próbę naliczenia punktów",
+        "x": 568,
+        "y": 584
+      },
+      {
+        "id": "c12",
+        "type": "actor",
+        "text": "Handlowiec",
+        "x": 64,
+        "y": 776
+      },
+      {
+        "id": "c13",
+        "type": "command",
+        "text": "Złóż ofertę",
+        "x": 64,
+        "y": 886
+      },
+      {
+        "id": "c14",
+        "type": "aggregate",
+        "text": "Oferta musi mieć przynajmniej jedną pozycję i wartość > 0",
+        "x": 232,
+        "y": 886
+      },
+      {
+        "id": "c15",
+        "type": "event",
+        "text": "Złożono ofertę",
+        "x": 400,
+        "y": 886
+      },
+      {
+        "id": "c16",
+        "type": "event",
+        "text": "Złożono ofertę",
+        "x": 64,
+        "y": 1076
+      },
+      {
+        "id": "c17",
+        "type": "policy",
+        "text": "Zawsze gdy złożono ofertę sprawdź czy wartość > 200k. Wówczas skieruj do akceptacji szefa, w przeciwnym razie zatwierdź automatycznie (oba warianty to poprawne, dozwolone ścieżki procesu)",
+        "x": 232,
+        "y": 1076
+      },
+      {
+        "id": "c18",
+        "type": "command",
+        "text": "Skieruj ofertę do akceptacji szefa",
+        "x": 400,
+        "y": 1076
+      },
+      {
+        "id": "c19",
+        "type": "event",
+        "text": "Skierowano ofertę do akceptacji",
+        "x": 568,
+        "y": 1076
+      },
+      {
+        "id": "c20",
+        "type": "command",
+        "text": "Zatwierdź ofertę automatycznie",
+        "x": 400,
+        "y": 1266
+      },
+      {
+        "id": "c21",
+        "type": "event",
+        "text": "Zatwierdzono ofertę",
+        "x": 568,
+        "y": 1266
+      }
+    ],
+    "frames": [
+      {
+        "id": "c6",
+        "label": "Case nr 1: Rezerwacje",
+        "x": 40,
+        "y": 40,
+        "w": 720.2177734375,
+        "h": 493.7744140625,
+        "color": "#dbeafe88"
+      },
+      {
+        "id": "c11",
+        "label": "Case nr 1: Punkty lojalnościowe",
+        "x": 40,
+        "y": 532,
+        "w": 720,
+        "h": 270,
+        "color": "#dbeafe88"
+      },
+      {
+        "id": "c22",
+        "label": "Case nr 2: Oferta",
+        "x": 40,
+        "y": 834,
+        "w": 720,
+        "h": 650,
+        "color": "#dbeafe88"
+      }
+    ],
+    "arrows": []
   }
 }

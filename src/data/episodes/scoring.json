@@ -1,66 +1,156 @@
 {
-  "title": "Ocena dostawcy",
+  "title": "Jak tu się dogadać - modelowanie procesu AS IS",
   "subtitle": "Wywiad: Pytania naprowadzające",
   "dialogue": [
     {
-      "role": "ekspert",
-      "name": "Ekspert biznesowy",
-      "avatar": "👨‍💼",
-      "text": "No więc ten nasz proces oceny dostawcy działa tak: bierzemy dane z CRM-a, sprawdzamy gościa w BIK-u, zaglądamy do systemu XERXES, bo tam mamy tajne informacje. No i są jeszcze integracje z trzema innymi systemami, ale nie pamiętam nazw…"
-    },
-    {
       "role": "analityk",
       "name": "Analityk biznesowy",
       "avatar": "🕵️",
-      "text": "Okej brachu, powiedz mi najpierw po co go oceniacie i co istotnego dzieje się w tym procesie? Bez czego ten proces by się nie mógł udać?"
+      "text": "Witaj drogi ekspercie, mój drogowskazie, mój druhu. Na początek chciałbym podkreślić ponownie cel naszego spotkania. Tak jak rozmawialiśmy wczoraj, chcemy dziś z tego spotkania wyjść z wysokopoziomowym (Big Picture) modelem \"as is\" procesu oceny dostawcy. Obecnie ten proces wykonujecie manualnie w dużej mierze i chcecie go zautomatyzować. Czy to wszystko się zgadza?"
     },
     {
       "role": "ekspert",
       "name": "Ekspert biznesowy",
       "avatar": "👨‍💼",
-      "text": "Chodzi tu o to, że jak otrzymamy ofertę od dostawcy to zlecamy kwalifikację dostawcy do współpracy. Oceniam dostawcę bo jestem mądry, klikam checkboxa OCENA OK/NOK i tyle."
+      "text": "Jak zawsze przyjacielu niedoli trafiłeś w samo sedno. Wszystko się zgadza, możemy działać. "
     },
     {
       "role": "analityk",
       "name": "Analityk biznesowy",
       "avatar": "🕵️",
-      "text": "A co się musi wydarzyć, żebyś stwierdził, że nie możesz podjąć współpracy z dostawcą?"
+      "text": "Grejt. Powiedz mi na początek co z Twojej perspektywy jest najistotniejsze w tym procesie. Innymi słowy, bez czego ten proces nie mógłby się udać? Użyjemy do tego tych pomarańczowych karteczek, które symbolizują zdarzenie biznesowe, te ważne momenty w procesie. Pamiętasz, to coś co zapisywaliśmy w czasie przeszłym, bo w końcu z czymś co się wydarzyło ciężko dyskutować. :-)"
     },
     {
       "role": "ekspert",
       "name": "Ekspert biznesowy",
       "avatar": "👨‍💼",
-      "text": "No ja to sprawdzam gościa w takich naszych kwitach, tam leży teczka, spójrz sobie. A potem puszczam tym checkboxem ocenę systemową i jeśli system zobaczy, że dostawca jest oznaczony statusem BADBOY, to od razu takiego gagatka blokujemy."
+      "text": "Wiem wiem, dobra jedźmy z tym. No to tak. Daj mi te karteczkę, albo ze dwie bo szybciej to zrobię, pa tera. pyk pyk i jest: \"Zakwalifikowano dostawcę do współpracy\" i \"Zaakceptowano dostawcę\". "
     },
     {
       "role": "analityk",
       "name": "Analityk biznesowy",
       "avatar": "🕵️",
-      "text": "Mhm... A co jest bezpośrednim następstwem takiej kwalifikacji do współpracy?"
+      "text": "Okej.. nieźle. Brzmi poważnie. Powiedz mi, czemu ta kwalifikacja jest ważna? I czym ona różni się od akceptacji? "
     },
     {
       "role": "ekspert",
       "name": "Ekspert biznesowy",
       "avatar": "👨‍💼",
-      "text": "System powiadamia szefa, żeby zaakceptował dostawcę lub wycofał dokonaną ocenę i to koniec procesu."
+      "text": "No bo kwalifikację robi Jolka albo ja, a potem to idzie do szefa i on akceptuje to dopiero."
     },
     {
       "role": "analityk",
       "name": "Analityk biznesowy",
       "avatar": "🕵️",
-      "text": "Uuuu.. a czy każdego dostawcę poddajesz takiej ocenie?"
+      "text": "Ah ta Jolka. A co się musi stać, abyś mógł w ogóle rozpocząć kwalifikację? "
     },
     {
       "role": "ekspert",
       "name": "Ekspert biznesowy",
       "avatar": "👨‍💼",
-      "text": "Nie, nie, nie. Dostawców, którzy współpracowali z nami przynajmniej przy 5 dealach nie poddajemy już takiemu procesowi, kwalifikujemy ich w ciemno. Nawet jak Jolka przez przypadek oznaczyłaby takiego dostawcę jako BADBOY to i tak kwalifikujemy go, a co więcej szef już nie musi tego akceptować. Taki dostawca staje się zaakceptowany. Możemy z nim działać."
+      "text": "Musi do systemu wpłynąć oferta. Pracujemy na XERXESIE, Tomek w COBOLu wyklikał, poszedł wczoraj na emeryturę i klops. Chłop 78 lat ma. Ale to tak na marginesie. Anyway, jest to dla nas duży problem. Apka jest mega wolna."
     },
     {
       "role": "analityk",
       "name": "Analityk biznesowy",
       "avatar": "🕵️",
-      "text": "Ahaaa, Ty to jesteś taki mądry, dziękuję za pomoc! Jest jednak jeszcze wiele pytań, które będę chciał Ci wkrótce zadać. :-))"
+      "text": "Okej. Czyli gdybym usunął to nasze zdarzenie zakwalifikowano dostawcę do współpracy, to daleko nie zajedziemy jak rozumiem?"
+    },
+    {
+      "role": "ekspert",
+      "name": "Ekspert biznesowy",
+      "avatar": "👨‍💼",
+      "text": "Zdecydowanie. To jest uber ważny krok. Oceniam dostawcę moim pięknym umysłem oraz błękitnymi oczami i kwalifikuję go."
+    },
+    {
+      "role": "analityk",
+      "name": "Analityk biznesowy",
+      "avatar": "🕵️",
+      "text": "Zapomniałbym.. Powiedz mi jeszcze, czy jest jeszcze inne wejście do procesu oprócz otrzymania oferty w XERXESIE? "
+    },
+    {
+      "role": "ekspert",
+      "name": "Ekspert biznesowy",
+      "avatar": "👨‍💼",
+      "text": "Nope. To jedyna opcja."
+    },
+    {
+      "role": "analityk",
+      "name": "Analityk biznesowy",
+      "avatar": "🕵️",
+      "text": "Dobra, czyli dostajemy ofertę, a następstwem jest.. jak Ty to nazwałeś? "
+    },
+    {
+      "role": "ekspert",
+      "name": "Ekspert biznesowy",
+      "avatar": "👨‍💼",
+      "text": "Rozpoczynam ocenę dostawcy, tfu, przepraszam, \"Rozpoczęto ocenę dostawcy\", he he.."
+    },
+    {
+      "role": "analityk",
+      "name": "Analityk biznesowy",
+      "avatar": "🕵️",
+      "text": "Jesteś najbystrzejszą osobą przed swoim ekranem. No dobra, to jeszcze raz. Dostajesz ofertę, oceniasz typa i możesz go zakwalifikować. Czy ocena może skończyć się inaczej niż kwalifikacją?  "
+    },
+    {
+      "role": "ekspert",
+      "name": "Ekspert biznesowy",
+      "avatar": "👨‍💼",
+      "text": "Wiadomix. Mogę dostawcę odrzucić, a także zablokować, jeśli.. dobra, na razie nie wchodźmy w szczegóły, opowiem Ci potem."
+    },
+    {
+      "role": "analityk",
+      "name": "Analityk biznesowy",
+      "avatar": "🕵️",
+      "text": "Ja Cię kręcę. Czyli oprócz Twojego pięknego umysłu oceny dokonuje także system?"
+    },
+    {
+      "role": "ekspert",
+      "name": "Ekspert biznesowy",
+      "avatar": "👨‍💼",
+      "text": "No, w sumie tak."
+    },
+    {
+      "role": "analityk",
+      "name": "Analityk biznesowy",
+      "avatar": "🕵️",
+      "text": "A co jest bezpośrednim następstwem wykonania oceny dostawcy?"
+    },
+    {
+      "role": "ekspert",
+      "name": "Ekspert biznesowy",
+      "avatar": "👨‍💼",
+      "text": "Kwalifikacja do współpracy idzie do szefa do akceptacji. No albo do odrzucenia kwalifikacji. Założenie blokady albo odrzucenie przeze mnie albo przez Jolkę nie przechodzi przez szefa. "
+    },
+    {
+      "role": "analityk",
+      "name": "Analityk biznesowy",
+      "avatar": "🕵️",
+      "text": "A co się stanie, jeśli szef pojedzie na wakacje i nie klepnie Ci kwalifikacji? Tracicie dostawcę?"
+    },
+    {
+      "role": "ekspert",
+      "name": "Ekspert biznesowy",
+      "avatar": "👨‍💼",
+      "text": "Nie, nie, nie. Jeśli nie zaakceptuje w ciągu 24h to kwalifikacja jest potwierdzana i dostawca zostaje zaakceptowany do współpracy. Jakieś resztki zaufania mają do nas..."
+    },
+    {
+      "role": "analityk",
+      "name": "Analityk biznesowy",
+      "avatar": "🕵️",
+      "text": "okej, czy odrzucenie / potwierdzenie kwalifikacji to ostatni krok procesu? Czy ma on jakieś skutki?"
+    },
+    {
+      "role": "ekspert",
+      "name": "Ekspert biznesowy",
+      "avatar": "👨‍💼",
+      "text": "No ma, ma. odrzucenie kwalifikacji implikuje odrzucenie dostawcy, a akceptacja kwalifikacji implikuje akceptację dostawcy."
+    },
+    {
+      "role": "analityk",
+      "name": "Analityk biznesowy",
+      "avatar": "🕵️",
+      "text": "Mhmm... o szczegółach pogadamy na kolejnych warsztatach gdy będziemy modelować proces \"to be\". Dzięki brachu!"
     }
   ],
   "model": {
@@ -135,5 +225,121 @@
       }
     ],
     "hotspots": []
+  },
+  "canvas": {
+    "nodes": [
+      {
+        "id": "c1",
+        "type": "event",
+        "text": "Otrzymano ofertę od dostawcy",
+        "x": 52.466796875,
+        "y": 319.8173828125
+      },
+      {
+        "id": "c8",
+        "type": "event",
+        "text": "Zakwalifikowano dostawcę do współpracy",
+        "x": 286.6982421875,
+        "y": 172.52734375
+      },
+      {
+        "id": "c9",
+        "type": "event",
+        "text": "Odrzucono dostawcę",
+        "x": 293.7802734375,
+        "y": 341.7314453125
+      },
+      {
+        "id": "c10",
+        "type": "event",
+        "text": "Zablokowano dostawcę",
+        "x": 284.705078125,
+        "y": 503.5380859375
+      },
+      {
+        "id": "zzsiqwq",
+        "type": "event",
+        "text": "Upłynął czas na weryfikację decyzji",
+        "x": 1059.038630670746,
+        "y": 456.6077717832495
+      },
+      {
+        "id": "ra6eubh",
+        "type": "event",
+        "text": "Powiadomiono szefa",
+        "x": 469.71743174578705,
+        "y": 171.50397975196978
+      },
+      {
+        "id": "t1rrxld",
+        "type": "event",
+        "text": "Odrzucono kwalifikację",
+        "x": 634.7275617344199,
+        "y": 231.54134921894513
+      },
+      {
+        "id": "jntiz4u",
+        "type": "event",
+        "text": "Potwierdzono kwalifikację",
+        "x": 633.5773528208683,
+        "y": 66.0281553696509
+      },
+      {
+        "id": "c12ota0",
+        "type": "event",
+        "text": "Potwierdzono decyzję",
+        "x": 1218.8655891651092,
+        "y": 455.44301786450114
+      },
+      {
+        "id": "fhdzbtq",
+        "type": "event",
+        "text": "Zaakceptowano dostawcę do współpracy",
+        "x": 1378.5839337345978,
+        "y": 456.71526910708343
+      },
+      {
+        "id": "tqeovxv",
+        "type": "hotspot",
+        "text": "System napisany w przestarzałej technologii, wolny jest i denerwuje pracowników",
+        "x": 52.531026399971324,
+        "y": 177.61300429448363
+      },
+      {
+        "id": "li8sff0",
+        "type": "event",
+        "text": "Zaakceptowano dostawcę do współpracy",
+        "x": 799.8630842600696,
+        "y": 63.073269104290375
+      },
+      {
+        "id": "valsbwl",
+        "type": "event",
+        "text": "Odrzucono dostawcę",
+        "x": 806.6492823082172,
+        "y": 231.66834477754298
+      }
+    ],
+    "frames": [
+      {
+        "id": "c11",
+        "label": "Ocena dostawcy",
+        "x": 15,
+        "y": 43.4619140625,
+        "w": 1549.224609375,
+        "h": 637.5634765625,
+        "color": "#dbeafe88"
+      },
+      {
+        "id": "qpif3vg",
+        "label": "                                                                                                                                                                   Model \"as is\" - Big Picture",
+        "x": 17.166015625,
+        "y": 1.2763671875,
+        "w": 1540.224609375,
+        "h": 40.2392578125,
+        "color": "#dcfce788"
+      }
+    ],
+    "arrows": []
   }
 }

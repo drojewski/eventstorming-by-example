@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MessageSquare, GitMerge, Play } from 'lucide-react';
 import DialogueView from './DialogueView.jsx';
 import ModelBoard from './ModelBoard.jsx';
 import CanvasView from './CanvasView.jsx';
 
-export default function EpisodeViewer({ episode }) {
+export default function EpisodeViewer({ episode: initialEpisode, episodeId }) {
+  const [episode, setEpisode] = useState(initialEpisode);
   const [view, setView] = useState('dialogue');
+
+  useEffect(() => {
+    if (!episodeId) return;
+    fetch(`/api/episodes/${episodeId}`)
+      .then(r => r.json())
+      .then(data => setEpisode(data))
+      .catch(() => {});
+  }, [episodeId]);
   const [animate, setAnimate] = useState(false);
   const [visibleCount, setVisibleCount] = useState(0);
 

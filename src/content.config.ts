@@ -34,6 +34,8 @@ const canvasNode = z.object({
   text: z.string(),
   x: z.number(),
   y: z.number(),
+  w: z.number().optional(),
+  h: z.number().optional(),
 });
 
 const canvasFrame = z.object({
@@ -68,6 +70,12 @@ const episodes = defineCollection({
     canvas: z.object({
       nodes: z.array(canvasNode).optional().default([]),
       frames: z.array(canvasFrame).optional().default([]),
+      arrows: z.array(z.object({
+        id: z.string(),
+        fromId: z.string(),
+        toId: z.string(),
+        waypoints: z.array(z.object({ x: z.number(), y: z.number() })).optional().default([]),
+      })).optional().default([]),
     }).optional(),
   }),
 });

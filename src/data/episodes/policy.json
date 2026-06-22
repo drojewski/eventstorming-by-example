@@ -1,6 +1,6 @@
 {
-  "title": "Czym jest polityka? Fioletowa kartka versus żółta kartka.",
-  "subtitle": "P-o-l-i-t-y-k-a, reguły takie i owakie, auuuuu",
+  "title": "Czym jest polityka? Reguły takie i owakie",
+  "subtitle": "P-o-l-i-t-y-k-a, niezmienniki, auuuuu",
   "dialogue": [
     {
       "role": "analityk",
@@ -210,29 +210,29 @@
         "id": "c4",
         "type": "event",
         "text": "Złożono rezerwację",
-        "x": 484.609375,
-        "y": 84.5537109375
+        "x": 459.0771484375,
+        "y": 87.2099609375
       },
       {
         "id": "c5",
         "type": "policy",
         "text": "Zawsze gdy złożono rezerwację, zleć naliczenie punktów lojalnościowych (kontekst Rezerwacji nie wie komu się należą - przerzucamy decyzję do kontekstu punktów)",
-        "x": 63.2578125,
-        "y": 254.8076171875
+        "x": 637.7353515625,
+        "y": 58.23046875
       },
       {
         "id": "c7",
         "type": "command",
         "text": "Nalicz punkty lojalnościowe",
-        "x": 64,
-        "y": 584
+        "x": 72.14453125,
+        "y": 586.607421875
       },
       {
         "id": "c8",
         "type": "aggregate",
         "text": "wymagany poziom wtajemniczenia KINOMAN",
-        "x": 232,
-        "y": 584
+        "x": 236.208984375,
+        "y": 586.8759765625
       },
       {
         "id": "c9",
@@ -252,71 +252,66 @@
         "id": "c12",
         "type": "actor",
         "text": "Handlowiec",
-        "x": 64,
-        "y": 776
+        "x": 50.19140625,
+        "y": 894.6279296875,
+        "w": 110.67578125,
+        "h": 79.650390625
       },
       {
         "id": "c13",
         "type": "command",
         "text": "Złóż ofertę",
-        "x": 64,
-        "y": 886
+        "x": 157.1494140625,
+        "y": 885.970703125
       },
       {
         "id": "c14",
         "type": "aggregate",
         "text": "Oferta musi mieć przynajmniej jedną pozycję i wartość > 0",
-        "x": 232,
-        "y": 886
+        "x": 314.900390625,
+        "y": 881.9228515625
       },
       {
         "id": "c15",
         "type": "event",
         "text": "Złożono ofertę",
-        "x": 400,
-        "y": 886
-      },
-      {
-        "id": "c16",
-        "type": "event",
-        "text": "Złożono ofertę",
-        "x": 64,
-        "y": 1076
+        "x": 471.123046875,
+        "y": 884.3154296875
       },
       {
         "id": "c17",
         "type": "policy",
         "text": "Zawsze gdy złożono ofertę sprawdź czy wartość > 200k. Wówczas skieruj do akceptacji szefa, w przeciwnym razie zatwierdź automatycznie (oba warianty to poprawne, dozwolone ścieżki procesu)",
-        "x": 232,
-        "y": 1076
+        "x": 637.87890625,
+        "y": 845.931640625
       },
       {
         "id": "c18",
         "type": "command",
         "text": "Skieruj ofertę do akceptacji szefa",
-        "x": 400,
-        "y": 1076
+        "x": 824.1796875,
+        "y": 845.541015625
       },
       {
         "id": "c19",
         "type": "event",
         "text": "Skierowano ofertę do akceptacji",
-        "x": 568,
-        "y": 1076
+        "x": 1025.333984375,
+        "y": 839.0224609375
       },
       {
         "id": "c20",
         "type": "command",
         "text": "Zatwierdź ofertę automatycznie",
-        "x": 400,
-        "y": 1266
+        "x": 822.5537109375,
+        "y": 1025.677734375
       },
       {
         "id": "c21",
         "type": "event",
         "text": "Zatwierdzono ofertę",
-        "x": 568,
-        "y": 1266
+        "x": 1015.197265625,
+        "y": 1025.27734375
       }
     ],
     "frames": [
@@ -325,8 +320,8 @@
         "label": "Case nr 1: Rezerwacje",
         "x": 40,
         "y": 40,
-        "w": 720.2177734375,
-        "h": 493.7744140625,
+        "w": 786.0283203125,
+        "h": 456.1279296875,
         "color": "#dbeafe88"
       },
       {
@@ -343,8 +338,8 @@
         "label": "Case nr 2: Oferta",
         "x": 40,
         "y": 834,
-        "w": 720,
-        "h": 650,
+        "w": 1671.4697265625,
+        "h": 374.21875,
         "color": "#dbeafe88"
       }
     ],

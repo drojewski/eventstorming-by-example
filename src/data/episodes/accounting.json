@@ -6,7 +6,15 @@
       "role": "analityk",
       "name": "Analityk biznesowy",
       "avatar": "🕵️",
-      "text": "Przyjaciele, jak zawsze na początku chciałbym się upewnić, że cel warsztatu jaki obraliśmy jest dla wszystkich jasny. Chcemy wyjść z tego spotkania z analizą procesu \"to be\", realizującego obsługę wpłat od naszych klientów."
+      "text": "Przyjaciele, jak zawsze na początku chciałbym się upewnić, że cel warsztatu jaki obraliśmy jest dla wszystkich jasny. Chcemy wyjść z tego spotkania z analizą procesu \"to be\", realizującego obsługę wpłat od naszych klientów.",
+      "annotations": [
+        {
+          "id": "moq6t8z",
+          "start": 62,
+          "end": 75,
+          "note": "Nie zaczynaj warsztatu, jeśli nie określiłeś jasno jego celu i nie zaprosiłeś odpowiednich osób. Na początku warsztatu warto upewnić się, że obrany cel jest dla wszystkich zrozumiały. Trzymaj się go i moderuj dyskusję w taki sposób, aby cel warsztatu mógł zostać zrealizowany. Jeśli dyskusja utknie w jakimś miejscu, zaparkuj temat - pamiętaj, że masz do dyspozycji różową kartkę (hotspot)."
+        }
+      ]
     },
     {
       "role": "ekspert",
@@ -24,7 +32,15 @@
       "role": "ekspert",
       "name": "Ekspert biznesowy",
       "avatar": "👨‍💼",
-      "text": "Czyli te dyrdymały w czasie przeszłym, tak? Dobra, niech będzie. To co pierwsze przychodzi mi do głowy to 'Zmniejszono kwotę kapitału do spłaty' i 'Powiększono limit'"
+      "text": "Czyli te dyrdymały w czasie przeszłym, tak? Dobra, niech będzie. To co pierwsze przychodzi mi do głowy to 'Zmniejszono kwotę kapitału do spłaty' i 'Powiększono limit'",
+      "annotations": [
+        {
+          "id": "br3f1n4",
+          "start": 106,
+          "end": 166,
+          "note": "Ekspert ładnie sformułował zdarzenia biznesowe, które z jego perspektywy są istotne, czyli są to zdarzenia domenowe, które w notacji ES będą reprezentowane pomarańczowymi karteczkami."
+        }
+      ]
     },
     {
       "role": "analityk",
@@ -36,7 +52,15 @@
       "role": "ekspert",
       "name": "Ekspert biznesowy",
       "avatar": "👨‍💼",
-      "text": "Najpierw to musi wpłynąć kasa od klienta i musimy ją zaksięgować, bez tego ani rusz dalej."
+      "text": "Najpierw to musi wpłynąć kasa od klienta i musimy ją zaksięgować, bez tego ani rusz dalej.",
+      "annotations": [
+        {
+          "id": "d6ufydw",
+          "start": 43,
+          "end": 64,
+          "note": "Dowiadujemy się jakie zdarzenie domenowe jest wyzwalaczem naszego procesu - jest to zaksięgowanie wpłaty w systemie księgowym"
+        }
+      ]
     },
     {
       "role": "analityk",
@@ -60,7 +84,15 @@
       "role": "ekspert",
       "name": "Ekspert biznesowy",
       "avatar": "👨‍💼",
-      "text": "Algorytm mówi mi czy wpłata taka może być rozliczona automatycznie czy manualnie."
+      "text": "Algorytm mówi mi czy wpłata taka może być rozliczona automatycznie czy manualnie.",
+      "annotations": [
+        {
+          "id": "zmesjft",
+          "start": 0,
+          "end": 8,
+          "note": "Ekspert mówi nam o algorytmie, który powoduje, że nasz proces pójdzie jedną z dwóch dozwolonych ścieżek. Jest to zatem polityka, reprezentowana w notacji przez fioletową karteczkę. Więcej dowiesz się w odcinku \"Czym jest polityka. Reguły takie i owakie\". W opisie polityki można umieścić link do dokumentacji opisującej dokładnie algorytm (słowno muzycznie albo w postaci schematu blokowego na przykład)."
+        }
+      ]
     },
     {
       "role": "analityk",
@@ -84,7 +116,15 @@
       "role": "ekspert",
       "name": "Ekspert biznesowy",
       "avatar": "👨‍💼",
-      "text": "Wiadome, że ot tak to nie mogę. Muszę sprawdzić czy kwota wpłaty nie jest większa od kwoty kapitału do spłaty. Bo jak inaczej.."
+      "text": "Wiadome, że ot tak to nie mogę. Muszę sprawdzić czy kwota wpłaty nie jest większa od kwoty kapitału do spłaty. Bo jak inaczej..",
+      "annotations": [
+        {
+          "id": "6i1he5e",
+          "start": 32,
+          "end": 110,
+          "note": "Ekspert wyraźnie mówi, że musi sprawdzić, bo \"jak inaczej\" - jest to dla niego ważne, brzmi jak reguła, która nie może być złamana. Jest to niezmiennik (żółta karteczka). Więcej w odcinku: \"Czym jest polityka? Reguły takie i owakie\"\""
+        }
+      ]
     },
     {
       "role": "analityk",
@@ -102,7 +142,15 @@
       "role": "analityk",
       "name": "Analityk biznesowy",
       "avatar": "🕵️",
-      "text": "A co by się stało gdybym limit powiększył 5 minut po spłacie kapitału?"
+      "text": "A co by się stało gdybym limit powiększył 5 minut po spłacie kapitału?",
+      "annotations": [
+        {
+          "id": "8d1w1sj",
+          "start": 42,
+          "end": 52,
+          "note": "Analityk sprawdza, które reguły muszą być spełnione tu i teraz, a które można spełnić dopiero po jakimś czasie (spójność natychmiastowa vs spójność końcowa). Warto zadać pytanie \"co się stanie jeśli ta reguła zostanie spełniona dopiero po X minutach / godzinie\", aby w ekspercie pobudzić odpowiedni sposób myślenia. Odkrywamy tym sposobem granice transakcji."
+        }
+      ]
     },
     {
       "role": "ekspert",

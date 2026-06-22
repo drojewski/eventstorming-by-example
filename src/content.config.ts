@@ -58,6 +58,12 @@ const episodes = defineCollection({
       name: z.string(),
       avatar: z.string(),
       text: z.string(),
+      annotations: z.array(z.object({
+        id: z.string(),
+        start: z.number(),
+        end: z.number(),
+        note: z.string(),
+      })).optional().default([]),
     })).optional().default([]),
     model: z.object({
       slices: z.array(slice),

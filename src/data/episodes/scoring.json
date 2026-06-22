@@ -6,7 +6,15 @@
       "role": "analityk",
       "name": "Analityk biznesowy",
       "avatar": "🕵️",
-      "text": "Witaj drogi ekspercie, mój drogowskazie, mój druhu. Na początek chciałbym podkreślić ponownie cel naszego spotkania. Tak jak rozmawialiśmy wczoraj, chcemy dziś z tego spotkania wyjść z wysokopoziomowym (Big Picture) modelem \"as is\" procesu oceny dostawcy. Obecnie ten proces wykonujecie manualnie w dużej mierze i chcecie go docelowo zoptymalizować. Czy to wszystko się zgadza?"
+      "text": "Witaj drogi ekspercie, mój drogowskazie, mój druhu. Na początek chciałbym podkreślić ponownie cel naszego spotkania. Tak jak rozmawialiśmy wczoraj, chcemy dziś z tego spotkania wyjść z wysokopoziomowym (Big Picture) modelem \"as is\" procesu oceny dostawcy. Obecnie ten proces wykonujecie manualnie w dużej mierze i chcecie go docelowo zoptymalizować. Czy to wszystko się zgadza?",
+      "annotations": [
+        {
+          "id": "1f5cr41",
+          "start": 94,
+          "end": 105,
+          "note": "Nie zaczynaj warsztatu, jeśli nie określiłeś jasno jego celu i nie zaprosiłeś odpowiednich osób. Na początku warsztatu warto upewnić się, że obrany cel jest dla wszystkich zrozumiały. Trzymaj się go i moderuj dyskusję w taki sposób, aby cel warsztatu mógł zostać zrealizowany. Jeśli dyskusja utknie w jakimś miejscu, zaparkuj temat - pamiętaj, że masz do dyspozycji różową kartkę (hotspot)."
+        }
+      ]
     },
     {
       "role": "ekspert",
@@ -24,7 +32,15 @@
       "role": "ekspert",
       "name": "Ekspert biznesowy",
       "avatar": "👨‍💼",
-      "text": "Wiem wiem, dobra jedźmy z tym. No to tak. Daj mi te karteczkę, albo ze dwie bo szybciej to zrobię, pa tera. pyk pyk i jest: \"Zakwalifikowano dostawcę do współpracy\" i \"Zaakceptowano dostawcę\". "
+      "text": "Wiem wiem, dobra jedźmy z tym. No to tak. Daj mi te karteczkę, albo ze dwie bo szybciej to zrobię, pa tera. pyk pyk i jest: \"Zakwalifikowano dostawcę do współpracy\" i \"Zaakceptowano dostawcę\". ",
+      "annotations": [
+        {
+          "id": "qydb2iz",
+          "start": 124,
+          "end": 192,
+          "note": "Ekspert ładnie sformułował zdarzenia biznesowe, które z jego perspektywy są istotne, czyli są to zdarzenia domenowe, które w notacji ES będą reprezentowane pomarańczowymi karteczkami."
+        }
+      ]
     },
     {
       "role": "analityk",
@@ -36,7 +52,15 @@
       "role": "ekspert",
       "name": "Ekspert biznesowy",
       "avatar": "👨‍💼",
-      "text": "No bo kwalifikację robi Jolka albo ja, a potem to idzie do szefa i on akceptuje to dopiero."
+      "text": "No bo kwalifikację robi Jolka albo ja, a potem to idzie do szefa i on akceptuje to dopiero.",
+      "annotations": [
+        {
+          "id": "1r60v5o",
+          "start": 39,
+          "end": 64,
+          "note": "Akceptacja szefa jest reakcją na zdarzenie pt.: \"Zakwalifikowano\". Moglibyśmy przeczytać to w następujący sposób: \"Zawsze gdy zakwalifikowano dostawcę do współpracy, powiadom szefa\". W ten sposób formułujemy treść polityk (fioletowa karteczka). Z uwagi na to, że w tym konkretnym przypadku realizujemy model z lotu ptaka (Big Picture), to  ta karteczka na tym etapie nie została uwzględniona."
+        }
+      ]
     },
     {
       "role": "analityk",
@@ -48,13 +72,29 @@
       "role": "ekspert",
       "name": "Ekspert biznesowy",
       "avatar": "👨‍💼",
-      "text": "Musi do systemu wpłynąć oferta. Pracujemy na XERXESIE, Tomek w COBOLu wyklikał, poszedł wczoraj na emeryturę i klops. Chłop 78 lat ma. Ale to tak na marginesie. Anyway, jest to dla nas duży problem. Apka jest mega wolna."
+      "text": "Musi do systemu wpłynąć oferta. Pracujemy na XERXESIE, Tomek w COBOLu wyklikał, poszedł wczoraj na emeryturę i klops. Chłop 78 lat ma. Ale to tak na marginesie. Anyway, jest to dla nas duży problem. Apka jest mega wolna.",
+      "annotations": [
+        {
+          "id": "s4ph087",
+          "start": 0,
+          "end": 30,
+          "note": "Dowiadujemy się co jest wyzwalaczem naszego procesu. Jest to zdarzenie domenowe pt.: \"Otrzymano ofertę od dostawcy\""
+        }
+      ]
     },
     {
       "role": "analityk",
       "name": "Analityk biznesowy",
       "avatar": "🕵️",
-      "text": "Okej. Czyli gdybym usunął to nasze zdarzenie zakwalifikowano dostawcę do współpracy, to daleko nie zajedziemy jak rozumiem?"
+      "text": "Okej. Czyli gdybym usunął to nasze zdarzenie zakwalifikowano dostawcę do współpracy, to daleko nie zajedziemy jak rozumiem?",
+      "annotations": [
+        {
+          "id": "ilnsb13",
+          "start": 12,
+          "end": 25,
+          "note": "Warto zadać tego typu pytanie, nawet jeśli na pierwszy rzut oka brzmi nieco zaskakująco. Sprawdzamy reakcję eksperta, która może nas doprowadzić do nowych wniosków."
+        }
+      ]
     },
     {
       "role": "ekspert",
@@ -84,7 +124,15 @@
       "role": "ekspert",
       "name": "Ekspert biznesowy",
       "avatar": "👨‍💼",
-      "text": "Rozpoczynam ocenę dostawcy, tfu, przepraszam, \"Rozpoczęto ocenę dostawcy\", he he.."
+      "text": "Rozpoczynam ocenę dostawcy, tfu, przepraszam, \"Rozpoczęto ocenę dostawcy\", he he..",
+      "annotations": [
+        {
+          "id": "llm4vuk",
+          "start": 47,
+          "end": 72,
+          "note": "Widać, że ekspert nie z jednego pieca chleb jadł i nie jeden storming zrobił. Zidentyfikował zdarzenie domenowe (pomarańczowa karteczka)."
+        }
+      ]
     },
     {
       "role": "analityk",
@@ -96,7 +144,15 @@
       "role": "ekspert",
       "name": "Ekspert biznesowy",
       "avatar": "👨‍💼",
-      "text": "Wiadomix. Mogę dostawcę odrzucić, a także zablokować, jeśli.. dobra, na razie nie chciałeś wchodzić w szczegóły, opowiem Ci potem."
+      "text": "Wiadomix. Mogę dostawcę odrzucić, a także zablokować, jeśli.. dobra, na razie nie chciałeś wchodzić w szczegóły, opowiem Ci potem.",
+      "annotations": [
+        {
+          "id": "2sncirp",
+          "start": 10,
+          "end": 52,
+          "note": "Dowiadujemy się tu o alternatywnych zdarzeniach domenowych (pomarańczowe karteczki)"
+        }
+      ]
     },
     {
       "role": "analityk",
@@ -120,7 +176,15 @@
       "role": "ekspert",
       "name": "Ekspert biznesowy",
       "avatar": "👨‍💼",
-      "text": "Kwalifikacja do współpracy idzie do szefa. Powiadamiamy go na pager (sic!). No i szef akceptuje albo odrzuca kwalifikację. Założenie blokady oraz odrzucenie przeze mnie albo przez Jolkę nie przechodzi przez szefa. "
+      "text": "Kwalifikacja do współpracy idzie do szefa. Powiadamiamy go na pager (sic!). No i szef akceptuje albo odrzuca kwalifikację. Założenie blokady oraz odrzucenie przeze mnie albo przez Jolkę nie przechodzi przez szefa. ",
+      "annotations": [
+        {
+          "id": "0g8sfz7",
+          "start": 76,
+          "end": 121,
+          "note": "Dowiadujemy się, że po kwalifikacji dostawcy, reguły gry zaczynają się nieco zmieniać, bo go gry wchodzi inny aktor - szef."
+        }
+      ]
     },
     {
       "role": "analityk",
@@ -132,7 +196,15 @@
       "role": "ekspert",
       "name": "Ekspert biznesowy",
       "avatar": "👨‍💼",
-      "text": "No i właśnie tutaj mamy wąskie gardło. Jest to dla nas spory kłopot, bo szefowi a to pager nie zadziała, a to nie usłyszy, a to zapomni..."
+      "text": "No i właśnie tutaj mamy wąskie gardło. Jest to dla nas spory kłopot, bo szefowi a to pager nie zadziała, a to nie usłyszy, a to zapomni...",
+      "annotations": [
+        {
+          "id": "qhobnul",
+          "start": 0,
+          "end": 37,
+          "note": "Analitykowi udało się odkryć wąskie gardło w procesie - oznaczamy to miejsce różową karteczką (hotspot)"
+        }
+      ]
     },
     {
       "role": "analityk",
@@ -144,13 +216,29 @@
       "role": "ekspert",
       "name": "Ekspert biznesowy",
       "avatar": "👨‍💼",
-      "text": "No ma, ma. odrzucenie kwalifikacji implikuje odrzucenie dostawcy, a akceptacja kwalifikacji implikuje akceptację dostawcy."
+      "text": "No ma, ma. odrzucenie kwalifikacji implikuje odrzucenie dostawcy, a akceptacja kwalifikacji implikuje akceptację dostawcy. Powiadamiamy jeszcze dostawcę na koniec.",
+      "annotations": [
+        {
+          "id": "28clo3e",
+          "start": 0,
+          "end": 10,
+          "note": "Dowiadujemy się tutaj o łańcuszku zdarzeń domenowych, które są następstwem decyzji szefa"
+        }
+      ]
     },
     {
       "role": "analityk",
       "name": "Analityk biznesowy",
       "avatar": "🕵️",
-      "text": "Mhmm... o szczegółach pogadamy na kolejnych warsztatach, gdy będziemy modelować proces \"to be\". Powiedz mi jeszcze na koniec, co musiałoby się stać, abyś uznał tę inicjatywę za udaną, za sukces? "
+      "text": "Mhmm... o szczegółach pogadamy na kolejnych warsztatach, gdy będziemy modelować proces \"to be\". Powiedz mi jeszcze na koniec, co musiałoby się stać, abyś uznał tę inicjatywę za udaną, za sukces? ",
+      "annotations": [
+        {
+          "id": "zdyseth",
+          "start": 8,
+          "end": 56,
+          "note": "Analityk świadomie nie wchodzi w szczegóły procesu. Bazuje na zdarzeniach domenowych, szukając jednocześnie hotspotów."
+        }
+      ]
     },
     {
       "role": "ekspert",

@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import CanvasEditor from './CanvasEditor.jsx';
 
+function uid() { return Math.random().toString(36).slice(2, 9); }
+
 // ── Aktorzy ──────────────────────────────────────────────────────────────────
 const ACTORS = [
   { role: 'ekspert',   name: 'Ekspert biznesowy',  emoji: '👨‍💼', color: '#4f46e5', align: 'left'  },
@@ -44,100 +46,300 @@ function AutoTextarea({ value, onChange, placeholder, style }) {
   );
 }
 
+// ── Karta notatki ─────────────────────────────────────────────────────────────
+function NoteCard({ ann, quote, onDelete, onUpdate }) {
+  const [editing, setEditing] = useState(false);
+  const [val, setVal] = useState(ann.note);
+
+  function confirm() { onUpdate(val); setEditing(false); }
+
+  return (
+    <div style={{ display: 'flex', alignItems: 'flex-start', gap: 0 }}>
+      {/* Przerywana strzałka */}
+      <div style={{ display: 'flex', alignItems: 'center', flexShrink: 0, width: 36, marginTop: 14 }}>
+        <div style={{ flex: 1, borderTop: '1.5px dashed #94a3b8' }} />
+        <div style={{ width: 0, height: 0, border: '4px solid transparent', borderLeft: '6px solid #94a3b8' }} />
+      </div>
+      {/* Kartka notatki */}
+      <div style={{
+        background: '#fffbeb', border: '1px solid #fde68a',
+        borderRadius: 10, padding: '8px 12px',
+        boxShadow: '0 1px 4px rgba(0,0,0,.07)',
+        maxWidth: 340,
+      }}>
+        <div style={{ fontSize: 10, fontStyle: 'italic', color: '#92400e', marginBottom: 4, lineHeight: 1.35 }}>
+          „{quote}"
+        </div>
+        {editing ? (
+          <div style={{ display: 'flex', gap: 5, marginBottom: 4 }}>
+            <input
+              autoFocus
+              value={val}
+              onChange={e => setVal(e.target.value)}
+              onKeyDown={e => { if (e.key === 'Enter') confirm(); if (e.key === 'Escape') { setVal(ann.note); setEditing(false); } }}
+              style={{
+                flex: 1, fontSize: 12, padding: '4px 8px',
+                border: '1px solid #fbbf24', borderRadius: 6,
+                outline: 'none', fontFamily: 'inherit',
+              }}
+            />
+            <button onClick={confirm}
+              style={{ padding: '3px 10px', background: '#f59e0b', color: '#fff', border: 'none', borderRadius: 6, fontSize: 12, cursor: 'pointer' }}
+            >✓</button>
+          </div>
+        ) : (
+          <div style={{ fontSize: 12, color: '#78350f', lineHeight: 1.45, marginBottom: 4 }}>
+            {ann.note}
+          </div>
+        )}
+        <div style={{ display: 'flex', gap: 6, justifyContent: 'flex-end' }}>
+          <button onClick={() => setEditing(v => !v)}
+            style={{ fontSize: 10, color: '#a16207', background: 'none', border: 'none', cursor: 'pointer', padding: '1px 4px' }}
+          >✎</button>
+          <button onClick={onDelete}
+            style={{ fontSize: 10, color: '#dc2626', background: 'none', border: 'none', cursor: 'pointer', padding: '1px 4px' }}
+          >✕</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ── Jedna chmurka dialogu ─────────────────────────────────────────────────────
 function Bubble({ entry, onChange, onDelete, onUp, onDown, isFirst, isLast }) {
-  const [hover, setHover] = useState(false);
-  const a = actor(entry.role);
-  const left = a.align === 'left';
+  const [hover, setHover]           = useState(false);
+  const [annotating, setAnnotating] = useState(false);
+  const [pending, setPending]       = useState(null);
+  const [noteInput, setNoteInput]   = useState('');
+  const textRef      = useRef(null);
+  const annotatingRef = useRef(false);  // zawsze aktualny, unika stale closure
+
+  const a           = actor(entry.role);
+  const left        = a.align === 'left';
+  const annotations = entry.annotations || [];
+
+  // Synchronizuj ref ze stanem
+  useEffect(() => { annotatingRef.current = annotating; }, [annotating]);
+
+  // document-level mouseup – niezależny od struktury drzewa DOM
+  useEffect(() => {
+    function onMouseUp() {
+      if (!annotatingRef.current) return;
+      const sel = window.getSelection();
+      if (!sel || sel.isCollapsed || sel.rangeCount === 0) return;
+      const range = sel.getRangeAt(0);
+      const container = textRef.current;
+      if (!container || !container.contains(range.commonAncestorContainer)) return;
+      try {
+        const pre = document.createRange();
+        pre.selectNodeContents(container);
+        pre.setEnd(range.startContainer, range.startOffset);
+        const start = pre.toString().length;
+        const text  = sel.toString();
+        if (!text.trim()) return;
+        setPending({ start, end: start + text.length, text });
+        setNoteInput('');
+      } catch (_) {}
+    }
+    document.addEventListener('mouseup', onMouseUp);
+    return () => document.removeEventListener('mouseup', onMouseUp);
+  }, []);  // tylko mount/unmount – ref zawsze aktualny
+
+  function confirmNote() {
+    if (!pending || !noteInput.trim()) return;
+    const ann = { id: uid(), start: pending.start, end: pending.end, note: noteInput.trim() };
+    onChange({ ...entry, annotations: [...annotations, ann] });
+    setPending(null); setNoteInput('');
+    window.getSelection()?.removeAllRanges();
+  }
+
+  function renderAnnotatedText() {
+    const text   = entry.text;
+    const sorted = [...annotations].sort((a, b) => a.start - b.start);
+    if (!sorted.length) return <>{text}</>;
+    const parts = []; let pos = 0;
+    for (const ann of sorted) {
+      if (ann.start > pos) parts.push({ mark: false, content: text.slice(pos, ann.start) });
+      parts.push({ mark: true, content: text.slice(ann.start, ann.end) });
+      pos = ann.end;
+    }
+    if (pos < text.length) parts.push({ mark: false, content: text.slice(pos) });
+    return (
+      <>
+        {parts.map((p, i) => p.mark
+          ? <mark key={i} style={{ background: 'rgba(253,224,71,.55)', borderRadius: 2, padding: '0 1px', color: 'inherit' }}>{p.content}</mark>
+          : p.content
+        )}
+      </>
+    );
+  }
 
   return (
     <div
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      style={{
+      style={{ marginBottom: 28 }}
+    >
+      {/* ── Główny rząd: avatar + chmurka + akcje ── */}
+      <div style={{
         display: 'flex',
         flexDirection: left ? 'row' : 'row-reverse',
         alignItems: 'flex-end',
         gap: 14,
-        marginBottom: 32,
-      }}
-    >
-      {/* Avatar */}
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, flexShrink: 0 }}>
-        <div style={{
-          width: 44, height: 44, borderRadius: '50%',
-          background: a.color + '18',
-          border: `2px solid ${a.color}44`,
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: 22, lineHeight: 1,
-        }}>{a.emoji}</div>
-        <select
-          value={entry.role}
-          onChange={e => {
-            const b = actor(e.target.value);
-            onChange({ ...entry, role: b.role, name: b.name, avatar: b.emoji });
-          }}
-          style={{
-            fontSize: 10, border: `1px solid ${a.color}55`, borderRadius: 4,
-            padding: '1px 2px', background: '#fff', color: '#666',
-            cursor: 'pointer', width: 58, textAlign: 'center',
-          }}
-        >
-          {ACTORS.map(b => <option key={b.role} value={b.role}>{b.name.split(' ')[0]}</option>)}
-        </select>
-      </div>
+      }}>
+        {/* Avatar */}
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, flexShrink: 0 }}>
+          <div style={{
+            width: 44, height: 44, borderRadius: '50%',
+            background: a.color + '18', border: `2px solid ${a.color}44`,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontSize: 22, lineHeight: 1,
+          }}>{a.emoji}</div>
+          <select
+            value={entry.role}
+            onChange={e => { const b = actor(e.target.value); onChange({ ...entry, role: b.role, name: b.name, avatar: b.emoji }); }}
+            style={{
+              fontSize: 10, border: `1px solid ${a.color}55`, borderRadius: 4,
+              padding: '1px 2px', background: '#fff', color: '#666',
+              cursor: 'pointer', width: 58, textAlign: 'center',
+            }}
+          >
+            {ACTORS.map(b => <option key={b.role} value={b.role}>{b.name.split(' ')[0]}</option>)}
+          </select>
+        </div>
 
-      {/* Chmurka */}
-      <div style={{ maxWidth: '75%', position: 'relative' }}>
-        {/* ogon */}
+        {/* Chmurka */}
+        <div style={{ maxWidth: '72%', position: 'relative' }}>
+          <div style={{
+            position: 'absolute', bottom: 14,
+            ...(left ? { left: -8, borderRight: `9px solid ${a.color}` } : { right: -8, borderLeft: `9px solid ${a.color}` }),
+            width: 0, height: 0, borderTop: '7px solid transparent', borderBottom: '7px solid transparent',
+          }} />
+          <div style={{
+            background: a.color,
+            borderRadius: left ? '4px 20px 20px 20px' : '20px 4px 20px 20px',
+            padding: '16px 22px',
+            boxShadow: annotating ? `0 0 0 2px #fff, 0 0 0 4px ${a.color}` : '0 2px 10px rgba(0,0,0,.18)',
+            transition: 'box-shadow .15s',
+          }}>
+            {annotating ? (
+              <div
+                ref={textRef}
+                style={{
+                  color: '#fff', fontSize: 15, lineHeight: 1.6, minWidth: 260,
+                  userSelect: 'text', cursor: 'text',
+                }}
+              >
+                {renderAnnotatedText()}
+              </div>
+            ) : (
+              <AutoTextarea
+                value={entry.text}
+                onChange={e => onChange({ ...entry, text: e.target.value })}
+                placeholder="Wpisz kwestię…"
+                style={{ color: '#fff', caretColor: '#fff', fontSize: 15, minWidth: 260 }}
+              />
+            )}
+          </div>
+        </div>
+
+        {/* Akcje */}
         <div style={{
-          position: 'absolute', bottom: 14,
-          ...(left ? { left: -8, borderRight: `9px solid ${a.color}` } : { right: -8, borderLeft: `9px solid ${a.color}` }),
-          width: 0, height: 0,
-          borderTop: '7px solid transparent',
-          borderBottom: '7px solid transparent',
-        }} />
-        <div style={{
-          background: a.color,
-          borderRadius: left ? '4px 20px 20px 20px' : '20px 4px 20px 20px',
-          padding: '16px 22px',
-          boxShadow: '0 2px 10px rgba(0,0,0,.18)',
+          display: 'flex', flexDirection: 'column', gap: 4,
+          opacity: hover ? 1 : 0, transition: 'opacity .15s', paddingBottom: 4,
         }}>
-          <AutoTextarea
-            value={entry.text}
-            onChange={e => onChange({ ...entry, text: e.target.value })}
-            placeholder="Wpisz kwestię…"
-            style={{ color: '#fff', caretColor: '#fff', fontSize: 15, minWidth: 260 }}
-          />
+          <button
+            onClick={() => { setAnnotating(v => !v); setPending(null); }}
+            title={annotating ? 'Wyjdź z trybu adnotacji' : 'Tryb adnotacji'}
+            style={{
+              width: 26, height: 26, borderRadius: '50%', border: 'none',
+              background: annotating ? '#4f46e5' : '#f3f4f6',
+              color: annotating ? '#fff' : '#6366f1',
+              cursor: 'pointer', fontSize: 13,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+            }}
+          >✎</button>
+          {[
+            { label: '↑', action: onUp,    disabled: isFirst, color: '#6366f1' },
+            { label: '↓', action: onDown,  disabled: isLast,  color: '#6366f1' },
+            { label: '✕', action: onDelete, disabled: false,   color: '#ef4444' },
+          ].map(({ label, action, disabled, color }) => (
+            <button key={label} onClick={action} disabled={disabled} style={{
+              width: 26, height: 26, borderRadius: '50%', border: 'none',
+              background: '#f3f4f6', color: disabled ? '#d1d5db' : color,
+              cursor: disabled ? 'default' : 'pointer', fontSize: 12,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+            }}>{label}</button>
+          ))}
         </div>
       </div>
 
-      {/* Akcje (widoczne na hover) */}
-      <div style={{
-        display: 'flex', flexDirection: 'column', gap: 4,
-        opacity: hover ? 1 : 0, transition: 'opacity .15s',
-        paddingBottom: 4,
-      }}>
-        {[
-          { label: '↑', action: onUp,    disabled: isFirst, color: '#6366f1' },
-          { label: '↓', action: onDown,  disabled: isLast,  color: '#6366f1' },
-          { label: '✕', action: onDelete, disabled: false,  color: '#ef4444' },
-        ].map(({ label, action, disabled, color }) => (
-          <button
-            key={label}
-            onClick={action}
-            disabled={disabled}
+      {/* ── Podpowiedź w trybie adnotacji ── */}
+      {annotating && !pending && (
+        <div style={{
+          marginTop: 6, marginLeft: left ? 58 : 0, marginRight: left ? 0 : 58,
+          fontSize: 11, color: '#64748b', textAlign: 'center',
+          background: '#f1f5f9', borderRadius: 6, padding: '4px 10px',
+          border: '1px dashed #cbd5e1',
+        }}>
+          Zaznacz fragment tekstu w chmurce, aby dodać notatkę
+        </div>
+      )}
+
+      {/* ── Formularz nowej notatki po zaznaczeniu ── */}
+      {annotating && pending && (
+        <div style={{
+          marginTop: 8, marginLeft: left ? 58 : 0, marginRight: left ? 0 : 58,
+          display: 'flex', alignItems: 'center', gap: 8,
+          padding: '10px 14px', background: '#fffbeb',
+          border: '1px dashed #fbbf24', borderRadius: 10,
+        }}>
+          <span style={{
+            fontSize: 11, color: '#92400e', fontStyle: 'italic',
+            flexShrink: 0, maxWidth: 160, overflow: 'hidden',
+            textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+          }}>„{pending.text}"</span>
+          <span style={{ color: '#d1d5db', flexShrink: 0 }}>→</span>
+          <input
+            autoFocus
+            value={noteInput}
+            onChange={e => setNoteInput(e.target.value)}
+            onKeyDown={e => { if (e.key === 'Enter') confirmNote(); if (e.key === 'Escape') setPending(null); }}
+            placeholder="Wpisz notatkę…"
             style={{
-              width: 26, height: 26, borderRadius: '50%',
-              border: 'none', background: disabled ? '#f3f4f6' : '#f3f4f6',
-              color: disabled ? '#d1d5db' : color,
-              cursor: disabled ? 'default' : 'pointer',
-              fontSize: 12, display: 'flex', alignItems: 'center', justifyContent: 'center',
-              transition: 'background .1s',
+              flex: 1, padding: '6px 10px', borderRadius: 7,
+              border: '1px solid #fbbf24', outline: 'none',
+              fontSize: 13, fontFamily: 'inherit',
             }}
-          >{label}</button>
-        ))}
-      </div>
+          />
+          <button onClick={confirmNote} style={{
+            padding: '6px 12px', background: '#f59e0b', color: '#fff',
+            border: 'none', borderRadius: 7, fontSize: 12, fontWeight: 600, cursor: 'pointer',
+          }}>Dodaj</button>
+          <button onClick={() => setPending(null)} style={{
+            padding: '4px 8px', background: 'none', color: '#9ca3af',
+            border: 'none', fontSize: 13, cursor: 'pointer',
+          }}>✕</button>
+        </div>
+      )}
+
+      {/* ── Notatki z przerywanymi strzałkami ── */}
+      {annotations.length > 0 && (
+        <div style={{
+          marginTop: 8, marginLeft: left ? 58 : 0, marginRight: left ? 0 : 58,
+          display: 'flex', flexDirection: 'column', gap: 6,
+        }}>
+          {annotations.map(ann => (
+            <NoteCard
+              key={ann.id}
+              ann={ann}
+              quote={entry.text.slice(ann.start, ann.end)}
+              onDelete={() => onChange({ ...entry, annotations: annotations.filter(a => a.id !== ann.id) })}
+              onUpdate={note => onChange({ ...entry, annotations: annotations.map(a => a.id === ann.id ? { ...a, note } : a) })}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

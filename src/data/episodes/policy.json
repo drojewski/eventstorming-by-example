@@ -1,6 +1,6 @@
 {
   "title": "Czym jest polityka? Fioletowa kartka versus żółta kartka.",
-  "subtitle": "Wywiad: Wszędzie polityka",
+  "subtitle": "P-o-l-i-t-y-k-a, reguły takie i owakie, auuuuu",
   "dialogue": [
     {
       "role": "analityk",
@@ -36,7 +36,7 @@
       "role": "analityk2",
       "name": "Analityk Paweł",
       "avatar": "👨‍💼",
-      "text": "Co racja to racja. No bo mamy tak naprawdę dwa rodzaje reguł. Reguły dotyczące procesu oraz reguły pilnujące spójności biznesu."
+      "text": "Co racja to racja. No bo mamy tak naprawdę dwa rodzaje reguł (w zasadzie to więcej, ale uprośćmy trochę ten smutny świat). Reguły dotyczące procesu oraz reguły pilnujące spójności biznesu."
     },
     {
       "role": "analityk",
@@ -48,7 +48,7 @@
       "role": "analityk2",
       "name": "Analityk Paweł",
       "avatar": "👨‍💼",
-      "text": "Zacznijmy od fioletowej kartki. Ta reguła (ten if) rozgałęzia nam proces na różne, dozwolone i akceptowalne przez biznes, ściezki. Innymi słowy steruje przepływem między krokami procesu. Byłeś wcześniej programistą nie? No to zaimplementowałbyś taką fioletową kartkę jako event listener albo process manager..,"
+      "text": "Zacznijmy od fioletowej kartki. Ta reguła (ten if) rozgałęzia nam proces na różne, dozwolone i akceptowalne przez biznes, ściezki. Innymi słowy steruje przepływem między krokami procesu. Tak na marginesie: byłeś wcześniej programistą nie? No to zaimplementowałbyś taką fioletową kartkę jako event listener albo process manager, czy inny przerażający twór."
     },
     {
       "role": "analityk",
@@ -72,7 +72,7 @@
       "role": "analityk2",
       "name": "Analityk Paweł",
       "avatar": "👨‍💼",
-      "text": "Powiedzmy, że składasz rezerwację i złożenie takiej rezerwacji wiąże się z tym, że naliczane są punkty lojalnościowe. Ale, ale!! Ale tylko wówczas, gdy masz status 'KINOMAN'. Jak mógłbyś to zrobić.. Mógłbyś w module rezerwacji przechwycić zdarzenie o złożeniu rezerwacji, walnąć ifa na statusie i wysłać bądź nie wysłać żądania naliczenia punktów lojalnościowych. Co o tym myślisz?"
+      "text": "Zacznijmy od żółtej kartki, od tych niezmienników. Powiedzmy, że składasz rezerwację i złożenie takiej rezerwacji wiąże się z tym, że naliczane są punkty lojalnościowe. Ale, ale!! Ale tylko wówczas, gdy masz status 'KINOMAN'. Jak mógłbyś to zrobić.. Mógłbyś w module rezerwacji przechwycić zdarzenie o złożeniu rezerwacji, walnąć ifa na statusie i wysłać bądź nie wysłać żądania naliczenia punktów lojalnościowych. Co o tym myślisz?"
     },
     {
       "role": "analityk",
@@ -84,7 +84,7 @@
       "role": "analityk2",
       "name": "Analityk Paweł",
       "avatar": "👨‍💼",
-      "text": "Wiadomix, że śmierdzi. Bo dlaczego niby nasz wypieszczony mikroserwis rezerwacji miałby wiedzieć coś o VIPach oraz o regułach rządzących przyznawaniem punktów. Biznes powiedział jasno - nie można naliczyć punktów lojalnościowych jeśli nie jesteś kinomanem. To jest super ważna reguła biznesowa, której nie możemy złamać. Ta reguła musi znajdować się w kontekście punktów a nie rezerwacji."
+      "text": "Wiadomix, że śmierdzi. Bo dlaczego niby nasz wypieszczony mikroserwis rezerwacji miałby wiedzieć coś o KINOMANACH oraz o regułach rządzących przyznawaniem punktów. Biznes powiedział jasno - nie można naliczyć punktów lojalnościowych jeśli nie jesteś kinomanem. To jest super ważna reguła biznesowa, której nie możemy złamać. Ta reguła musi znajdować się w kontekście punktów a nie rezerwacji."
     },
     {
       "role": "analityk",

@@ -1,12 +1,12 @@
 {
-  "title": "Jak tu się dogadać - modelowanie procesu AS IS",
-  "subtitle": "Wywiad: Pytania naprowadzające",
+  "title": "Jak tu się dogadać - modelowanie AS IS",
+  "subtitle": "Pytania naprowadzające, cel warsztatu, Event Storming Big Picture",
   "dialogue": [
     {
       "role": "analityk",
       "name": "Analityk biznesowy",
       "avatar": "🕵️",
-      "text": "Witaj drogi ekspercie, mój drogowskazie, mój druhu. Na początek chciałbym podkreślić ponownie cel naszego spotkania. Tak jak rozmawialiśmy wczoraj, chcemy dziś z tego spotkania wyjść z wysokopoziomowym (Big Picture) modelem \"as is\" procesu oceny dostawcy. Obecnie ten proces wykonujecie manualnie w dużej mierze i chcecie go zautomatyzować. Czy to wszystko się zgadza?"
+      "text": "Witaj drogi ekspercie, mój drogowskazie, mój druhu. Na początek chciałbym podkreślić ponownie cel naszego spotkania. Tak jak rozmawialiśmy wczoraj, chcemy dziś z tego spotkania wyjść z wysokopoziomowym (Big Picture) modelem \"as is\" procesu oceny dostawcy. Obecnie ten proces wykonujecie manualnie w dużej mierze i chcecie go docelowo zoptymalizować. Czy to wszystko się zgadza?"
     },
     {
       "role": "ekspert",
@@ -18,7 +18,7 @@
       "role": "analityk",
       "name": "Analityk biznesowy",
       "avatar": "🕵️",
-      "text": "Grejt. Powiedz mi na początek co z Twojej perspektywy jest najistotniejsze w tym procesie. Innymi słowy, bez czego ten proces nie mógłby się udać? Użyjemy do tego tych pomarańczowych karteczek, które symbolizują zdarzenie biznesowe, te ważne momenty w procesie. Pamiętasz, to coś co zapisywaliśmy w czasie przeszłym, bo w końcu z czymś co się wydarzyło ciężko dyskutować. :-)"
+      "text": "Grejt. Powiedz mi na początek co z Twojej perspektywy jest najistotniejsze w tym procesie. Innymi słowy, bez czego ten proces nie mógłby się udać? Użyjemy do tego tych pomarańczowych karteczek, które symbolizują zdarzenie biznesowe, te ważne momenty w procesie. Pamiętasz, to coś co zapisywaliśmy w czasie przeszłym, bo w końcu z czymś co się już wydarzyło ciężko dyskutować. :-)"
     },
     {
       "role": "ekspert",
@@ -96,7 +96,7 @@
       "role": "ekspert",
       "name": "Ekspert biznesowy",
       "avatar": "👨‍💼",
-      "text": "Wiadomix. Mogę dostawcę odrzucić, a także zablokować, jeśli.. dobra, na razie nie wchodźmy w szczegóły, opowiem Ci potem."
+      "text": "Wiadomix. Mogę dostawcę odrzucić, a także zablokować, jeśli.. dobra, na razie nie chciałeś wchodzić w szczegóły, opowiem Ci potem."
     },
     {
       "role": "analityk",
@@ -120,7 +120,7 @@
       "role": "ekspert",
       "name": "Ekspert biznesowy",
       "avatar": "👨‍💼",
-      "text": "Kwalifikacja do współpracy idzie do szefa do akceptacji. No albo do odrzucenia kwalifikacji. Założenie blokady albo odrzucenie przeze mnie albo przez Jolkę nie przechodzi przez szefa. "
+      "text": "Kwalifikacja do współpracy idzie do szefa. Powiadamiamy go na pager (sic!). No i szef akceptuje albo odrzuca kwalifikację. Założenie blokady oraz odrzucenie przeze mnie albo przez Jolkę nie przechodzi przez szefa. "
     },
     {
       "role": "analityk",
@@ -132,13 +132,13 @@
       "role": "ekspert",
       "name": "Ekspert biznesowy",
       "avatar": "👨‍💼",
-      "text": "Nie, nie, nie. Jeśli nie zaakceptuje w ciągu 24h to kwalifikacja jest potwierdzana i dostawca zostaje zaakceptowany do współpracy. Jakieś resztki zaufania mają do nas..."
+      "text": "No i właśnie tutaj mamy wąskie gardło. Jest to dla nas spory kłopot, bo szefowi a to pager nie zadziała, a to nie usłyszy, a to zapomni..."
     },
     {
       "role": "analityk",
       "name": "Analityk biznesowy",
       "avatar": "🕵️",
-      "text": "okej, czy odrzucenie / potwierdzenie kwalifikacji to ostatni krok procesu? Czy ma on jakieś skutki?"
+      "text": "Smutek :-( okej, czy odrzucenie / potwierdzenie kwalifikacji to ostatni krok procesu? Czy ma on jakieś skutki?"
     },
     {
       "role": "ekspert",
@@ -150,7 +150,19 @@
       "role": "analityk",
       "name": "Analityk biznesowy",
       "avatar": "🕵️",
-      "text": "Mhmm... o szczegółach pogadamy na kolejnych warsztatach gdy będziemy modelować proces \"to be\". Dzięki brachu!"
+      "text": "Mhmm... o szczegółach pogadamy na kolejnych warsztatach, gdy będziemy modelować proces \"to be\". Powiedz mi jeszcze na koniec, co musiałoby się stać, abyś uznał tę inicjatywę za udaną, za sukces? "
+    },
+    {
+      "role": "ekspert",
+      "name": "Ekspert biznesowy",
+      "avatar": "👨‍💼",
+      "text": "Wydaje mi się, że wszystko to przegadaliśmy - najbardziej boli mnie ten bottleneck i ten przestarzały system. Czuję się nieraz przez niego jakbym sam miał 78 lat, a mam 76. :-("
+    },
+    {
+      "role": "analityk",
+      "name": "Analityk biznesowy",
+      "avatar": "🕵️",
+      "text": "Kumam. Dzięki brachu. Nie zostawię Cię. Najwyżej razem pójdziemy na dno. Jesteśmy w kontakcie!"
     }
   ],
   "model": {
@@ -257,13 +269,6 @@
         "y": 503.5380859375
       },
       {
-        "id": "zzsiqwq",
-        "type": "event",
-        "text": "Upłynął czas na weryfikację decyzji",
-        "x": 1059.038630670746,
-        "y": 456.6077717832495
-      },
-      {
         "id": "ra6eubh",
         "type": "event",
         "text": "Powiadomiono szefa",
@@ -285,20 +290,6 @@
         "y": 66.0281553696509
       },
       {
-        "id": "c12ota0",
-        "type": "event",
-        "text": "Potwierdzono decyzję",
-        "x": 1218.8655891651092,
-        "y": 455.44301786450114
-      },
-      {
-        "id": "fhdzbtq",
-        "type": "event",
-        "text": "Zaakceptowano dostawcę do współpracy",
-        "x": 1378.5839337345978,
-        "y": 456.71526910708343
-      },
-      {
         "id": "tqeovxv",
         "type": "hotspot",
         "text": "System napisany w przestarzałej technologii, wolny jest i denerwuje pracowników",
@@ -318,6 +309,13 @@
         "text": "Odrzucono dostawcę",
         "x": 806.6492823082172,
         "y": 231.66834477754298
+      },
+      {
+        "id": "4coseao",
+        "type": "hotspot",
+        "text": "Wąskie gardło",
+        "x": 549.4607591228237,
+        "y": 315.1519781655143
       }
     ],
     "frames": [

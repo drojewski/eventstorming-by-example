@@ -1,12 +1,24 @@
 {
   "title": "Accounting",
-  "subtitle": "Wywiad: Ekspert potrafi odpowiedzieć na pytania, a analityk umie właściwe pytania zadać",
+  "subtitle": "Notacja, Event Storming Process Level, pytania naprowadzające",
   "dialogue": [
     {
       "role": "analityk",
       "name": "Analityk biznesowy",
       "avatar": "🕵️",
-      "text": "Powiedz mi proszę drogi ekspercie, jakie dwa zdarzenia byś wymienił jako te najistotniejsze w tym procesie z Twojego punktu widzenia. Pamiętasz.. chodzi mi o zdarzenia biznesowe. Jeśli Ci to pomoże to zapomnijmy na chwilę, że proces jest scyfryzowany. Niech to będą zdarzenia pi razy oko z początku i końca procesu."
+      "text": "Przyjaciele, jak zawsze na początku chciałbym się upewnić, że cel warsztatu jaki obraliśmy jest dla wszystkich jasny. Chcemy wyjść z tego spotkania z analizą procesu \"to be\", realizującego obsługę wpłat od naszych klientów."
+    },
+    {
+      "role": "ekspert",
+      "name": "Ekspert biznesowy",
+      "avatar": "👨‍💼",
+      "text": "Tak, zgadza się. No klient pożyczył - klient musi spłacić. Robi przelewy, a my musimy to ogarnąć w systemach."
+    },
+    {
+      "role": "analityk",
+      "name": "Analityk biznesowy",
+      "avatar": "🕵️",
+      "text": "Ok. Powiedz mi proszę drogi ekspercie, jakie dwa zdarzenia byś wymienił jako te najistotniejsze w tym procesie z Twojego punktu widzenia. Pamiętasz.. chodzi mi o zdarzenia biznesowe. Jeśli Ci to pomoże to zapomnijmy na chwilę o komputerach, o cyfrowym świecie, o zerach i jedynkach. Skupmy się wyłącznie na istocie samego procesu. Niech to będą zdarzenia pi razy oko z początku i końca procesu, a które z Twojej perspektywy są kluczowe."
     },
     {
       "role": "ekspert",
@@ -102,7 +114,7 @@
       "role": "analityk",
       "name": "Analityk biznesowy",
       "avatar": "🕵️",
-      "text": "Jesteś najmądrzejszy na kuli ziemskiej, na razie mi to wystarczy, dzięki!"
+      "text": "Jesteś najmądrzejszy na kuli ziemskiej, na razie mi to wystarczy. Wydaje mi się, że miałem z czymś podobnym do czynienia już jakieś 1277 razy. Mamy tu do czynienia po prostu z kontami.. Damy radę. dzięki! "
     }
   ],
   "model": {
@@ -156,78 +168,57 @@
         "id": "c1",
         "type": "event",
         "text": "Zaksięgowano wpłatę",
-        "x": 64,
-        "y": 92
+        "x": 76.1826171875,
+        "y": 183.8994140625
       },
       {
         "id": "c2",
         "type": "policy",
-        "text": "Zawsze gdy zaksięgowano wpłatę -> uruchom algorytm rozliczenia (bezpośredni skutek zaksięgowania, jeszcze przed jakąkolwiek zmianą kapitału)",
-        "x": 232,
-        "y": 92
-      },
-      {
-        "id": "c3",
-        "type": "command",
-        "text": "Określ sposób rozliczenia wpłaty",
-        "x": 400,
-        "y": 92
-      },
-      {
-        "id": "c4",
-        "type": "event",
-        "text": "Wybrano automatyczny sposób rozliczania",
-        "x": 568,
-        "y": 92
+        "text": "Zawsze gdy zaksięgowano wpłatę -> uruchom algorytm określający sposób rozliczenia wpłaty.",
+        "x": 245.1494140625,
+        "y": 181.3994140625
       },
       {
         "id": "c5",
         "type": "command",
         "text": "Zmniejsz kwotę kapitału do spłaty",
-        "x": 736,
-        "y": 92
+        "x": 665.4677734375,
+        "y": 78.15234375
       },
       {
         "id": "c6",
         "type": "aggregate",
         "text": "Kwota wpłaty nie może być większa niż kapitał do spłaty.",
-        "x": 904,
-        "y": 92
+        "x": 830.845703125,
+        "y": 75.1884765625
       },
       {
         "id": "c7",
         "type": "event",
         "text": "Zmniejszono kwotę kapitału do spłaty",
-        "x": 1072,
-        "y": 92
+        "x": 989.5439453125,
+        "y": 73.337890625
       },
       {
         "id": "c8",
         "type": "event",
         "text": "Powiększono limit",
-        "x": 1240,
-        "y": 92
-      },
-      {
-        "id": "c9",
-        "type": "event",
-        "text": "Wybrano manualny sposób rozliczenia",
-        "x": 568,
-        "y": 282
+        "x": 1151.7333984375,
+        "y": 77.7666015625
       },
       {
         "id": "c10",
         "type": "command",
         "text": "Rozlicz wpłatę manualnie",
-        "x": 736,
-        "y": 282
+        "x": 658.353515625,
+        "y": 286.5166015625
       },
       {
         "id": "c11",
         "type": "event",
         "text": "Skierowano do rozliczenia manualnego",
-        "x": 904,
-        "y": 282
+        "x": 821.4462890625,
+        "y": 290.9013671875
       },
       {
         "id": "c13",
@@ -248,11 +239,53 @@
       {
         "id": "c12",
         "label": "Rozliczenie",
-        "x": 40,
-        "y": 40,
+        "x": 63.18359375,
+        "y": 61.025390625,
         "w": 1392,
         "h": 460,
         "color": "#dbeafe88"
+      },
+      {
+        "id": "srhij4g",
+        "label": "sposób automatyczny",
+        "x": 439.099609375,
+        "y": 109.826171875,
+        "w": 188.9306640625,
+        "h": 40,
+        "color": "#fef9c388"
+      },
+      {
+        "id": "m2lna8x",
+        "label": "sposób manualny",
+        "x": 465.9013671875,
+        "y": 316.18359375,
+        "w": 156.5234375,
+        "h": 40,
+        "color": "#dcfce788"
+      }
+    ],
+    "arrows": [
+      {
+        "id": "y1lndgg",
+        "fromId": "c2",
+        "toId": "c5",
+        "waypoints": [
+          {
+            "x": 429.216796875,
+            "y": 157.2578125
+          }
+        ]
+      },
+      {
+        "id": "36qggif",
+        "fromId": "c2",
+        "toId": "c10",
+        "waypoints": [
+          {
+            "x": 449.408203125,
+            "y": 362.3330078125
+          }
+        ]
       }
     ]
   }

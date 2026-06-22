@@ -9,5 +9,11 @@ export default defineConfig({
   integrations: [react()],
   vite: {
     plugins: [tailwindcss()],
+    server: {
+      watch: {
+        // Zapisy przez API triggerowały race condition na data-store.json.tmp
+        ignored: ['**/src/data/episodes/**'],
+      },
+    },
   },
 });

@@ -48,7 +48,7 @@
       "role": "analityk2",
       "name": "Analityk Paweł",
       "avatar": "👨‍💼",
-      "text": "Zacznijmy od fioletowej kartki. Ta reguła (ten if) rozgałęzia nam proces na różne, dozwolone i akceptowalne przez biznes, ściezki. Innymi słowy steruje przepływem między krokami procesu. Tak na marginesie: byłeś wcześniej programistą nie? No to zaimplementowałbyś taką fioletową kartkę jako event listener albo process manager, czy inny przerażający twór."
+      "text": "Zacznijmy od fioletowej kartki. Ta reguła rozgałęzia nam proces na różne, dozwolone i akceptowalne przez biznes, ściezki. Innymi słowy steruje przepływem między krokami procesu. Tak na marginesie: byłeś wcześniej programistą nie? No to zaimplementowałbyś taką fioletową kartkę jako event listener albo process manager, czy inny przerażający twór."
     },
     {
       "role": "analityk",
@@ -60,7 +60,7 @@
       "role": "analityk2",
       "name": "Analityk Paweł",
       "avatar": "👨‍💼",
-      "text": "Na tych żółtych karteczkach umieszczasz reguły (niezmienniki), które muszą być spełnione, aby komenda się powiodła, aby nie wprowadzić naszego systemu w niedozwolony stan. Spójności tej pilnuje tzw. agregat (DDD). To klasa, encja, która ma pewne zachowania (metody po prostu), a w tych metodach te super istotne ify pilnujące owej spójności"
+      "text": "Na tych żółtych karteczkach umieszczasz reguły (niezmienniki), które muszą być spełnione, aby komenda się powiodła -> aby nie wprowadzić naszego systemu w niedozwolony stan. Spójności tej pilnuje tzw. agregat (DDD). To klasa, encja, która ma pewne zachowania (metody po prostu), a w tych metodach te super istotne ify pilnujące owej spójności"
     },
     {
       "role": "analityk",
@@ -72,7 +72,7 @@
       "role": "analityk2",
       "name": "Analityk Paweł",
       "avatar": "👨‍💼",
-      "text": "Zacznijmy od żółtej kartki, od tych niezmienników. Powiedzmy, że składasz rezerwację i złożenie takiej rezerwacji wiąże się z tym, że naliczane są punkty lojalnościowe. Ale, ale!! Ale tylko wówczas, gdy masz status 'KINOMAN'. Jak mógłbyś to zrobić.. Mógłbyś w module rezerwacji przechwycić zdarzenie o złożeniu rezerwacji, walnąć ifa na statusie i wysłać bądź nie wysłać żądania naliczenia punktów lojalnościowych. Co o tym myślisz?"
+      "text": "Powiedzmy, że składasz rezerwację i złożenie takiej rezerwacji wiąże się z tym, że naliczane są punkty lojalnościowe. Ale, ale!! Ale tylko wówczas, gdy masz status 'KINOMAN'. Jak mógłbyś to zrobić.. Mógłbyś w module rezerwacji przechwycić zdarzenie o złożeniu rezerwacji, walnąć ifa na statusie i wysłać bądź nie wysłać żądania naliczenia punktów lojalnościowych. Co o tym myślisz?"
     },
     {
       "role": "analityk",
@@ -84,7 +84,7 @@
       "role": "analityk2",
       "name": "Analityk Paweł",
       "avatar": "👨‍💼",
-      "text": "Wiadomix, że śmierdzi. Bo dlaczego niby nasz wypieszczony mikroserwis rezerwacji miałby wiedzieć coś o KINOMANACH oraz o regułach rządzących przyznawaniem punktów. Biznes powiedział jasno - nie można naliczyć punktów lojalnościowych jeśli nie jesteś kinomanem. To jest super ważna reguła biznesowa, której nie możemy złamać. Ta reguła musi znajdować się w kontekście punktów a nie rezerwacji."
+      "text": "Wiadomix, że śmierdzi. Bo dlaczego niby nasz wypieszczony mikroserwis rezerwacji miałby wiedzieć coś o KINOMANACH oraz o regułach rządzących przyznawaniem punktów. Biznes powiedział jasno - nie można naliczyć punktów lojalnościowych jeśli nie jesteś kinomanem. To jest super ważna reguła biznesowa (żółta karteczka), której nie możemy złamać. Ta reguła musi znajdować się w kontekście punktów a nie rezerwacji."
     },
     {
       "role": "analityk",
@@ -96,7 +96,7 @@
       "role": "analityk2",
       "name": "Analityk Paweł",
       "avatar": "👨‍💼",
-      "text": "Wiem, sam to w końcu wymyśliłem. No bo wyobraźmy sobie, że teraz nie jest to status KINOMAN tylko KINOMANIAK - jeśli zostawilibyśmy tę regułę w kontekście rezerwacji, to musielibyśmy dodać zadanie do backlog'u w zespole rezerwacji, mimo że o zmianie zdecydował biznes zajmujący się punktami lojalnościowymi - dziwne kapkę..."
+      "text": "Wiem, sam to w końcu wymyśliłem. No bo wyobraźmy sobie, że biznes podejmuje decyzje, że nie będzie to teraz status KINOMAN tylko ZWARIOWANY_KINOMANIAK - jeśli zostawilibyśmy tę regułę w kontekście rezerwacji, to musielibyśmy dodać zadanie do backlog'u w zespole rezerwacji, mimo że o zmianie zdecydował biznes zajmujący się punktami lojalnościowymi - dziwne kapkę... Albo reguła mówiąca o tym, że można zarezerwować miejsce w kinie o ile jest ono wolne.. To też super ważna reguła, której złamaniem spowodowałoby smutek na twarzy klientów, a koniec końców naszych, bo musielibyśmy rozpatrywać reklamację, zwracać kasę, wizerunkowo też to słabo wygląda..."
     },
     {
       "role": "analityk",
@@ -108,7 +108,7 @@
       "role": "analityk2",
       "name": "Analityk Paweł",
       "avatar": "👨‍💼",
-      "text": "Spokojnie, zabierz te ręce. Powiedzmy teraz, że reguła brzmi: złożenie oferty, która opiewa na więcej niż 200k wymaga akceptacji szefa. Czyli mamy dwie dozwolone ścieżki procesu. Zarówno oferta na 50k i oferta na 250k są dozwolonymi i w pełni poprawnymi bytami biznesowymi. Ta reguła nie dotyczy stanu tego obiektu. Dotyczy kroków procesu. Zatem ją bym umieścił w polityce."
+      "text": "Spokojnie, zabierz te ręce. Powiedzmy teraz, że reguła brzmi: złożenie oferty, która opiewa na więcej niż 200k wymaga akceptacji szefa. Czyli mamy dwie dozwolone ścieżki procesu. Zarówno oferta na 50k jak i oferta na 250k są dozwolonymi i w pełni poprawnymi bytami biznesowymi. Ta reguła nie dotyczy stanu tego obiektu. Dotyczy kroków procesu. Zatem ją bym umieścił w polityce."
     },
     {
       "role": "analityk",

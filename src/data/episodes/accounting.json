@@ -1,6 +1,6 @@
 {
-  "title": "Accounting",
-  "subtitle": "Notacja, Event Storming Process Level, pytania naprowadzające",
+  "title": "Accounting - modelowanie procesu \"TO BE\"",
+  "subtitle": "Notacja, Event Storming Process Level, pytania naprowadzające, archetyp accounting",
   "dialogue": [
     {
       "role": "analityk",
@@ -26,7 +26,7 @@
       "role": "analityk",
       "name": "Analityk biznesowy",
       "avatar": "🕵️",
-      "text": "Ok. Powiedz mi proszę drogi ekspercie, jakie dwa zdarzenia byś wymienił jako te najistotniejsze w tym procesie z Twojego punktu widzenia. Pamiętasz.. chodzi mi o zdarzenia biznesowe. Jeśli Ci to pomoże to zapomnijmy na chwilę o komputerach, o cyfrowym świecie, o zerach i jedynkach. Skupmy się wyłącznie na istocie samego procesu. Niech to będą zdarzenia pi razy oko z początku i końca procesu, a które z Twojej perspektywy są kluczowe."
+      "text": "Ok. Powiedz mi proszę drogi ekspercie, jakie dwa zdarzenia byś wymienił jako te najistotniejsze w tym procesie z Twojego punktu widzenia. Pamiętasz.. chodzi mi o zdarzenia domenowe. Jeśli Ci to pomoże to zapomnijmy na chwilę o komputerach, o cyfrowym świecie, o zerach i jedynkach. Skupmy się wyłącznie na istocie samego procesu. "
     },
     {
       "role": "ekspert",
@@ -38,7 +38,7 @@
           "id": "br3f1n4",
           "start": 106,
           "end": 166,
-          "note": "Ekspert ładnie sformułował zdarzenia biznesowe, które z jego perspektywy są istotne, czyli są to zdarzenia domenowe, które w notacji ES będą reprezentowane pomarańczowymi karteczkami."
+          "note": "Ekspert trafnie sformułował zdarzenia domenowe, które z jego perspektywy są istotne. W notacji ES są one obrazowane pomarańczowymi karteczkami."
         }
       ]
     },

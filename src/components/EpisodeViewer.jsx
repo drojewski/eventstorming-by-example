@@ -10,9 +10,12 @@ export default function EpisodeViewer({ episode: initialEpisode, episodeId }) {
 
   useEffect(() => {
     if (!episodeId) return;
-    fetch(`/api/episodes/${episodeId}`)
+    fetch(`/api/episodes/${episodeId}`, { cache: 'no-store' })
       .then(r => r.json())
-      .then(data => setEpisode(data))
+      .then(data => {
+        setEpisode(data);
+        if (data.title) document.title = `${data.title} — Event Storming by Example`;
+      })
       .catch(() => {});
   }, [episodeId]);
   const [animate, setAnimate] = useState(false);
@@ -31,6 +34,8 @@ export default function EpisodeViewer({ episode: initialEpisode, episodeId }) {
 
   return (
     <div className="max-w-8xl mx-auto">
+      <h1 className="text-2xl font-bold mt-2 mb-1">{episode.title}</h1>
+      {episode.subtitle && <p className="text-gray-500 mb-6">{episode.subtitle}</p>}
       <div className="flex flex-wrap gap-2 mb-6">
         <button onClick={() => { setView('dialogue'); setAnimate(false); }}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium ${view === 'dialogue' ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>

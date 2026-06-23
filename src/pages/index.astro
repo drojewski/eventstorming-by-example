@@ -1,7 +1,6 @@
 ---
-import { getCollection } from 'astro:content';
+import EpisodeList from '../components/EpisodeList.jsx';
 import '../styles/global.css';
-const episodes = await getCollection('episodes');
 ---
 <html lang="pl">
   <head>
@@ -12,15 +11,6 @@ const episodes = await getCollection('episodes');
   <body class="bg-gray-50 min-h-screen p-8">
     <h1 class="text-3xl font-bold mb-2">Event Storming by Example</h1>
     <p class="text-gray-500 mb-8">Okreść cel warsztatu, zbierz drużynę, rozmawiaj i modeluj</p>
-    <ul class="space-y-4 max-w-2xl">
-      {episodes.map((e) => (
-        <li class="bg-white rounded-xl shadow-sm p-4 hover:shadow-md transition-shadow">
-          <a href={`/${e.id}`} class="text-blue-600 hover:underline text-lg font-medium">
-            {e.data.title}
-          </a>
-          {e.data.subtitle && <p class="text-gray-500 text-sm mt-1">{e.data.subtitle}</p>}
-        </li>
-      ))}
-    </ul>
+    <EpisodeList client:load />
   </body>
 </html>

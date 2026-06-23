@@ -1,12 +1,12 @@
 {
-  "title": "Jak tu się dogadać - modelowanie AS IS",
+  "title": "Jak tu się dogadać - modelowanie procesu \"AS IS\"",
   "subtitle": "Pytania naprowadzające, cel warsztatu, Event Storming Big Picture",
   "dialogue": [
     {
       "role": "analityk",
       "name": "Analityk biznesowy",
       "avatar": "🕵️",
-      "text": "Witaj drogi ekspercie, mój drogowskazie, mój druhu. Na początek chciałbym podkreślić ponownie cel naszego spotkania. Tak jak rozmawialiśmy wczoraj, chcemy dziś z tego spotkania wyjść z wysokopoziomowym (Big Picture) modelem \"as is\" procesu oceny dostawcy. Obecnie ten proces wykonujecie manualnie w dużej mierze i chcecie go docelowo zoptymalizować. Czy to wszystko się zgadza?",
+      "text": "Witaj drogi ekspercie, mój drogowskazie, mój druhu. Na początek chciałbym podkreślić ponownie cel naszego spotkania. Tak jak rozmawialiśmy wczoraj, chcemy dziś z tego spotkania wyjść z wysokopoziomowym (Big Picture) modelem \"as is\" procesu oceny dostawcy. Chcemy wiedzieć jak on obecnie działa i wyrównać wiedzę. Obecnie ten proces wykonujecie manualnie w dużej mierze i chcecie go docelowo zoptymalizować. Czy to wszystko się zgadza?",
       "annotations": [
         {
           "id": "1f5cr41",
@@ -26,7 +26,7 @@
       "role": "analityk",
       "name": "Analityk biznesowy",
       "avatar": "🕵️",
-      "text": "Grejt. Powiedz mi na początek co z Twojej perspektywy jest najistotniejsze w tym procesie. Innymi słowy, bez czego ten proces nie mógłby się udać? Użyjemy do tego tych pomarańczowych karteczek, które symbolizują zdarzenie biznesowe, te ważne momenty w procesie. Pamiętasz, to coś co zapisywaliśmy w czasie przeszłym, bo w końcu z czymś co się już wydarzyło ciężko dyskutować. :-)"
+      "text": "Grejt. Powiedz mi na początek co z Twojej perspektywy jest najistotniejsze w tym procesie. Innymi słowy, bez czego ten proces nie mógłby się udać? Użyjemy do tego tych pomarańczowych karteczek, które symbolizują zdarzenie domenowe, te ważne momenty w procesie. Pamiętasz, to coś co zapisywaliśmy w czasie przeszłym, bo w końcu z czymś co się już wydarzyło ciężko dyskutować. :-)"
     },
     {
       "role": "ekspert",
@@ -38,7 +38,7 @@
           "id": "qydb2iz",
           "start": 124,
           "end": 192,
-          "note": "Ekspert ładnie sformułował zdarzenia biznesowe, które z jego perspektywy są istotne, czyli są to zdarzenia domenowe, które w notacji ES będą reprezentowane pomarańczowymi karteczkami."
+          "note": "Ekspert trafnie sformułował zdarzenia domenowe, które z jego perspektywy są istotne. W notacji ES są one obrazowane pomarańczowymi karteczkami."
         }
       ]
     },
@@ -92,7 +92,7 @@
           "id": "ilnsb13",
           "start": 12,
           "end": 25,
-          "note": "Warto zadać tego typu pytanie, nawet jeśli na pierwszy rzut oka brzmi nieco zaskakująco. Sprawdzamy reakcję eksperta, która może nas doprowadzić do nowych wniosków."
+          "note": "Warto zadać tego typu pytanie, nawet jeśli na pierwszy rzut oka brzmi nieco osobliwie. Sprawdzamy reakcję eksperta, która może nas doprowadzić do nowych wniosków."
         }
       ]
     },
@@ -144,7 +144,7 @@
       "role": "ekspert",
       "name": "Ekspert biznesowy",
       "avatar": "👨‍💼",
-      "text": "Wiadomix. Mogę dostawcę odrzucić, a także zablokować, jeśli.. dobra, na razie nie chciałeś wchodzić w szczegóły, opowiem Ci potem.",
+      "text": "Wiadomix. Mogę dostawcę odrzucić, a także zablokować. W sumie to system też weryfikuje tę kwalifikację w pewnej mierze i może nie dopuścić do kwalifikacji jeśli.. dobra, na razie nie chciałeś wchodzić w szczegóły, opowiem Ci potem.",
       "annotations": [
         {
           "id": "2sncirp",

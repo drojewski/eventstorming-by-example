@@ -21,8 +21,6 @@ const { entry } = Astro.props;
   </head>
   <body class="bg-gray-50 min-h-screen p-4 md:p-8">
     <a href="/" class="text-sm text-gray-500 hover:underline">← wszystkie odcinki</a>
-    <h1 class="text-2xl font-bold mt-2 mb-1">{entry.data.title}</h1>
-    {entry.data.subtitle && <p class="text-gray-500 mb-6">{entry.data.subtitle}</p>}
     <EpisodeViewer episode={entry.data} episodeId={entry.id} client:load />
   </body>
 </html>

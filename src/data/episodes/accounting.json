@@ -6,13 +6,19 @@
       "role": "analityk",
       "name": "Analityk biznesowy",
       "avatar": "🕵️",
-      "text": "Przyjaciele, jak zawsze na początku chciałbym się upewnić, że cel warsztatu jaki obraliśmy jest dla wszystkich jasny. Wiemy z grubsza jak ten proces obecnie wygląda i chcemy wyjść z tego spotkania z modelem \"to be\" procesu realizującego obsługę wpłat od naszych klientów.",
+      "text": "Przyjaciele, jak zawsze na początku chciałbym się upewnić, że cel warsztatu jaki obraliśmy jest dla wszystkich jasny. Macie doskonale przemyślany już ten proces obsługi wpłat oraz biorąc pod uwagę, że proces nie jest turbo skomplikowany, przechodzimy od razu do \"to be\". Pomieszamy nieco aspekty warsztatu Big Picture i Process Level, ale w końcu mamy wyjątkowo na to czas.   ",
       "annotations": [
         {
           "id": "moq6t8z",
           "start": 62,
           "end": 75,
           "note": "Nie zaczynaj warsztatu, jeśli nie określiłeś jasno jego celu i nie zaprosiłeś odpowiednich osób. Na początku warsztatu warto upewnić się, że obrany cel jest dla wszystkich zrozumiały. Trzymaj się go i moderuj dyskusję w taki sposób, aby cel warsztatu mógł zostać zrealizowany. Jeśli dyskusja utknie w jakimś miejscu, zaparkuj temat - pamiętaj, że masz do dyspozycji różową kartkę (hotspot)."
+        },
+        {
+          "id": "3slzokb",
+          "start": 238,
+          "end": 270,
+          "note": "Jeśli czas goni, warto na takie warsztaty przygotować model AS IS według swojej najlepszej wiedzy i na nim budować model \"TO BE\""
         }
       ]
     },
@@ -162,7 +168,7 @@
       "role": "analityk",
       "name": "Analityk biznesowy",
       "avatar": "🕵️",
-      "text": "Jesteś najmądrzejszy na kuli ziemskiej, na razie mi to wystarczy. Wydaje mi się, że miałem z czymś podobnym do czynienia już jakieś 1277 razy. Mamy tu do czynienia po prostu z kontami.. Damy radę. dzięki! "
+      "text": "Rozumiem. Jesteś najmądrzejszy na kuli ziemskiej, na razie mi to wystarczy. Wydaje mi się, że miałem z czymś podobnym do czynienia już jakieś 1277 razy. Damy radę. dzięki! "
     }
   ],
   "model": {
@@ -222,7 +228,7 @@
       {
         "id": "c2",
         "type": "policy",
-        "text": "Zawsze gdy zaksięgowano wpłatę -> uruchom algorytm określający sposób rozliczenia wpłaty.",
+        "text": "Zawsze gdy zaksięgowano wpłatę -> uruchom algorytm określający sposób rozliczenia wpłaty. Dokładny opis algorytmu oraz schemat blokowy znajduje się pod adresem: https://docs.example.prv.pl",
         "x": 245.1494140625,
         "y": 181.3994140625
       },

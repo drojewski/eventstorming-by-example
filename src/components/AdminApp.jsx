@@ -67,7 +67,7 @@ function NoteCard({ ann, quote, onDelete, onUpdate }) {
         boxShadow: '0 1px 4px rgba(0,0,0,.07)',
         maxWidth: 340,
       }}>
-        <div style={{ fontSize: 10, fontStyle: 'italic', color: '#92400e', marginBottom: 4, lineHeight: 1.35 }}>
+        <div style={{ fontSize: 12, fontStyle: 'italic', color: '#92400e', marginBottom: 5, lineHeight: 1.4 }}>
           „{quote}"
         </div>
         {editing ? (
@@ -78,26 +78,26 @@ function NoteCard({ ann, quote, onDelete, onUpdate }) {
               onChange={e => setVal(e.target.value)}
               onKeyDown={e => { if (e.key === 'Enter') confirm(); if (e.key === 'Escape') { setVal(ann.note); setEditing(false); } }}
               style={{
-                flex: 1, fontSize: 12, padding: '4px 8px',
+                flex: 1, fontSize: 14, padding: '4px 8px',
                 border: '1px solid #fbbf24', borderRadius: 6,
                 outline: 'none', fontFamily: 'inherit',
               }}
             />
             <button onClick={confirm}
-              style={{ padding: '3px 10px', background: '#f59e0b', color: '#fff', border: 'none', borderRadius: 6, fontSize: 12, cursor: 'pointer' }}
+              style={{ padding: '3px 10px', background: '#f59e0b', color: '#fff', border: 'none', borderRadius: 6, fontSize: 13, cursor: 'pointer' }}
             >✓</button>
           </div>
         ) : (
-          <div style={{ fontSize: 12, color: '#78350f', lineHeight: 1.45, marginBottom: 4 }}>
+          <div style={{ fontSize: 14, color: '#78350f', lineHeight: 1.5, marginBottom: 5 }}>
             {ann.note}
           </div>
         )}
         <div style={{ display: 'flex', gap: 6, justifyContent: 'flex-end' }}>
           <button onClick={() => setEditing(v => !v)}
-            style={{ fontSize: 10, color: '#a16207', background: 'none', border: 'none', cursor: 'pointer', padding: '1px 4px' }}
+            style={{ fontSize: 12, color: '#a16207', background: 'none', border: 'none', cursor: 'pointer', padding: '1px 4px' }}
           >✎</button>
           <button onClick={onDelete}
-            style={{ fontSize: 10, color: '#dc2626', background: 'none', border: 'none', cursor: 'pointer', padding: '1px 4px' }}
+            style={{ fontSize: 12, color: '#dc2626', background: 'none', border: 'none', cursor: 'pointer', padding: '1px 4px' }}
           >✕</button>
         </div>
       </div>

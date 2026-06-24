@@ -250,7 +250,15 @@
       "role": "analityk",
       "name": "Analityk biznesowy",
       "avatar": "🕵️",
-      "text": "Kumam. Dzięki brachu. Nie zostawię Cię. Najwyżej razem pójdziemy na dno. Jesteśmy w kontakcie!"
+      "text": "Kumam. Dzięki brachu. Nie zostawię Cię. Najwyżej razem pójdziemy na dno. Jesteśmy w kontakcie! Jak przyjdą mi do głowy jeszcze jakieś pytania, umieszczę je w formie hotspotów i przegadamy przy najbliższej okazji. ",
+      "annotations": [
+        {
+          "id": "q5kcu8h",
+          "start": 95,
+          "end": 212,
+          "note": "Po warsztatach warto umieścić niezadane pytania na różowych karteczkach."
+        }
+      ]
     }
   ],
   "model": {
@@ -404,14 +412,35 @@
         "text": "Wąskie gardło",
         "x": 549.4607591228237,
         "y": 315.1519781655143
+      },
+      {
+        "id": "d7gotpu",
+        "type": "hotspot",
+        "text": "Do konsultacji: Czym różni się blokada od odrzucenia, czy jest trwala, czy można wycofać blokadę?",
+        "x": 409.9656298898883,
+        "y": 566.114501987262
+      },
+      {
+        "id": "3xshdal",
+        "type": "hotspot",
+        "text": "Do konsultacji: Czy odrzucenie przez szefa różni się od odrzucenia przez Jolkę lub eksperta?",
+        "x": 933.8340514753584,
+        "y": 310.9076168776757
+      },
+      {
+        "id": "1ut9h1k",
+        "type": "hotspot",
+        "text": "Do konsultacji: a co się stanie jeśli usunę zdarzenie potwierdzono kwalifikację?",
+        "x": 968.3976008189874,
+        "y": 56.954287047042726
       }
     ],
     "frames": [
       {
         "id": "c11",
         "label": "Ocena dostawcy",
-        "x": 15,
-        "y": 43.4619140625,
+        "x": 15.849609375,
+        "y": 44.0283203125,
         "w": 1549.224609375,
         "h": 637.5634765625,
         "color": "#dbeafe88"

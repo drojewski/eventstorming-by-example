@@ -49,8 +49,8 @@ function NoteAnnotations({ text, annotations, right, visible }) {
             }} />
           </div>
           <div className="bg-yellow-50 border border-yellow-200 rounded-xl px-3 py-2 max-w-xs shadow-sm">
-            <p className="text-xs italic text-yellow-800 mb-1 leading-snug">„{text.slice(ann.start, ann.end)}"</p>
-            <p className="text-xs text-yellow-900 leading-snug">{ann.note}</p>
+            <p className="text-sm italic text-yellow-800 mb-1 leading-snug">„{text.slice(ann.start, ann.end)}"</p>
+            <p className="text-sm text-yellow-900 leading-snug">{ann.note}</p>
           </div>
         </div>
       ))}

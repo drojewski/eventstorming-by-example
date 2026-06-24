@@ -72,7 +72,7 @@
       "role": "analityk2",
       "name": "Analityk Paweł",
       "avatar": "👨‍💼",
-      "text": "Powiedzmy, że składasz rezerwację i złożenie takiej rezerwacji wiąże się z tym, że naliczane są punkty lojalnościowe. Ale, ale!! Ale tylko wówczas, gdy masz status 'KINOMAN'. Jak mógłbyś to zrobić.. Mógłbyś w module rezerwacji przechwycić zdarzenie o złożeniu rezerwacji, walnąć ifa na statusie i wysłać bądź nie wysłać żądania naliczenia punktów lojalnościowych. Co o tym myślisz?"
+      "text": "Zacznijmy od żółtej karteczki i skomplikujmy nieco kontekst. Powiedzmy, że składasz rezerwację i złożenie takiej rezerwacji wiąże się z tym, że naliczane są punkty lojalnościowe. Ale, ale!! Ale tylko wówczas, gdy masz status 'KINOMAN'. Jak mógłbyś to zrobić.. Mógłbyś w module rezerwacji przechwycić zdarzenie o złożeniu rezerwacji, walnąć ifa na statusie i wysłać bądź nie wysłać żądania naliczenia punktów lojalnościowych. Co o tym myślisz?"
     },
     {
       "role": "analityk",
@@ -96,7 +96,7 @@
       "role": "analityk2",
       "name": "Analityk Paweł",
       "avatar": "👨‍💼",
-      "text": "Wiem, sam to w końcu wymyśliłem. No bo wyobraźmy sobie, że biznes podejmuje decyzje, że nie będzie to teraz status KINOMAN tylko ZWARIOWANY_KINOMANIAK - jeśli zostawilibyśmy tę regułę w kontekście rezerwacji, to musielibyśmy dodać zadanie do backlog'u w zespole rezerwacji, mimo że o zmianie zdecydował biznes zajmujący się punktami lojalnościowymi - dziwne kapkę... Albo reguła mówiąca o tym, że można zarezerwować miejsce w kinie o ile jest ono wolne.. To też super ważna reguła, której złamaniem spowodowałoby smutek na twarzy klientów, a koniec końców naszych, bo musielibyśmy rozpatrywać reklamację, zwracać kasę, wizerunkowo też to słabo wygląda..."
+      "text": "Wiem, sam to w końcu wymyśliłem. No bo wyobraźmy sobie, że biznes podejmuje decyzje, że nie będzie to teraz status KINOMAN tylko ZWARIOWANY_KINOMANIAK - jeśli zostawilibyśmy tę regułę w kontekście rezerwacji, to musielibyśmy dodać zadanie do backlog'u w zespole rezerwacji, mimo że o zmianie zdecydował biznes zajmujący się punktami lojalnościowymi - dziwne kapkę... Albo reguła mówiąca o tym, że można zarezerwować miejsce w kinie o ile jest ono wolne.. To też super ważna reguła, której złamanie spowodowałoby smutek na twarzy klientów, a koniec końców naszych, bo musielibyśmy rozpatrywać reklamację, zwracać kasę, wizerunkowo też to słabo wygląda..."
     },
     {
       "role": "analityk",
@@ -224,36 +224,36 @@
         "id": "c7",
         "type": "command",
         "text": "Nalicz punkty lojalnościowe",
-        "x": 72.14453125,
-        "y": 586.607421875
+        "x": 862.6865234375,
+        "y": 106.021484375
       },
       {
         "id": "c8",
         "type": "aggregate",
         "text": "wymagany poziom wtajemniczenia KINOMAN",
-        "x": 236.208984375,
-        "y": 586.8759765625
+        "x": 1027.41015625,
+        "y": 105.396484375
       },
       {
         "id": "c9",
         "type": "event",
         "text": "Naliczono punkty",
-        "x": 408.447265625,
-        "y": 518.853515625
+        "x": 1214.4970703125,
+        "y": 45.4453125
       },
       {
         "id": "c10",
         "type": "event",
         "text": "Odrzucono próbę naliczenia punktów",
-        "x": 411.10546875,
-        "y": 669.9228515625
+        "x": 1220.12890625,
+        "y": 202.8037109375
       },
       {
         "id": "c12",
         "type": "actor",
         "text": "Handlowiec",
-        "x": 50.19140625,
-        "y": 894.6279296875,
+        "x": 47.7841796875,
+        "y": 576.4443359375,
         "w": 110.67578125,
         "h": 79.650390625
       },
@@ -261,57 +261,64 @@
         "id": "c13",
         "type": "command",
         "text": "Złóż ofertę",
-        "x": 157.1494140625,
-        "y": 885.970703125
+        "x": 167.4814453125,
+        "y": 574.18359375
       },
       {
         "id": "c14",
         "type": "aggregate",
         "text": "Oferta musi mieć przynajmniej jedną pozycję i wartość > 0",
-        "x": 314.900390625,
-        "y": 881.9228515625
+        "x": 326.8388671875,
+        "y": 574.1103515625
       },
       {
         "id": "c15",
         "type": "event",
         "text": "Złożono ofertę",
-        "x": 471.123046875,
-        "y": 884.3154296875
+        "x": 483.0078125,
+        "y": 574.6962890625
       },
       {
         "id": "c17",
         "type": "policy",
         "text": "Zawsze gdy złożono ofertę sprawdź czy wartość > 200k. Wówczas skieruj do akceptacji szefa, w przeciwnym razie zatwierdź automatycznie (oba warianty to poprawne, dozwolone ścieżki procesu)",
-        "x": 637.87890625,
-        "y": 845.931640625
+        "x": 650.90625,
+        "y": 546.6884765625
       },
       {
         "id": "c18",
         "type": "command",
         "text": "Skieruj ofertę do akceptacji szefa",
-        "x": 824.1796875,
-        "y": 845.541015625
+        "x": 823.3837890625,
+        "y": 542.630859375
       },
       {
         "id": "c19",
         "type": "event",
         "text": "Skierowano ofertę do akceptacji",
-        "x": 1025.333984375,
-        "y": 839.0224609375
+        "x": 989.1376953125,
+        "y": 537.58203125
       },
       {
         "id": "c20",
         "type": "command",
         "text": "Zatwierdź ofertę automatycznie",
-        "x": 822.5537109375,
-        "y": 1025.677734375
+        "x": 824.8974609375,
+        "y": 722.8212890625
       },
       {
         "id": "c21",
         "type": "event",
         "text": "Zatwierdzono ofertę",
-        "x": 1015.197265625,
-        "y": 1025.27734375
+        "x": 1005.0654296875,
+        "y": 732.044921875
+      },
+      {
+        "id": "32m3hgl",
+        "type": "event",
+        "text": "(...)",
+        "x": 1175.3226362607056,
+        "y": 537.6871413896876
       }
     ],
     "frames": [
@@ -327,17 +334,17 @@
       {
         "id": "c11",
         "label": "Case nr 1: Punkty lojalnościowe",
-        "x": 39.833984375,
-        "y": 513.0693359375,
-        "w": 768.4033203125,
-        "h": 309.5947265625,
+        "x": 851.0546875,
+        "y": 38.455078125,
+        "w": 866.2646484375,
+        "h": 454.51171875,
         "color": "#dbeafe88"
       },
       {
         "id": "c22",
         "label": "Case nr 2: Oferta",
-        "x": 40,
-        "y": 834,
+        "x": 39.5556640625,
+        "y": 522.7158203125,
         "w": 1671.4697265625,
         "h": 374.21875,
         "color": "#dbeafe88"

@@ -9,8 +9,7 @@ export default function EpisodeViewer({ episode: initialEpisode, episodeId }) {
   const [view, setView] = useState('dialogue');
 
   useEffect(() => {
-    // W produkcji dane są wypieczone w buildzie — fetch tylko w lokalnym dev
-    if (!episodeId || !window.location.hostname.includes('localhost')) return;
+    if (!episodeId || !import.meta.env.DEV) return;
     fetch(`/api/episodes/${episodeId}`, { cache: 'no-store' })
       .then(r => r.json())
       .then(data => {

@@ -4,7 +4,7 @@ export default function EpisodeList({ initialEpisodes = [] }) {
   const [episodes, setEpisodes] = useState(initialEpisodes);
 
   useEffect(() => {
-    if (!window.location.hostname.includes('localhost')) return;
+    if (!import.meta.env.DEV) return;
     fetch('/api/episodes', { cache: 'no-store' })
       .then(r => r.json())
       .then(data => { if (Array.isArray(data)) setEpisodes(data); })

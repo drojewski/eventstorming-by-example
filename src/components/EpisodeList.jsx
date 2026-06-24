@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
-export default function EpisodeList() {
-  const [episodes, setEpisodes] = useState([]);
+export default function EpisodeList({ initialEpisodes = [] }) {
+  const [episodes, setEpisodes] = useState(initialEpisodes);
 
   useEffect(() => {
+    if (!window.location.hostname.includes('localhost')) return;
     fetch('/api/episodes', { cache: 'no-store' })
       .then(r => r.json())
-      .then(setEpisodes)
+      .then(data => { if (Array.isArray(data)) setEpisodes(data); })
       .catch(() => {});
   }, []);
 

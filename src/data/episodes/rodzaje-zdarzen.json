@@ -48,7 +48,7 @@
       "role": "analityk2",
       "name": "Analityk 2",
       "avatar": "🧑‍💻",
-      "text": "Nie przerywaj, mówię z pamięci. W warstwie \"odkrywczej\" mamy zdarzenia takie, o: \n- zdarzenia domenowe\n- zdarzenia infrastrukturalne\n- zdarzenia środowiskowe\n- zdarzenia interfejsu graficznego\n\nNieco inną kwestią jest zmapowanie odkrytych zdarzeń na elementy techniczne. W zależności od perspektywy i potrzeby możemy mówić o zdarzeniach publicznych oraz prywatnych, a patrząc jeszcze z innej strony, ktoś może odpowiedzieć na pytanie o rodzaje zdarzeń w ten sposób: wyróżniamy Command Message & Document Message & Event Message bo przeczytaliśmy Enterprise Integration Patterns (B. Woolf, G. Hohpe). "
+      "text": "Nie przerywaj, mówię z pamięci. W warstwie \"odkrywczej\" mamy zdarzenia takie, o: \n- zdarzenia domenowe\n- zdarzenia infrastrukturalne\n- zdarzenia środowiskowe\n- zdarzenia interfejsu graficznego\n\nNieco inną kwestią jest zmapowanie odkrytych zdarzeń na elementy techniczne. Nie jest łatwo odpowiedzieć na nieprecyzyjne pytanie dotyczące rodzajów zdarzeń. Jeden rabin powie no my wyróżniamy zdarzenia publiczne oraz prywatne. I będzie to jakaś odpowiedź. Inny rabin powie: wyróżniamy u siebie Command Message & Document Message & Event Message bo przeczytaliśmy Enterprise Integration Patterns (B. Woolf, G. Hohpe). "
     },
     {
       "role": "analityk",

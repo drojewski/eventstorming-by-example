@@ -5,6 +5,23 @@ import path from 'node:path';
 export const prerender = false;
 
 const EPISODES_DIR = path.join(process.cwd(), 'src/data/episodes');
+const ORDER_FILE   = path.join(process.cwd(), 'src/data/order.json');
+
+function readOrder(): string[] {
+  if (!fs.existsSync(ORDER_FILE)) return [];
+  return JSON.parse(fs.readFileSync(ORDER_FILE, 'utf-8'));
+}
+
+function sortByOrder<T extends { id: string }>(items: T[], order: string[]): T[] {
+  return [...items].sort((a, b) => {
+    const ia = order.indexOf(a.id);
+    const ib = order.indexOf(b.id);
+    if (ia === -1 && ib === -1) return 0;
+    if (ia === -1) return 1;
+    if (ib === -1) return -1;
+    return ia - ib;
+  });
+}
 
 export const GET: APIRoute = async () => {
   const files = fs
@@ -17,7 +34,7 @@ export const GET: APIRoute = async () => {
     return { id, title: content.title || id, subtitle: content.subtitle || '' };
   });
 
-  return new Response(JSON.stringify(episodes), {
+  return new Response(JSON.stringify(sortByOrder(episodes, readOrder())), {
     headers: { 'Content-Type': 'application/json' },
   });
 };

@@ -651,6 +651,22 @@ export default function AdminApp() {
     if (selId === id) { setSelId(null); setData(null); }
   }
 
+  async function moveEpisode(id, dir) {
+    const idx = episodes.findIndex(e => e.id === id);
+    if (idx === -1) return;
+    if (dir === 'up' && idx === 0) return;
+    if (dir === 'down' && idx === episodes.length - 1) return;
+    const next = [...episodes];
+    const swap = dir === 'up' ? idx - 1 : idx + 1;
+    [next[idx], next[swap]] = [next[swap], next[idx]];
+    setEpisodes(next);
+    await fetch('/api/episodes/order', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(next.map(e => e.id)),
+    });
+  }
+
   useEffect(() => {
     const fn = e => {
       if ((e.ctrlKey || e.metaKey) && e.key === 's') { e.preventDefault(); save(); }
@@ -703,8 +719,15 @@ export default function AdminApp() {
             onMouseLeave={e => { e.currentTarget.style.borderColor = '#475569'; e.currentTarget.style.color = '#94a3b8'; }}
           >+ Nowy epizod</button>
 
-          {episodes.map(ep => {
+          {episodes.map((ep, epIdx) => {
             const active = selId === ep.id;
+            const btnStyle = (color) => ({
+              width: 18, height: 18, borderRadius: '50%', border: 'none',
+              background: 'transparent', color: active ? '#a5b4fc' : color,
+              fontSize: 9, cursor: 'pointer', flexShrink: 0,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              opacity: 0, transition: 'opacity .1s', padding: 0,
+            });
             return (
               <div
                 key={ep.id}
@@ -726,17 +749,28 @@ export default function AdminApp() {
                     {ep.id}
                   </div>
                 </div>
-                <button
-                  onClick={e => { e.stopPropagation(); del(ep.id); }}
-                  style={{
-                    width: 20, height: 20, borderRadius: '50%', border: 'none',
-                    background: 'transparent', color: active ? '#a5b4fc' : '#475569',
-                    fontSize: 10, cursor: 'pointer', flexShrink: 0, marginLeft: 4,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    opacity: 0, transition: 'opacity .1s',
-                  }}
-                  className="del-btn"
-                >✕</button>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 2, flexShrink: 0 }}>
+                  <button
+                    onClick={e => { e.stopPropagation(); moveEpisode(ep.id, 'up'); }}
+                    disabled={epIdx === 0}
+                    title="Przesuń wyżej"
+                    style={{ ...btnStyle('#94a3b8'), opacity: 0 }}
+                    className="order-btn"
+                  >▲</button>
+                  <button
+                    onClick={e => { e.stopPropagation(); moveEpisode(ep.id, 'down'); }}
+                    disabled={epIdx === episodes.length - 1}
+                    title="Przesuń niżej"
+                    style={{ ...btnStyle('#94a3b8'), opacity: 0 }}
+                    className="order-btn"
+                  >▼</button>
+                  <button
+                    onClick={e => { e.stopPropagation(); del(ep.id); }}
+                    title="Usuń epizod"
+                    style={{ ...btnStyle('#475569'), opacity: 0 }}
+                    className="del-btn"
+                  >✕</button>
+                </div>
               </div>
             );
           })}
@@ -943,6 +977,8 @@ export default function AdminApp() {
         @keyframes spin { to { transform: rotate(360deg); } }
         @keyframes fadein { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
         aside div:hover .del-btn { opacity: 1 !important; }
+        aside div:hover .order-btn { opacity: 1 !important; }
+        aside div:hover .order-btn:disabled { opacity: .25 !important; cursor: default; }
         * { box-sizing: border-box; }
       `}</style>
     </div>

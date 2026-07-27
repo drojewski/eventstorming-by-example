@@ -48,7 +48,7 @@
       "role": "analityk2",
       "name": "Analityk 2",
       "avatar": "🧑‍💻",
-      "text": "Nie przerywaj, mówię z pamięci. Mamy zdarzenia takie, o: \n- zdarzenia domenowe\n- zdarzenia infrastrukturalne\n- zdarzenia środowiskowe\n- zdarzenia interfejsu graficznego"
+      "text": "Nie przerywaj, mówię z pamięci. Mamy zdarzenia takie, o: \n- zdarzenia domenowe\n- zdarzenia infrastrukturalne\n- zdarzenia środowiskowe\n- zdarzenia interfejsu graficznego\n\nNie jest to jednak jedyna perspektywa, z której można klasyfikować zdarzenia. Możesz zajrzeć też do Enterprise Integration Patterns (G. Hohpe & B. Woolf)."
     },
     {
       "role": "analityk",

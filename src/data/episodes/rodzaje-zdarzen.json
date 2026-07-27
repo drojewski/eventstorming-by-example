@@ -48,7 +48,7 @@
       "role": "analityk2",
       "name": "Analityk 2",
       "avatar": "🧑‍💻",
-      "text": "Nie przerywaj, mówię z pamięci. Mamy zdarzenia takie, o: zdarzenia domenowe, zdarzenia infrastrukturalne, zdarzenia środowiskowe, zdarzenia interfejsu graficznego"
+      "text": "Nie przerywaj, mówię z pamięci. Mamy zdarzenia takie, o: \n- zdarzenia domenowe\n- zdarzenia infrastrukturalne\n- zdarzenia środowiskowe\n- zdarzenia interfejsu graficznego"
     },
     {
       "role": "analityk",
@@ -84,7 +84,7 @@
       "role": "analityk2",
       "name": "Analityk 2",
       "avatar": "🧑‍💻",
-      "text": "Zdarzenia infrastrukturalne to zdarzenia, które również nie wnoszą wiele do naszego modelu domenowego. Np.: \"zapisano rekord w bazie\", \"umieszczono event na rabbicie czy innej kafce\". To nie jest biznes. Eksperci domenowi nie chcą i nie muszą słyszeć o technikaliach. O nich będą rozmawiać programiści na późniejszym etapie."
+      "text": "Zdarzenia infrastrukturalne to zdarzenia, które również nie wnoszą wiele do naszego modelu domenowego. Np.: \"zapisano rekord w bazie\", \"umieszczono event na rabbicie czy innej kafce\". To nie jest biznes. Eksperci domenowi nie chcą i nie muszą słyszeć o technikaliach. To samo z ciągiem karteczek pt.: pobierz dane z systemu X -> pobrano dane z systemu X, pobierz dane z systemu Y -> pobrano dane z systemu Y. O nich będą rozmawiać programiści na późniejszym etapie. "
     },
     {
       "role": "analityk2",

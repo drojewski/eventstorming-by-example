@@ -6,8 +6,37 @@ const ROLE_STYLE = {
   analityk2: { side: 'right', bubble: 'bg-teal-50 border-teal-200' },
 };
 
+function renderRichText(text) {
+  const lines = text.split('\n');
+  const elements = [];
+  let listItems = [];
+
+  const flushList = () => {
+    if (!listItems.length) return;
+    elements.push(
+      <ul key={`ul${elements.length}`} style={{ margin: '4px 0', paddingLeft: 18, listStyleType: 'disc' }}>
+        {listItems.map((item, i) => <li key={i} style={{ lineHeight: 1.5 }}>{item}</li>)}
+      </ul>
+    );
+    listItems = [];
+  };
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    if (line.startsWith('- ') || line.startsWith('* ')) {
+      listItems.push(line.slice(2));
+    } else {
+      flushList();
+      elements.push(<span key={`t${elements.length}`}>{line}</span>);
+      if (i < lines.length - 1) elements.push(<br key={`br${elements.length}`} />);
+    }
+  }
+  flushList();
+  return elements;
+}
+
 function AnnotatedText({ text, annotations, showNotes, onToggle }) {
-  if (!annotations?.length) return <>{text}</>;
+  if (!annotations?.length) return <>{renderRichText(text)}</>;
   const sorted = [...annotations].sort((a, b) => a.start - b.start);
   const parts = []; let pos = 0;
   for (const ann of sorted) {

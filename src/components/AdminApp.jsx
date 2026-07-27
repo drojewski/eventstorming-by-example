@@ -14,6 +14,35 @@ function actor(role) {
   return ACTORS.find(a => a.role === role) ?? ACTORS[0];
 }
 
+function renderRichText(text) {
+  const lines = text.split('\n');
+  const elements = [];
+  let listItems = [];
+
+  const flushList = () => {
+    if (!listItems.length) return;
+    elements.push(
+      <ul key={`ul${elements.length}`} style={{ margin: '4px 0', paddingLeft: 18, listStyleType: 'disc' }}>
+        {listItems.map((item, i) => <li key={i} style={{ lineHeight: 1.6 }}>{item}</li>)}
+      </ul>
+    );
+    listItems = [];
+  };
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    if (line.startsWith('- ') || line.startsWith('* ')) {
+      listItems.push(line.slice(2));
+    } else {
+      flushList();
+      elements.push(<span key={`t${elements.length}`}>{line}</span>);
+      if (i < lines.length - 1) elements.push(<br key={`br${elements.length}`} />);
+    }
+  }
+  flushList();
+  return elements;
+}
+
 // ── Textarea która rośnie automatycznie ──────────────────────────────────────
 function AutoTextarea({ value, onChange, placeholder, style }) {
   const ref = useRef(null);
@@ -156,7 +185,7 @@ function Bubble({ entry, onChange, onDelete, onUp, onDown, isFirst, isLast }) {
   function renderAnnotatedText() {
     const text   = entry.text;
     const sorted = [...annotations].sort((a, b) => a.start - b.start);
-    if (!sorted.length) return <>{text}</>;
+    if (!sorted.length) return <>{renderRichText(text)}</>;
     const parts = []; let pos = 0;
     for (const ann of sorted) {
       if (ann.start > pos) parts.push({ mark: false, content: text.slice(pos, ann.start) });

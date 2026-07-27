@@ -1,0 +1,106 @@
+{
+  "title": "Rodzaje zdarzeń",
+  "subtitle": "Jak rozpoznać istotne zdarzenia biznesowe i jak odsiać szum informacyjny",
+  "dialogue": [
+    {
+      "role": "analityk",
+      "name": "Analityk biznesowy",
+      "avatar": "🕵️",
+      "text": "Ten mój board wygląda coraz gorzej. Mam pierdyliard strzałek, 2000 kartek, przestaję nad tym panować. Ratuj. Mam pieniądze."
+    },
+    {
+      "role": "analityk2",
+      "name": "Analityk 2",
+      "avatar": "🧑‍💻",
+      "text": "To dobrze. Zostaw pod wiaduktem. Patrzyłem na tego boarda Twojego no i widzę tam mnóstwo szumu informacyjnego. Zapisujesz chyba wszystko co biznes powie. Ja wiem, że oni wiedzą skąd i kiedy pobrać dane i kiedy wyszukać coś w GUI, ale czy to na pewno wszystko potrzebne na warsztatach majacych na celu pozyskanie wiedzy biznesowej?"
+    },
+    {
+      "role": "analityk",
+      "name": "Analityk biznesowy",
+      "avatar": "🕵️",
+      "text": "No chyba nie. Nie?"
+    },
+    {
+      "role": "analityk2",
+      "name": "Analityk 2",
+      "avatar": "🧑‍💻",
+      "text": "Brawo, świetnie to ująłeś - nie. Wszystko zależy od celu warsztatu. Jeśli zależy nam na odkryciu wiedzy biznesowej no to nie interesują nas technikalia, nie będzie nas też specjalnie interesowało to co user wklikuje w pola formularza."
+    },
+    {
+      "role": "analityk",
+      "name": "Analityk biznesowy",
+      "avatar": "🕵️",
+      "text": "No chyba nie. Nie?"
+    },
+    {
+      "role": "analityk2",
+      "name": "Analityk 2",
+      "avatar": "🧑‍💻",
+      "text": "W punkt. Pewien fachura od ES powiedział mi pewnego słonecznego dnia. Słuchaj Mirek, zdarzenia to są różne. Są ważne i mniej ważne."
+    },
+    {
+      "role": "analityk",
+      "name": "Analityk biznesowy",
+      "avatar": "🕵️",
+      "text": "Wow.. Nie przestawaj mówić. Mam ciarki."
+    },
+    {
+      "role": "analityk2",
+      "name": "Analityk 2",
+      "avatar": "🧑‍💻",
+      "text": "Nie przerywaj, mówię z pamięci. Mamy zdarzenia takie, o: zdarzenia domenowe, zdarzenia infrastrukturalne, zdarzenia środowiskowe, zdarzenia interfejsu graficznego"
+    },
+    {
+      "role": "analityk",
+      "name": "Analityk biznesowy",
+      "avatar": "🕵️",
+      "text": "No nie pierd... no nie gadaj."
+    },
+    {
+      "role": "analityk2",
+      "name": "Analityk 2",
+      "avatar": "🧑‍💻",
+      "text": "Tak, synu. Taka prawda jest. Zdarzenia domenowe / biznesowe to te które nas głównie interesują podczas takich warsztatów. Zdarzenie domenowe wydarzyło się, to jest fakt. I co więcej jesteś w stanie określić dokładnie kiedy - 2024-02-11 12:00:00.1234. Zmieniają stan naszego systemu. To bardzo ważne. Żeby odkryć takie zdarzenie nie musimy wchodzić ani w aspekty architektury, ani w UI, ani w aspekty stacku technologicznego. Np.: Potwierdzono rezerwację albo Upłynął termin płatności faktury (a nie np.: Nie opłacono faktury - nie jesteśmy w stanie takiego zdarzenia umiejscowić w czasie)"
+    },
+    {
+      "role": "analityk",
+      "name": "Analityk biznesowy",
+      "avatar": "🕵️",
+      "text": "G-E-N-I-A-L-N-E"
+    },
+    {
+      "role": "analityk2",
+      "name": "Analityk 2",
+      "avatar": "🧑‍💻",
+      "text": "Tak o mnie mówią. Zdarzenia UI np.: \"Wyszukano klienta\", \"Wypełniono pole nip\", \"Submitnięto formularz\", \"Wypełniono formularz\" nie wnoszą wiele do naszego modelu domenowego. Nie zmieniają stanu systemu. Ale z drugiej strony.. jeśli przez dodanie kilku kartek ze zdarzeniami nie-domenowymi biznesowi będzie łatwiej rozmawiać / zrozumieć to co robimy, to dodaj je, nie bądźmy events-nazi. Niech nie stanowią jednak one trzonu Twojego modelu."
+    },
+    {
+      "role": "analityk",
+      "name": "Analityk biznesowy",
+      "avatar": "🕵️",
+      "text": "Ma sens."
+    },
+    {
+      "role": "analityk2",
+      "name": "Analityk 2",
+      "avatar": "🧑‍💻",
+      "text": "Zdarzenia infrastrukturalne to zdarzenia, które również nie wnoszą wiele do naszego modelu domenowego. Np.: \"zapisano rekord w bazie\", \"umieszczono event na rabbicie czy innej kafce\". To nie jest biznes. Eksperci domenowi nie chcą i nie muszą słyszeć o technikaliach. O nich będą rozmawiać programiści na późniejszym etapie."
+    },
+    {
+      "role": "analityk2",
+      "name": "Analityk 2",
+      "avatar": "🧑‍💻",
+      "text": "Zdarzenie środowiskowe to np.: klient nie odebrał połączenia telefonicznego, klient przyjechał na spotkanie, klient wszedł do placówki, wybrano miejsce parkingowe - te zdarzenia owszem mają miejsce, ale odbywają się w otaczającym nas świecie. Co do zasady nie jesteśmy w stanie umiejscowić ich dokładnie w czasie. Nie zmieniają stanu systemu. Nie triggeruje ich też żadna komenda. Takie zdarzenia nie będą miały źródła prawdy w naszym systemie."
+    },
+    {
+      "role": "analityk",
+      "name": "Analityk biznesowy",
+      "avatar": "🕵️",
+      "text": "Dzięki Tobie staję się lepszy. Nigdy mnie nie zostawiaj."
+    }
+  ],
+  "model": {
+    "slices": [],
+    "hotspots": []
+  }
+}

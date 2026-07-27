@@ -26,7 +26,21 @@
       "role": "analityk",
       "name": "Analityk biznesowy",
       "avatar": "🕵️",
-      "text": "Grejt. Powiedz mi na początek co z Twojej perspektywy jest najistotniejsze w tym procesie. Innymi słowy, bez czego ten proces nie mógłby się udać? Użyjemy do tego tych pomarańczowych karteczek, które symbolizują zdarzenie domenowe, te ważne momenty w procesie. Pamiętasz, to coś co zapisywaliśmy w czasie przeszłym, bo w końcu z czymś co się już wydarzyło ciężko dyskutować. :-)"
+      "text": "Grejt. Powiedz mi na początek co z Twojej perspektywy jest najistotniejsze w tym procesie. Innymi słowy, bez czego ten proces nie mógłby się udać? Użyjemy do tego tych pomarańczowych karteczek, które symbolizują zdarzenie domenowe, te ważne momenty w procesie. Pamiętasz, to coś co zapisywaliśmy w czasie przeszłym, bo w końcu z czymś co się już wydarzyło ciężko dyskutować. :-)",
+      "annotations": [
+        {
+          "id": "nl1eeal",
+          "start": 105,
+          "end": 145,
+          "note": "Zadając to pytanie pozyskujemy wiedzę na temat najistotniejszych kroków procesu."
+        },
+        {
+          "id": "3iu234y",
+          "start": 147,
+          "end": 230,
+          "note": "Warto też przypomnieć rozmówcom w jaki sposób będziemy obrazować naszą rozmowę."
+        }
+      ]
     },
     {
       "role": "ekspert",
@@ -46,7 +60,15 @@
       "role": "analityk",
       "name": "Analityk biznesowy",
       "avatar": "🕵️",
-      "text": "Okej.. nieźle. Brzmi poważnie. Powiedz mi, czemu ta kwalifikacja jest ważna? I czym ona różni się od akceptacji? "
+      "text": "Okej.. nieźle. Brzmi poważnie. Powiedz mi, czemu ta kwalifikacja jest ważna? I czym ona różni się od akceptacji? ",
+      "annotations": [
+        {
+          "id": "nh10d9i",
+          "start": 43,
+          "end": 75,
+          "note": "Zadając to pytanie dowiadujemy się o poziomie istotności tego kroku, sprawdzamy czy nie jest to tylko szum informacyjny."
+        }
+      ]
     },
     {
       "role": "ekspert",
@@ -66,7 +88,15 @@
       "role": "analityk",
       "name": "Analityk biznesowy",
       "avatar": "🕵️",
-      "text": "Ah ta Jolka. A co się musi stać, abyś mógł w ogóle rozpocząć kwalifikację? "
+      "text": "Ah ta Jolka. A co się musi stać, abyś mógł w ogóle rozpocząć kwalifikację? ",
+      "annotations": [
+        {
+          "id": "28n49hj",
+          "start": 13,
+          "end": 73,
+          "note": "Zadając to pytanie docieramy do kolejnych zdarzeń występujących w procesie."
+        }
+      ]
     },
     {
       "role": "ekspert",
@@ -89,10 +119,10 @@
       "text": "Okej. Czyli gdybym usunął to nasze zdarzenie zakwalifikowano dostawcę do współpracy, to daleko nie zajedziemy jak rozumiem?",
       "annotations": [
         {
-          "id": "ilnsb13",
-          "start": 12,
-          "end": 25,
-          "note": "Warto zadać tego typu pytanie, nawet jeśli na pierwszy rzut oka brzmi nieco osobliwie. Sprawdzamy reakcję eksperta, która może nas doprowadzić do nowych wniosków."
+          "id": "bpxhjvv",
+          "start": 6,
+          "end": 123,
+          "note": "Sprawdzamy poziom istotności zdarzenia. Czy jest to faktycznie realne, ważne zdarzenie biznesowe czy tylko szum informacyjny"
         }
       ]
     },
@@ -106,7 +136,15 @@
       "role": "analityk",
       "name": "Analityk biznesowy",
       "avatar": "🕵️",
-      "text": "Zapomniałbym.. Powiedz mi jeszcze, czy jest jeszcze inne wejście do procesu oprócz otrzymania oferty w XERXESIE? "
+      "text": "Zapomniałbym.. Powiedz mi jeszcze, czy jest jeszcze inne wejście do procesu oprócz otrzymania oferty w XERXESIE? ",
+      "annotations": [
+        {
+          "id": "7ltqpci",
+          "start": 15,
+          "end": 111,
+          "note": "Być może mamy więcej niż jedno wejście do procesu, które rządzi się innymi regułami."
+        }
+      ]
     },
     {
       "role": "ekspert",
@@ -118,7 +156,15 @@
       "role": "analityk",
       "name": "Analityk biznesowy",
       "avatar": "🕵️",
-      "text": "Dobra, czyli dostajemy ofertę, a następstwem jest.. jak Ty to nazwałeś? "
+      "text": "Dobra, czyli dostajemy ofertę, a następstwem jest.. jak Ty to nazwałeś? ",
+      "annotations": [
+        {
+          "id": "wp64trc",
+          "start": 7,
+          "end": 51,
+          "note": "Szablonowe pytanie - odkrywamy kolejne zdarzenia w procesie."
+        }
+      ]
     },
     {
       "role": "ekspert",
@@ -138,7 +184,15 @@
       "role": "analityk",
       "name": "Analityk biznesowy",
       "avatar": "🕵️",
-      "text": "Jesteś najbystrzejszą osobą przed swoim ekranem. No dobra, to jeszcze raz. Dostajesz ofertę, oceniasz typa i możesz go zakwalifikować. Czy ocena może skończyć się inaczej niż kwalifikacją?  "
+      "text": "Jesteś najbystrzejszą osobą przed swoim ekranem. No dobra, to jeszcze raz. Dostajesz ofertę, oceniasz typa i możesz go zakwalifikować. Czy ocena może skończyć się inaczej niż kwalifikacją?  ",
+      "annotations": [
+        {
+          "id": "s29w5sd",
+          "start": 135,
+          "end": 188,
+          "note": "Dzięki temu pytaniu odkrywamy alternatywę"
+        }
+      ]
     },
     {
       "role": "ekspert",
@@ -210,7 +264,15 @@
       "role": "analityk",
       "name": "Analityk biznesowy",
       "avatar": "🕵️",
-      "text": "Smutek :-( okej, czy odrzucenie / potwierdzenie kwalifikacji to ostatni krok procesu? Czy ma on jakieś skutki?"
+      "text": "Smutek :-( okej, czy odrzucenie / potwierdzenie kwalifikacji to ostatni krok procesu? Czy ma on jakieś skutki?",
+      "annotations": [
+        {
+          "id": "r1sl0rz",
+          "start": 86,
+          "end": 110,
+          "note": "Zieeew, next one. Odkrywamy następstwa."
+        }
+      ]
     },
     {
       "role": "ekspert",
@@ -237,6 +299,12 @@
           "start": 8,
           "end": 56,
           "note": "Analityk świadomie nie wchodzi w szczegóły procesu. Bazuje na zdarzeniach domenowych, szukając jednocześnie hotspotów."
+        },
+        {
+          "id": "ewdrzz1",
+          "start": 126,
+          "end": 194,
+          "note": "Mmmm, sexy pytanie. Dbamy o sponsora przedsięwzięcia i rozumiemy jego potrzeby."
         }
       ]
     },

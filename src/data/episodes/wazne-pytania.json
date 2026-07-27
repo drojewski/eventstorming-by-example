@@ -1,0 +1,34 @@
+{
+  "title": "Jakie pytania warto zadawać?",
+  "subtitle": "",
+  "dialogue": [
+    {
+      "role": "analityk",
+      "name": "Analityk biznesowy",
+      "avatar": "🕵️",
+      "text": "Byczku, powiedz mi, bo Ty jesteś już doświadczony fachura, jakie pytania warto zadawać w trakcie warsztatów. "
+    },
+    {
+      "role": "analityk2",
+      "name": "Analityk 2",
+      "avatar": "🧑‍💻",
+      "text": "Heh! Usiądź wygodnie i słuchaj. Po pierwsze to pamiętaj o celu warsztatu. Nie wbijaj na warsztaty jeśli nie wiesz co chcesz uzyskać. Biznes od razu wywącha to i popatrzy z politowaniem. "
+    },
+    {
+      "role": "analityk",
+      "name": "Analityk biznesowy",
+      "avatar": "🕵️",
+      "text": "Jesteś taki mądry. A co z tymi pytaniami?"
+    },
+    {
+      "role": "analityk2",
+      "name": "Analityk 2",
+      "avatar": "🧑‍💻",
+      "text": "Młody, niecierpliwy. Ja tłukę w zasadzie zawsze te same pytanie. \n\n- drogi ekspercie, jakie dwa / trzy zdarzenia są dla Ciebie najistotniejsze, bez których ten proces nie może się udać (tak często zaczynam rozmowę)\n\n- co się musi stać, aby zdarzenie <to i to> wystąpiło?\n\n- co jest bezpośrednim następstwem tego zdarzenia?\n\n- jaki jest skutek tej komendy?\n\n- do czego prowadzi to zdarzenie?\n\n- czy te dwa zdarzenia dzieją się równolegle?\n\n- co musi się stać żeby ta komenda mogła zakończyć się sukcesem? Czy są jakieś reguły, które to determinują?\n\n-  czy coś jeszcze może się stać na skutek tego zdarzenia oprócz tego co już powiedziałeś?\n\n- czy jest jakieś alternatywne wejście do tego procesu?\n\n- co się stanie jak usunę to zdarzenie?\n\n- na co wpływa zdarzenie X\n\n- co chciałbyś zobaczyć na ekranie gdy wystapiło zdarzenie X? (nieraz pomaga..)\n\nZajrzyj do innych odcinków, gdzie część powyższych pytań jest użyta w rozmowie.\n"
+    }
+  ],
+  "model": {
+    "slices": [],
+    "hotspots": []
+  }
+}

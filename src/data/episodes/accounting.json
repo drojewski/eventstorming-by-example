@@ -52,7 +52,15 @@
       "role": "analityk",
       "name": "Analityk biznesowy",
       "avatar": "🕵️",
-      "text": "Super. Wrzućmy je w takim razie na naszego boarda wzdłuż linii czasu. Mamy to. Powiedz mi proszę co się musi stać żebym mógł zmniejszyć kwotę kapitału do spłaty?"
+      "text": "Super. Wrzućmy je w takim razie na naszego boarda wzdłuż linii czasu. Mamy to. Powiedz mi proszę co się musi stać żebym mógł zmniejszyć kwotę kapitału do spłaty?",
+      "annotations": [
+        {
+          "id": "pnuj8ir",
+          "start": 79,
+          "end": 160,
+          "note": "Sztampowe pytanie, które warto zawsze zadać. Chcemy przecież wydobyć wiedzę od naszego eksperta."
+        }
+      ]
     },
     {
       "role": "ekspert",
@@ -72,7 +80,15 @@
       "role": "analityk",
       "name": "Analityk biznesowy",
       "avatar": "🕵️",
-      "text": "Co jest bezpośrednim skutkiem zaksięgowania wpłaty? Od razu przystępujesz do zmniejszenia tego kapitału, czy coś jeszcze musi się stać?"
+      "text": "Co jest bezpośrednim skutkiem zaksięgowania wpłaty? Od razu przystępujesz do zmniejszenia tego kapitału, czy coś jeszcze musi się stać?",
+      "annotations": [
+        {
+          "id": "sxod7n6",
+          "start": 0,
+          "end": 51,
+          "note": "Kolejne sztampowe pytanie - tym razem o skutek zdarzenia. W ten sposób staramy się dojść do prawdy objawionej."
+        }
+      ]
     },
     {
       "role": "ekspert",

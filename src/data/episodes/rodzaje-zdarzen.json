@@ -36,7 +36,15 @@
       "role": "analityk2",
       "name": "Analityk 2",
       "avatar": "🧑‍💻",
-      "text": "W punkt. Pewien fachura od ES powiedział mi pewnego słonecznego dnia. Słuchaj Mirek, zdarzenia to są różne. Są ważne i mniej ważne."
+      "text": "W punkt. Pewien fachura od ES powiedział mi pewnego słonecznego dnia. Słuchaj Mirek, zdarzenia to są różne. Są ważne i mniej ważne.",
+      "annotations": [
+        {
+          "id": "vaxck6i",
+          "start": 16,
+          "end": 23,
+          "note": "https://github.com/mariuszgil/awesome-eventstorming"
+        }
+      ]
     },
     {
       "role": "analityk",
@@ -97,6 +105,12 @@
       "name": "Analityk biznesowy",
       "avatar": "🕵️",
       "text": "Dzięki Tobie staję się lepszy. Nigdy mnie nie zostawiaj."
+    },
+    {
+      "role": "analityk2",
+      "name": "Analityk 2",
+      "avatar": "🧑‍💻",
+      "text": "Będę trwać przy Tobie. Gdy słońce i deszcz. Ale pamiętaj, żeby próbować odpowiednio kategoryzować zdarzenia swoich kolegów i koleżanek. Ziarno, plewy, odsiewanie itd. pamiętasz, c'nie?"
     }
   ],
   "model": {

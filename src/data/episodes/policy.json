@@ -48,7 +48,7 @@
       "role": "analityk2",
       "name": "Analityk Paweł",
       "avatar": "👨‍💼",
-      "text": "Zacznijmy od fioletowej kartki. Rozgałęzia ona nam proces na różne, dozwolone i akceptowalne przez biznes, ściezki. Innymi słowy - reagujemy na przychodzące zdarzenie w konkretny sposób. Biznes mówi nam o regule pt.: słuchajcie, zawsze gdy potwierdzimy rezerwację to naliczamy punkty lojalnoścowe (tak na marginesie, zauważ, że ta polityka stanowi taki \"klej\" między kontekstami, tu: rezerwacji oraz punktów lojalnościowych). Myslisz: aha... czyli mam zdarzenie \"Potwierdzono rezerwację\" i wówczas wchodzi do gry komenda pt.: \"Nalicz punkty lojalnościowe\". Prosty routing. Tak na marginesie: byłeś wcześniej programistą nie? No to zaimplementowałbyś taką fioletową kartkę jako event listener albo process manager, czy inny przerażający twór."
+      "text": "Zacznijmy od fioletowej kartki. Rozgałęzia ona nam proces na różne, dozwolone i akceptowalne przez biznes, ściezki. Innymi słowy - reagujemy na przychodzące zdarzenie w konkretny sposób. Biznes mówi nam o regule pt.: słuchajcie, zawsze gdy potwierdzimy rezerwację to naliczamy punkty lojalnoścowe (tak na marginesie, zauważ, że ta polityka stanowi taki \"klej\" między kontekstami, tu: rezerwacji oraz punktów lojalnościowych). Myslisz: aha... czyli mam zdarzenie \"Potwierdzono rezerwację\" i wówczas wchodzi do gry komenda pt.: \"Nalicz punkty lojalnościowe\". Prosty routing. Btw: byłeś wcześniej programistą nie? No to zaimplementowałbyś taką fioletową kartkę jako event listener albo process manager, czy inny przerażający twór."
     },
     {
       "role": "analityk",

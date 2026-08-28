@@ -87,9 +87,8 @@ function NoteAnnotations({ text, annotations, right, visible }) {
   );
 }
 
-function DialoguePanel({ panel, animate, visible }) {
+function DialoguePanel({ panel }) {
   const [showNotes, setShowNotes] = useState(false);
-  if (!visible) return null;
 
   const style = ROLE_STYLE[panel.role] || ROLE_STYLE.ekspert;
   const right = style.side === 'right';
@@ -140,15 +139,11 @@ function DialoguePanel({ panel, animate, visible }) {
   );
 }
 
-export default function DialogueView({ dialogue, animate, visibleCount }) {
+export default function DialogueView({ dialogue }) {
   return (
     <div className="space-y-5 max-w-3xl mx-auto">
       {dialogue.map((panel, i) => (
-        <DialoguePanel
-          key={i}
-          panel={panel}
-          visible={!animate || i < visibleCount}
-        />
+        <DialoguePanel key={i} panel={panel} />
       ))}
     </div>
   );
